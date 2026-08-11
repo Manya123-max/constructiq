@@ -87,16 +87,29 @@ export function EstimationPanel() {
   return (
     <div className="workspace-panel">
       {/* Results Header */}
-      <div className="results-header">
+      <div className="results-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem', gap: '1rem' }}>
         <div>
           <h1 className="results-title">Project Overview</h1>
           <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginTop: '4px' }}>
             Performance analytics and engineering benchmarks for <strong>{capMw} MW {pType} ({tType} Turbine)</strong> in <strong>{stateName}</strong>.
           </p>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <span className="badge-stat cyan" style={{ fontSize: '0.75rem', fontWeight: 800 }}>
-            ⏱️ {dur.construction_duration_months || 48} Months ({dur.estimated_years || 4.0} Yrs)
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+          <span
+            className="badge-stat cyan"
+            style={{
+              fontSize: '0.70rem',
+              fontWeight: 700,
+              whiteSpace: 'nowrap',
+              padding: '5px 10px',
+              borderRadius: '6px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
+          >
+            <span>⏱️</span>
+            <span>{dur.construction_duration_months || 48} Months ({dur.estimated_years || 4.0} Yrs)</span>
           </span>
         </div>
       </div>
