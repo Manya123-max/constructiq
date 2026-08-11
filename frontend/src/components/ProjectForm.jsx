@@ -29,6 +29,47 @@ const STATE_RIVER_BASINS = {
   'West Bengal': ['Teesta River Basin', 'Damodar River Basin']
 }
 
+const BASIN_TO_STATE_MAP = {
+  'Ganga Basin': 'Uttarakhand',
+  'Alaknanda River': 'Uttarakhand',
+  'Bhagirathi River': 'Uttarakhand',
+  'Yamuna Basin': 'Uttarakhand',
+  'Mandakini River': 'Uttarakhand',
+  'Sutlej River Basin': 'Himachal Pradesh',
+  'Beas River Basin': 'Himachal Pradesh',
+  'Ravi River Basin': 'Himachal Pradesh',
+  'Chenab River Basin': 'Jammu & Kashmir',
+  'Jhelum River Basin': 'Jammu & Kashmir',
+  'Indus River Basin': 'Ladakh',
+  'Zanskar River Basin': 'Ladakh',
+  'Teesta River Basin': 'Sikkim',
+  'Rangeet River Basin': 'Sikkim',
+  'Subansiri River Basin': 'Arunachal Pradesh',
+  'Siang River Basin': 'Arunachal Pradesh',
+  'Dibang River Basin': 'Arunachal Pradesh',
+  'Kameng River Basin': 'Arunachal Pradesh',
+  'Brahmaputra Basin': 'Assam',
+  'Kopili River Basin': 'Assam',
+  'Umiam River Basin': 'Meghalaya',
+  'Periyar River Basin': 'Kerala',
+  'Chalakkudy River Basin': 'Kerala',
+  'Pamba River Basin': 'Kerala',
+  'Sharavathi River Basin': 'Karnataka',
+  'Cauvery River Basin': 'Karnataka',
+  'Krishna Basin': 'Andhra Pradesh',
+  'Krishna River Basin': 'Andhra Pradesh',
+  'Godavari Basin': 'Telangana',
+  'Godavari River Basin': 'Telangana',
+  'Penna River Basin': 'Andhra Pradesh',
+  'Koyna River Basin': 'Maharashtra',
+  'Narmada River Basin': 'Madhya Pradesh',
+  'Sone River Basin': 'Madhya Pradesh',
+  'Tapti River Basin': 'Gujarat',
+  'Mahanadi Basin': 'Odisha',
+  'Indravati River Basin': 'Odisha',
+  'Damodar River Basin': 'West Bengal'
+}
+
 function getCategoryFromMw(mw) {
   if (mw > 100) return 'Large Hydro'
   if (mw >= 25) return 'Medium Hydro'
@@ -88,6 +129,13 @@ export function ProjectForm() {
       if (name === 'state' && typeof value === 'string') {
         const availableBasins = STATE_RIVER_BASINS[value] || ['Ganga Basin']
         updated.river_basin = availableBasins[0]
+      }
+
+      if (name === 'river_basin' && typeof value === 'string') {
+        const mappedState = BASIN_TO_STATE_MAP[value]
+        if (mappedState) {
+          updated.state = mappedState
+        }
       }
 
       // If Capacity MW or Net Head changes, dynamically re-calculate Flow & Category

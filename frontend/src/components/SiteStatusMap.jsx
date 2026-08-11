@@ -4,41 +4,50 @@ import { useStore } from '../store/useStore'
 // Indian Basin & River Geocoding GIS Coordinates Registry
 const BASIN_GEO_REGISTRY = {
   // Ganga Basin & Sub-basins
-  'Ganga Basin': { lat: 30.3753, lng: 78.4744, bbox: '77.5,29.5,79.5,31.2', basin: 'Ganga Basin (Uttarakhand)' },
-  'Alaknanda River': { lat: 30.5600, lng: 79.1600, bbox: '78.5,30.0,79.8,31.0', basin: 'Alaknanda Valley Basin' },
-  'Bhagirathi River': { lat: 30.9800, lng: 78.9300, bbox: '78.3,30.4,79.5,31.5', basin: 'Bhagirathi Catchment Basin' },
-  'Yamuna Basin': { lat: 31.0100, lng: 78.4500, bbox: '77.8,30.2,79.0,31.4', basin: 'Yamuna Basin (Uttarakhand)' },
-  'Mandakini River': { lat: 30.7300, lng: 79.0600, bbox: '78.8,30.4,79.4,31.0', basin: 'Mandakini Hydro Regime' },
+  'Ganga Basin': { lat: 30.3753, lng: 78.4744, bbox: '77.5,29.5,79.5,31.2', basin: 'Ganga Basin (Uttarakhand)', state: 'Uttarakhand' },
+  'Alaknanda River': { lat: 30.5600, lng: 79.1600, bbox: '78.5,30.0,79.8,31.0', basin: 'Alaknanda Valley Basin', state: 'Uttarakhand' },
+  'Bhagirathi River': { lat: 30.9800, lng: 78.9300, bbox: '78.3,30.4,79.5,31.5', basin: 'Bhagirathi Catchment Basin', state: 'Uttarakhand' },
+  'Yamuna Basin': { lat: 31.0100, lng: 78.4500, bbox: '77.8,30.2,79.0,31.4', basin: 'Yamuna Basin (Uttarakhand)', state: 'Uttarakhand' },
+  'Mandakini River': { lat: 30.7300, lng: 79.0600, bbox: '78.8,30.4,79.4,31.0', basin: 'Mandakini Hydro Regime', state: 'Uttarakhand' },
 
   // Sutlej & Indus Basins
-  'Sutlej River Basin': { lat: 31.4200, lng: 77.6500, bbox: '77.0,30.8,78.5,32.0', basin: 'Sutlej River Basin (Himachal)' },
-  'Beas River Basin': { lat: 31.9500, lng: 77.1500, bbox: '76.5,31.2,77.8,32.4', basin: 'Beas Alpine Basin' },
-  'Ravi River Basin': { lat: 32.5500, lng: 76.1200, bbox: '75.5,32.0,76.8,33.0', basin: 'Ravi River Basin' },
-  'Chenab River Basin': { lat: 33.1500, lng: 75.3200, bbox: '74.8,32.5,76.2,34.0', basin: 'Chenab High-Head Basin (J&K)' },
-  'Jhelum River Basin': { lat: 34.0800, lng: 74.8000, bbox: '74.2,33.5,75.5,34.5', basin: 'Jhelum River Basin' },
-  'Indus River Basin': { lat: 34.1526, lng: 77.5771, bbox: '76.5,33.2,78.5,35.0', basin: 'Upper Indus Basin (Ladakh)' },
-  'Zanskar River Basin': { lat: 33.7800, lng: 76.9200, bbox: '76.2,33.2,77.5,34.2', basin: 'Zanskar Trans-Himalayan Basin' },
+  'Sutlej River Basin': { lat: 31.4200, lng: 77.6500, bbox: '77.0,30.8,78.5,32.0', basin: 'Sutlej River Basin (Himachal)', state: 'Himachal Pradesh' },
+  'Beas River Basin': { lat: 31.9500, lng: 77.1500, bbox: '76.5,31.2,77.8,32.4', basin: 'Beas Alpine Basin', state: 'Himachal Pradesh' },
+  'Ravi River Basin': { lat: 32.5500, lng: 76.1200, bbox: '75.5,32.0,76.8,33.0', basin: 'Ravi River Basin', state: 'Himachal Pradesh' },
+  'Chenab River Basin': { lat: 33.1500, lng: 75.3200, bbox: '74.8,32.5,76.2,34.0', basin: 'Chenab High-Head Basin (J&K)', state: 'Jammu & Kashmir' },
+  'Jhelum River Basin': { lat: 34.0800, lng: 74.8000, bbox: '74.2,33.5,75.5,34.5', basin: 'Jhelum River Basin', state: 'Jammu & Kashmir' },
+  'Indus River Basin': { lat: 34.1526, lng: 77.5771, bbox: '76.5,33.2,78.5,35.0', basin: 'Upper Indus Basin (Ladakh)', state: 'Ladakh' },
+  'Zanskar River Basin': { lat: 33.7800, lng: 76.9200, bbox: '76.2,33.2,77.5,34.2', basin: 'Zanskar Trans-Himalayan Basin', state: 'Ladakh' },
 
   // Brahmaputra, Siang, Subansiri, Teesta
-  'Subansiri River Basin': { lat: 27.8500, lng: 94.2000, bbox: '93.5,27.0,95.2,28.5', basin: 'Subansiri Basin (Arunachal)' },
-  'Siang River Basin': { lat: 28.1000, lng: 95.0500, bbox: '94.2,27.5,95.8,29.0', basin: 'Siang / Brahmaputra Basin' },
-  'Dibang River Basin': { lat: 28.2500, lng: 95.8500, bbox: '95.2,27.8,96.5,29.0', basin: 'Dibang Ultra-Large Basin' },
-  'Kameng River Basin': { lat: 27.3200, lng: 92.6500, bbox: '92.0,26.8,93.2,28.0', basin: 'Kameng River Basin' },
-  'Teesta River Basin': { lat: 27.5330, lng: 88.5122, bbox: '88.0,27.0,89.0,28.0', basin: 'Teesta Alpine Basin (Sikkim)' },
-  'Rangeet River Basin': { lat: 27.1800, lng: 88.3000, bbox: '88.0,27.0,88.6,27.5', basin: 'Rangeet Sub-Basin' },
-  'Brahmaputra Basin': { lat: 26.2006, lng: 92.9376, bbox: '91.5,25.5,94.0,27.5', basin: 'Brahmaputra Mainstem Basin' },
-  'Kopili River Basin': { lat: 25.5788, lng: 91.8933, bbox: '90.5,25.0,92.5,26.0', basin: 'Kopili River Basin' },
+  'Subansiri River Basin': { lat: 27.8500, lng: 94.2000, bbox: '93.5,27.0,95.2,28.5', basin: 'Subansiri Basin (Arunachal)', state: 'Arunachal Pradesh' },
+  'Siang River Basin': { lat: 28.1000, lng: 95.0500, bbox: '94.2,27.5,95.8,29.0', basin: 'Siang / Brahmaputra Basin', state: 'Arunachal Pradesh' },
+  'Dibang River Basin': { lat: 28.2500, lng: 95.8500, bbox: '95.2,27.8,96.5,29.0', basin: 'Dibang Ultra-Large Basin', state: 'Arunachal Pradesh' },
+  'Kameng River Basin': { lat: 27.3200, lng: 92.6500, bbox: '92.0,26.8,93.2,28.0', basin: 'Kameng River Basin', state: 'Arunachal Pradesh' },
+  'Teesta River Basin': { lat: 27.5330, lng: 88.5122, bbox: '88.0,27.0,89.0,28.0', basin: 'Teesta Alpine Basin (Sikkim)', state: 'Sikkim' },
+  'Rangeet River Basin': { lat: 27.1800, lng: 88.3000, bbox: '88.0,27.0,88.6,27.5', basin: 'Rangeet Sub-Basin', state: 'Sikkim' },
+  'Brahmaputra Basin': { lat: 26.2006, lng: 92.9376, bbox: '91.5,25.5,94.0,27.5', basin: 'Brahmaputra Mainstem Basin', state: 'Assam' },
+  'Kopili River Basin': { lat: 25.5788, lng: 91.8933, bbox: '90.5,25.0,92.5,26.0', basin: 'Kopili River Basin', state: 'Assam' },
+  'Umiam River Basin': { lat: 25.6500, lng: 91.9000, bbox: '91.2,25.2,92.5,26.2', basin: 'Umiam Basin (Meghalaya)', state: 'Meghalaya' },
 
   // Peninsular Basins
-  'Periyar River Basin': { lat: 9.8517, lng: 76.9744, bbox: '76.2,9.2,77.5,10.5', basin: 'Periyar Hydro System (Kerala)' },
-  'Chalakkudy River Basin': { lat: 10.3000, lng: 76.6500, bbox: '76.2,10.0,77.0,10.6', basin: 'Chalakkudy Western Ghats Basin' },
-  'Sharavathi River Basin': { lat: 14.2000, lng: 74.8000, bbox: '74.2,13.8,75.8,14.8', basin: 'Sharavathi Valley Basin (Karnataka)' },
-  'Cauvery River Basin': { lat: 12.3000, lng: 76.6000, bbox: '75.8,11.8,77.5,12.8', basin: 'Cauvery River Basin' },
-  'Godavari River Basin': { lat: 18.7000, lng: 79.5000, bbox: '78.5,17.5,80.5,19.5', basin: 'Godavari Major Basin (Telangana/AP)' },
-  'Krishna River Basin': { lat: 16.0886, lng: 78.8953, bbox: '78.0,15.2,79.8,16.8', basin: 'Krishna River Basin (AP)' },
-  'Koyna River Basin': { lat: 17.3986, lng: 73.7431, bbox: '73.0,16.5,75.0,18.5', basin: 'Koyna Complex (Maharashtra)' },
-  'Narmada River Basin': { lat: 21.8133, lng: 73.7483, bbox: '72.5,21.0,74.5,22.8', basin: 'Narmada River Basin (MP/Gujarat)' },
-  'Mahanadi Basin': { lat: 19.8135, lng: 85.8312, bbox: '84.0,19.0,86.5,21.0', basin: 'Mahanadi Basin (Odisha)' },
+  'Periyar River Basin': { lat: 9.8517, lng: 76.9744, bbox: '76.2,9.2,77.5,10.5', basin: 'Periyar Hydro System (Kerala)', state: 'Kerala' },
+  'Chalakkudy River Basin': { lat: 10.3000, lng: 76.6500, bbox: '76.2,10.0,77.0,10.6', basin: 'Chalakkudy Western Ghats Basin', state: 'Kerala' },
+  'Pamba River Basin': { lat: 9.3800, lng: 76.8200, bbox: '76.2,9.0,77.2,10.0', basin: 'Pamba River Basin (Kerala)', state: 'Kerala' },
+  'Sharavathi River Basin': { lat: 14.2000, lng: 74.8000, bbox: '74.2,13.8,75.8,14.8', basin: 'Sharavathi Valley Basin (Karnataka)', state: 'Karnataka' },
+  'Cauvery River Basin': { lat: 12.3000, lng: 76.6000, bbox: '75.8,11.8,77.5,12.8', basin: 'Cauvery River Basin', state: 'Karnataka' },
+  'Krishna Basin': { lat: 16.0886, lng: 78.8953, bbox: '78.0,15.2,79.8,16.8', basin: 'Krishna River Basin', state: 'Andhra Pradesh' },
+  'Krishna River Basin': { lat: 16.0886, lng: 78.8953, bbox: '78.0,15.2,79.8,16.8', basin: 'Krishna River Basin', state: 'Andhra Pradesh' },
+  'Godavari Basin': { lat: 18.7000, lng: 79.5000, bbox: '78.5,17.5,80.5,19.5', basin: 'Godavari Major Basin', state: 'Telangana' },
+  'Godavari River Basin': { lat: 18.7000, lng: 79.5000, bbox: '78.5,17.5,80.5,19.5', basin: 'Godavari Major Basin', state: 'Telangana' },
+  'Penna River Basin': { lat: 14.4500, lng: 78.8200, bbox: '78.0,14.0,79.5,15.2', basin: 'Penna River Basin', state: 'Andhra Pradesh' },
+  'Koyna River Basin': { lat: 17.3986, lng: 73.7431, bbox: '73.0,16.5,75.0,18.5', basin: 'Koyna Complex (Maharashtra)', state: 'Maharashtra' },
+  'Narmada River Basin': { lat: 21.8133, lng: 73.7483, bbox: '72.5,21.0,74.5,22.8', basin: 'Narmada River Basin', state: 'Madhya Pradesh' },
+  'Tapti River Basin': { lat: 21.1500, lng: 72.8300, bbox: '72.2,20.8,73.8,22.0', basin: 'Tapti River Basin', state: 'Gujarat' },
+  'Sone River Basin': { lat: 24.2000, lng: 81.3000, bbox: '80.5,23.5,82.5,25.0', basin: 'Sone River Basin', state: 'Madhya Pradesh' },
+  'Mahanadi Basin': { lat: 19.8135, lng: 85.8312, bbox: '84.0,19.0,86.5,21.0', basin: 'Mahanadi Basin (Odisha)', state: 'Odisha' },
+  'Indravati River Basin': { lat: 19.1000, lng: 82.2000, bbox: '81.5,18.5,83.0,20.0', basin: 'Indravati River Basin', state: 'Odisha' },
+  'Damodar River Basin': { lat: 23.6000, lng: 86.9000, bbox: '86.0,23.0,87.8,24.5', basin: 'Damodar Valley Basin', state: 'West Bengal' },
 }
 
 // Fallback State Geocoding
@@ -69,13 +78,13 @@ export function SiteStatusMap({ compact = false }) {
   const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
 
   const activeBasin = currentForm?.river_basin || estimationResult?.project_inputs?.river_basin || 'Ganga Basin'
-  const activeState = currentForm?.state || estimationResult?.project_inputs?.state || 'Uttarakhand'
+  const siteInfo = BASIN_GEO_REGISTRY[activeBasin]
+    || STATE_COORDINATES[currentForm?.state]
+    || BASIN_GEO_REGISTRY['Ganga Basin']
+
+  const activeState = currentForm?.state || siteInfo?.state || estimationResult?.project_inputs?.state || 'Uttarakhand'
   const activeCap = currentForm?.capacity_mw || estimationResult?.project_inputs?.capacity_mw || 45
   const activeType = currentForm?.project_type || estimationResult?.project_inputs?.project_type || 'run-of-river'
-
-  const siteInfo = BASIN_GEO_REGISTRY[activeBasin]
-    || STATE_COORDINATES[activeState]
-    || BASIN_GEO_REGISTRY['Ganga Basin']
 
   return (
     <div
@@ -100,7 +109,7 @@ export function SiteStatusMap({ compact = false }) {
             SITE LOCATION MAP
           </div>
           <div style={{ fontSize: '0.95rem', fontWeight: 800, color: '#FFFFFF', marginTop: '2px' }}>
-            {activeCap} MW {activeType} Hydro ({activeState})
+            {activeCap} MW {activeType} Hydro ({siteInfo?.state || activeState})
           </div>
         </div>
       </div>

@@ -70,10 +70,12 @@ export function EstimationPanel() {
     rag_confidence
   } = estimationResult
 
-  const capMw = project_inputs?.capacity_mw || 45
-  const stateName = project_inputs?.state || 'Uttarakhand'
-  const pType = project_inputs?.project_type || 'run-of-river'
-  const tType = project_inputs?.turbine_type || 'Francis'
+  const currentForm = useStore((s) => s.currentForm)
+
+  const capMw = currentForm?.capacity_mw || project_inputs?.capacity_mw || 45
+  const stateName = currentForm?.state || project_inputs?.state || 'Uttarakhand'
+  const pType = currentForm?.project_type || project_inputs?.project_type || 'run-of-river'
+  const tType = currentForm?.turbine_type || project_inputs?.turbine_type || 'Francis'
 
   const mat = model_1_materials || {}
   const gen = model_2_generation || {}
