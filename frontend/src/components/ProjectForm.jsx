@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useStore } from '../store/useStore'
 import { api } from '../api/client'
 
@@ -69,8 +69,14 @@ const DEFAULT_HYDRO = {
 }
 
 export function ProjectForm() {
-  const { setEstimationResult, setIsEstimating, setEstimationError, isEstimating } = useStore()
+  const { setEstimationResult, setIsEstimating, setEstimationError, setCurrentForm, isEstimating } = useStore()
   const [form, setForm] = useState(DEFAULT_HYDRO)
+
+  useEffect(() => {
+    if (setCurrentForm) {
+      setCurrentForm(form)
+    }
+  }, [form, setCurrentForm])
 
   const handleChange = (e) => {
     const { name, value } = e.target

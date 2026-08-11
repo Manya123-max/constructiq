@@ -7,7 +7,7 @@ const BASIN_GEO_REGISTRY = {
   'Ganga Basin': { lat: 30.3753, lng: 78.4744, bbox: '77.5,29.5,79.5,31.2', basin: 'Ganga Basin (Uttarakhand)' },
   'Alaknanda River': { lat: 30.5600, lng: 79.1600, bbox: '78.5,30.0,79.8,31.0', basin: 'Alaknanda Valley Basin' },
   'Bhagirathi River': { lat: 30.9800, lng: 78.9300, bbox: '78.3,30.4,79.5,31.5', basin: 'Bhagirathi Catchment Basin' },
-  'Yamuna Basin': { lat: 31.0100, lng: 78.4500, bbox: '77.8,30.2,79.0,31.4', basin: 'Upper Yamuna Basin' },
+  'Yamuna Basin': { lat: 31.0100, lng: 78.4500, bbox: '77.8,30.2,79.0,31.4', basin: 'Yamuna Basin (Uttarakhand)' },
   'Mandakini River': { lat: 30.7300, lng: 79.0600, bbox: '78.8,30.4,79.4,31.0', basin: 'Mandakini Hydro Regime' },
 
   // Sutlej & Indus Basins
@@ -64,13 +64,14 @@ const STATE_COORDINATES = {
 
 export function SiteStatusMap({ compact = false }) {
   const estimationResult = useStore((s) => s.estimationResult)
+  const currentForm = useStore((s) => s.currentForm)
   const googleApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
   const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
 
-  const activeBasin = estimationResult?.project_inputs?.river_basin
-  const activeState = estimationResult?.project_inputs?.state || 'Uttarakhand'
-  const activeCap = estimationResult?.project_inputs?.capacity_mw || 250
-  const activeType = estimationResult?.project_inputs?.project_type || 'run-of-river'
+  const activeBasin = currentForm?.river_basin || estimationResult?.project_inputs?.river_basin || 'Ganga Basin'
+  const activeState = currentForm?.state || estimationResult?.project_inputs?.state || 'Uttarakhand'
+  const activeCap = currentForm?.capacity_mw || estimationResult?.project_inputs?.capacity_mw || 45
+  const activeType = currentForm?.project_type || estimationResult?.project_inputs?.project_type || 'run-of-river'
 
   const siteInfo = BASIN_GEO_REGISTRY[activeBasin]
     || STATE_COORDINATES[activeState]

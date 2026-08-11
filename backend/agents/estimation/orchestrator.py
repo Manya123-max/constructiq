@@ -228,6 +228,7 @@ def run_estimation_pipeline(input_data: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "status": "success",
         "project_inputs": {
+            "river_basin": input_dict.get("river_basin", "Ganga Basin"),
             "capacity_mw": cap_mw,
             "number_of_units": num_units,
             "unit_capacity_mw": round(unit_cap_mw, 2),

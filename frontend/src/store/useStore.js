@@ -9,9 +9,11 @@ export const useStore = create((set) => ({
   estimationResult: null,
   isEstimating: false,
   estimationError: null,
+  currentForm: null,
   setEstimationResult: (result) => set({ estimationResult: result, estimationError: null }),
   setIsEstimating: (v) => set({ isEstimating: v }),
   setEstimationError: (e) => set({ estimationError: e }),
+  setCurrentForm: (form) => set({ currentForm: form }),
 
   // Monitoring
   activeMonitorTab: 'status',
