@@ -159,7 +159,7 @@ def seed_database():
                 source="data.gov.in / CEA",
             ))
 
-        # Seed sample monitoring records for HP-001 (Subansiri-style benchmark project)
+        # ── HP-001: Tehri Hydro (Uttarakhand) — Mid-stage, minor delays ─────────
         hp1_id = "HP-001"
         print(f"Seeding site monitoring data for benchmark project {hp1_id}...")
         db.add(ActivityPlan(project_id=hp1_id, activity_name="Site Excavation & Foundation", planned_start=date(2023, 1, 15), planned_end=date(2023, 6, 30), planned_pct=100.0, weight=0.25))
@@ -182,8 +182,59 @@ def seed_database():
 
         db.add(ProcurementOrder(project_id=hp1_id, material="Cement", po_number="PO-HYDRO-2024-089", po_date=date(2024, 5, 10), expected_delivery=date(2024, 6, 25), quantity=5000.0, unit="MT", status="Delayed"))
         db.add(ProcurementOrder(project_id=hp1_id, material="Penstock Steel Plates", po_number="PO-HYDRO-2024-104", po_date=date(2024, 6, 1), expected_delivery=date(2024, 7, 15), quantity=800.0, unit="MT", status="In Transit"))
-
         db.add(SiteLog(project_id=hp1_id, log_date=date(2024, 6, 28), weather="Heavy Rain", labor_count=420, notes="Monsoon rainfall delayed tunnel excavation. Cement delivery truck stuck at mountain pass."))
+
+        # ── HP-002: Nathpa Jhakri (Himachal Pradesh) — Advanced stage, near completion ─
+        hp2_id = "HP-002"
+        print(f"Seeding site monitoring data for {hp2_id} (Nathpa Jhakri)...")
+        db.add(ActivityPlan(project_id=hp2_id, activity_name="Site Excavation & Foundation", planned_start=date(2021, 3, 1), planned_end=date(2021, 9, 30), planned_pct=100.0, weight=0.20))
+        db.add(ActivityPlan(project_id=hp2_id, activity_name="Dam & Barrage Works", planned_start=date(2021, 6, 1), planned_end=date(2023, 6, 30), planned_pct=100.0, weight=0.35))
+        db.add(ActivityPlan(project_id=hp2_id, activity_name="Headrace Tunnel & Surge Shaft", planned_start=date(2021, 9, 1), planned_end=date(2024, 3, 31), planned_pct=92.0, weight=0.25))
+        db.add(ActivityPlan(project_id=hp2_id, activity_name="Powerhouse & Turbine Erection", planned_start=date(2023, 1, 1), planned_end=date(2024, 12, 31), planned_pct=75.0, weight=0.20))
+
+        db.add(ActivityActual(project_id=hp2_id, activity_name="Site Excavation & Foundation", actual_pct=100.0, actual_date=date(2021, 9, 15)))
+        db.add(ActivityActual(project_id=hp2_id, activity_name="Dam & Barrage Works", actual_pct=100.0, actual_date=date(2023, 5, 20)))
+        db.add(ActivityActual(project_id=hp2_id, activity_name="Headrace Tunnel & Surge Shaft", actual_pct=89.0, actual_date=date(2024, 6, 30)))
+        db.add(ActivityActual(project_id=hp2_id, activity_name="Powerhouse & Turbine Erection", actual_pct=72.0, actual_date=date(2024, 6, 30)))
+
+        db.add(MaterialStock(project_id=hp2_id, material="Cement", current_stock=8500.0, unit="MT", daily_consumption_rate=120.0, min_threshold=2000.0))
+        db.add(MaterialStock(project_id=hp2_id, material="Reinforcement Steel", current_stock=3800.0, unit="MT", daily_consumption_rate=30.0, min_threshold=500.0))
+        db.add(MaterialStock(project_id=hp2_id, material="Penstock Steel", current_stock=2200.0, unit="MT", daily_consumption_rate=15.0, min_threshold=400.0))
+
+        db.add(MaterialRequirement(project_id=hp2_id, material="Cement", total_required=580000.0, consumed=520000.0, unit="MT"))
+        db.add(MaterialRequirement(project_id=hp2_id, material="Reinforcement Steel", total_required=52000.0, consumed=48000.0, unit="MT"))
+        db.add(MaterialRequirement(project_id=hp2_id, material="Penstock Steel", total_required=9800.0, consumed=7500.0, unit="MT"))
+
+        db.add(ProcurementOrder(project_id=hp2_id, material="Turbine Runner (Francis 150MW)", po_number="PO-NJ-2024-031", po_date=date(2024, 3, 15), expected_delivery=date(2024, 8, 10), quantity=4.0, unit="Units", status="In Transit"))
+        db.add(ProcurementOrder(project_id=hp2_id, material="GIS Switchyard Equipment", po_number="PO-NJ-2024-042", po_date=date(2024, 4, 1), expected_delivery=date(2024, 9, 1), quantity=1.0, unit="Set", status="Confirmed"))
+        db.add(SiteLog(project_id=hp2_id, log_date=date(2024, 6, 25), weather="Partly Cloudy", labor_count=680, notes="Turbine erection progressing on schedule. All civil works nearly complete. GIS switchyard foundation poured."))
+
+        # ── HP-003: Subansiri Lower (Arunachal Pradesh) — Early stage, critical delays ─
+        hp3_id = "HP-003"
+        print(f"Seeding site monitoring data for {hp3_id} (Subansiri Lower)...")
+        db.add(ActivityPlan(project_id=hp3_id, activity_name="Site Preparation & Access Roads", planned_start=date(2024, 1, 1), planned_end=date(2024, 6, 30), planned_pct=100.0, weight=0.15))
+        db.add(ActivityPlan(project_id=hp3_id, activity_name="Dam Foundation & Diversion", planned_start=date(2024, 3, 1), planned_end=date(2025, 6, 30), planned_pct=45.0, weight=0.40))
+        db.add(ActivityPlan(project_id=hp3_id, activity_name="Headrace Tunnel Boring (TBM)", planned_start=date(2024, 6, 1), planned_end=date(2026, 3, 31), planned_pct=18.0, weight=0.30))
+        db.add(ActivityPlan(project_id=hp3_id, activity_name="Powerhouse Cavern Excavation", planned_start=date(2025, 1, 1), planned_end=date(2026, 9, 30), planned_pct=5.0, weight=0.15))
+
+        db.add(ActivityActual(project_id=hp3_id, activity_name="Site Preparation & Access Roads", actual_pct=78.0, actual_date=date(2024, 6, 30)))
+        db.add(ActivityActual(project_id=hp3_id, activity_name="Dam Foundation & Diversion", actual_pct=22.0, actual_date=date(2024, 6, 30)))
+        db.add(ActivityActual(project_id=hp3_id, activity_name="Headrace Tunnel Boring (TBM)", actual_pct=6.0, actual_date=date(2024, 6, 30)))
+        db.add(ActivityActual(project_id=hp3_id, activity_name="Powerhouse Cavern Excavation", actual_pct=0.0, actual_date=date(2024, 6, 30)))
+
+        db.add(MaterialStock(project_id=hp3_id, material="Cement", current_stock=1800.0, unit="MT", daily_consumption_rate=220.0, min_threshold=4000.0))
+        db.add(MaterialStock(project_id=hp3_id, material="Reinforcement Steel", current_stock=420.0, unit="MT", daily_consumption_rate=60.0, min_threshold=800.0))
+        db.add(MaterialStock(project_id=hp3_id, material="Explosives (ANFO)", current_stock=85.0, unit="MT", daily_consumption_rate=12.0, min_threshold=100.0))
+
+        db.add(MaterialRequirement(project_id=hp3_id, material="Cement", total_required=980000.0, consumed=38000.0, unit="MT"))
+        db.add(MaterialRequirement(project_id=hp3_id, material="Reinforcement Steel", total_required=85000.0, consumed=3200.0, unit="MT"))
+        db.add(MaterialRequirement(project_id=hp3_id, material="Explosives (ANFO)", total_required=2400.0, consumed=180.0, unit="MT"))
+
+        db.add(ProcurementOrder(project_id=hp3_id, material="Cement (Bulk Tanker)", po_number="PO-SB-2024-011", po_date=date(2024, 5, 20), expected_delivery=date(2024, 6, 15), quantity=8000.0, unit="MT", status="Delayed"))
+        db.add(ProcurementOrder(project_id=hp3_id, material="TBM Cutter Heads", po_number="PO-SB-2024-019", po_date=date(2024, 6, 1), expected_delivery=date(2024, 8, 30), quantity=6.0, unit="Units", status="Delayed"))
+        db.add(SiteLog(project_id=hp3_id, log_date=date(2024, 6, 26), weather="Heavy Rain", labor_count=310, notes="Flash flooding at river diversion site. Access road washed out near km 18. TBM mobilization delayed by 6 weeks."))
+        db.add(SiteLog(project_id=hp3_id, log_date=date(2024, 6, 27), weather="Heavy Rain", labor_count=290, notes="Continued monsoon rainfall. Cement delivery trucks unable to reach site via NH-13. Emergency re-routing via Itanagar."))
+        db.add(SiteLog(project_id=hp3_id, log_date=date(2024, 6, 28), weather="Heavy Rain", labor_count=275, notes="Third consecutive day of heavy precipitation. Foundation pit dewatering pumps running at full capacity."))
 
         db.commit()
         print(f"[SUCCESS] Database seeded cleanly with {len(df_projects)} Hydro projects.")
