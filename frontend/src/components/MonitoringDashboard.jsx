@@ -17,8 +17,18 @@ export function MonitoringDashboard() {
   const [activeTab, setActiveTab] = useState('status')
   const [data, setData] = useState(null)
   const [projectMeta, setProjectMeta] = useState(null)
+  const [allProjectsList, setAllProjectsList] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+
+  // Fetch full project list from backend on mount or when estimation changes
+  useEffect(() => {
+    api.getProjects(400)
+      .then((res) => {
+        if (res?.data) setAllProjectsList(res.data)
+      })
+      .catch(() => {})
+  }, [estimationResult])
 
   // Sync latest estimated project ID if available
   useEffect(() => {
@@ -27,7 +37,7 @@ export function MonitoringDashboard() {
     }
   }, [estimationResult])
 
-  // Fetch project metadata (name, cost, capacity) per selected project for dynamic CapEx card
+  // Fetch project metadata (name, cost, capacity) per selected project for dynamic CapEx card / Planning Phase
   useEffect(() => {
     api.getProject(selectedProjectId)
       .then((res) => setProjectMeta(res.data))
@@ -56,13 +66,26 @@ export function MonitoringDashboard() {
   const variancePct = data?.variance ?? (plannedPct - actualPct)
   const healthStatus = data?.status || (variancePct > 5 ? 'Critical Delay' : variancePct > 2 ? 'Minor Delay' : 'On Track')
 
-  // Detect if the selected project is a freshly estimated one (not a seeded benchmark)
-  const isNewEstimate = estimationResult?.project_id && selectedProjectId === estimationResult.project_id
+  // Detect if the selected project is a freshly estimated AI project (starts with HP-EST- or matches in-memory result)
+  const isNewEstimate = String(selectedProjectId).startsWith('HP-EST-') || (estimationResult?.project_id && selectedProjectId === estimationResult.project_id)
 
-  // Dynamic CapEx from project_master table (project_cost_cr field)
-  const capexCr = isNewEstimate
+  // Extract display values for the Planning Phase view
+  const isCurrentStoreResult = estimationResult?.project_id === selectedProjectId
+  const estCapMw = isCurrentStoreResult
+    ? estimationResult?.model_1_turbine?.recommended_capacity_mw
+    : (projectMeta?.capacity_mw || projectMeta?.hydro_features?.capacity_mw)
+
+  const capexCr = isCurrentStoreResult
     ? estimationResult?.model_3_cost?.total_project_cost_cr
-    : (projectMeta?.project_cost_cr || null)
+    : (projectMeta?.project_cost_cr || projectMeta?.real_cost_cr || null)
+
+  const estGenGwh = isCurrentStoreResult
+    ? estimationResult?.model_2_generation?.annual_generation_gwh
+    : (projectMeta?.annual_generation_gwh || null)
+
+  const estProjTitle = isCurrentStoreResult
+    ? `${estimationResult.project_id} (Latest Simulation)`
+    : (projectMeta?.project_name || selectedProjectId)
 
   // Dynamic risk bar proportions based on real delayed vs on-track counts from backend
   const delayedCount = data?.delayed_count ?? 3
@@ -72,6 +95,29 @@ export function MonitoringDashboard() {
   const greenFlex = Math.max(1, onTrackCount)
   const amberFlex = Math.max(1, totalActivities - delayedCount - onTrackCount)
 
+  // Build unique dropdown project options
+  const defaultOptions = [
+    { id: 'HP-001', label: 'HP-001: Tehri Hydro Project (Uttarakhand)' },
+    { id: 'HP-002', label: 'HP-002: Nathpa Jhakri Plant (Himachal)' },
+    { id: 'HP-003', label: 'HP-003: Subansiri Lower Project (Arunachal)' },
+  ]
+
+  // Filter custom AI estimated projects from backend
+  const customEstProjects = allProjectsList
+    .filter((p) => p.project_id && p.project_id.startsWith('HP-EST-'))
+    .map((p) => ({
+      id: p.project_id,
+      label: `✨ ${p.project_id}: ${p.project_name || 'AI Simulation Project'}`
+    }))
+
+  // Combined dropdown list (ensuring active estimationResult is included)
+  const knownIds = new Set(defaultOptions.map(d => d.id).concat(customEstProjects.map(c => c.id)))
+  if (estimationResult?.project_id && !knownIds.has(estimationResult.project_id)) {
+    customEstProjects.unshift({
+      id: estimationResult.project_id,
+      label: `⚡ ${estimationResult.project_id} (Active Simulation)`
+    })
+  }
 
   return (
     <div>
@@ -100,16 +146,21 @@ export function MonitoringDashboard() {
               background: '#FFFFFF',
               border: '1px solid #CBD5E1',
               borderRadius: '6px',
-              color: '#0F172A'
+              color: '#0F172A',
+              maxWidth: '320px'
             }}
           >
-            <option value="HP-001">HP-001: Tehri Hydro Project</option>
-            <option value="HP-002">HP-002: Nathpa Jhakri Plant</option>
-            <option value="HP-003">HP-003: Subansiri Lower Project</option>
-            {estimationResult?.project_id && (
-              <option value={estimationResult.project_id}>
-                {estimationResult.project_id} (Latest Simulation)
-              </option>
+            <optgroup label="Live Benchmark Site Telemetry">
+              {defaultOptions.map(opt => (
+                <option key={opt.id} value={opt.id}>{opt.label}</option>
+              ))}
+            </optgroup>
+            {customEstProjects.length > 0 && (
+              <optgroup label="AI Estimated Projects (Planning Phase)">
+                {customEstProjects.map(opt => (
+                  <option key={opt.id} value={opt.id}>{opt.label}</option>
+                ))}
+              </optgroup>
             )}
           </select>
           <button style={{ background: '#005F6A', color: '#FFFFFF', border: 'none', padding: '8px 16px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer' }}>
@@ -134,10 +185,10 @@ export function MonitoringDashboard() {
             <span style={{ fontSize: '1.5rem' }}>🏗️</span>
             <div>
               <div style={{ fontWeight: 800, fontSize: '1rem', color: '#1B5E20' }}>
-                {estimationResult?.project_id} — Planning Phase (Pre-Construction)
+                {estProjTitle} — Planning Phase (Pre-Construction)
               </div>
               <div style={{ fontSize: '0.78rem', color: '#388E3C', marginTop: '2px' }}>
-                This project was just estimated by the AI pipeline. Construction has not started — no live site telemetry available yet.
+                This project was registered by the ConstructIQ AI pipeline. Physical construction has not started — no live site telemetry available yet.
               </div>
             </div>
           </div>
@@ -145,19 +196,19 @@ export function MonitoringDashboard() {
             <div style={{ background: '#FFFFFF', borderRadius: '8px', padding: '12px 16px', border: '1px solid #C8E6C9' }}>
               <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#388E3C', textTransform: 'uppercase' }}>Installed Capacity</div>
               <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#005F6A', marginTop: '4px' }}>
-                {estimationResult?.model_1_turbine?.recommended_capacity_mw?.toFixed(0) || '—'} MW
+                {estCapMw != null ? `${Number(estCapMw).toFixed(0)} MW` : '—'}
               </div>
             </div>
             <div style={{ background: '#FFFFFF', borderRadius: '8px', padding: '12px 16px', border: '1px solid #C8E6C9' }}>
               <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#388E3C', textTransform: 'uppercase' }}>Total CapEx</div>
               <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#005F6A', marginTop: '4px' }}>
-                ₹ {estimationResult?.model_3_cost?.total_project_cost_cr?.toFixed(0) || '—'} Cr
+                ₹ {capexCr != null ? Number(capexCr).toLocaleString('en-IN', { maximumFractionDigits: 0 }) : '—'} Cr
               </div>
             </div>
             <div style={{ background: '#FFFFFF', borderRadius: '8px', padding: '12px 16px', border: '1px solid #C8E6C9' }}>
               <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#388E3C', textTransform: 'uppercase' }}>Annual Generation</div>
               <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#005F6A', marginTop: '4px' }}>
-                {estimationResult?.model_2_generation?.annual_generation_gwh?.toFixed(0) || '—'} GWh
+                {estGenGwh != null ? `${Number(estGenGwh).toLocaleString('en-IN', { maximumFractionDigits: 0 })} GWh` : '—'}
               </div>
             </div>
             <div style={{ background: '#FFFFFF', borderRadius: '8px', padding: '12px 16px', border: '1px solid #C8E6C9' }}>
@@ -168,7 +219,7 @@ export function MonitoringDashboard() {
             </div>
           </div>
           <div style={{ fontSize: '0.76rem', color: '#555', background: '#FFFDE7', borderRadius: '6px', padding: '8px 12px', border: '1px solid #FFF176' }}>
-            💡 <strong>How to see live Construction Status:</strong> Select HP-001, HP-002, or HP-003 from the Target Project dropdown to view real-time site telemetry, delay detection, and material availability for benchmark projects.
+            💡 <strong>How to see live Construction Status:</strong> Select HP-001, HP-002, or HP-003 from the Target Project dropdown to view real-time site telemetry, delay detection, and material availability for active projects under construction.
           </div>
         </div>
       )}
