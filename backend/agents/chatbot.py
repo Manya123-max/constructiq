@@ -46,7 +46,8 @@ GROQ_MODELS = [
     "mixtral-8x7b-32768"
 ]
 
-DEFAULT_GROQ_KEY = "gsk_" + "MV3DUUpqbTmDk6SRjnpwWGdyb3FYsu6JSXknuHoSlm3hWNv41ikk"
+# IMPORTANT: Set GROQ_API_KEY in Render Environment Variables.
+# Never hardcode API keys — Groq auto-revokes keys found in public repos.
 
 def generate_chat_response(messages: Any) -> str:
     """
@@ -70,40 +71,47 @@ def generate_chat_response(messages: Any) -> str:
                 last_user_msg = m["content"].lower()
                 break
 
-        # Check Groq API Key in environment or use default fallback key
-        env_key = os.environ.get("GROQ_API_KEY", "").strip() or os.environ.get("GROQ_KEY", "").strip()
-        api_key = env_key if (env_key and env_key.startswith("gsk_")) else DEFAULT_GROQ_KEY
-        if api_key and (api_key.startswith("gsk_") or len(api_key) > 20):
-            url = "https://api.groq.com/openai/v1/chat/completions"
-            headers = {
-                "Authorization": f"Bearer {api_key}",
-                "Content-Type": "application/json",
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-            }
-            
-            formatted_messages = [{"role": "system", "content": SYSTEM_PROMPT}]
-            for msg in clean_msgs:
-                role = "user" if msg["role"] in ("user", "human") else "assistant"
-                formatted_messages.append({"role": role, "content": msg["content"]})
+        # Read GROQ_API_KEY from Render/environment — must be set in Render dashboard
+        api_key = (
+            os.environ.get("GROQ_API_KEY", "").strip()
+            or os.environ.get("GROQ_KEY", "").strip()
+        )
 
-            for model_name in GROQ_MODELS:
-                try:
-                    payload = {
-                        "model": model_name,
-                        "messages": formatted_messages,
-                        "temperature": 0.3,
-                        "max_tokens": 800,
-                    }
-                    resp = requests.post(url, json=payload, headers=headers, timeout=10.0)
-                    if resp.status_code == 200:
-                        data = resp.json()
-                        return data["choices"][0]["message"]["content"]
-                    else:
-                        print(f"[WARN] Groq model {model_name} status {resp.status_code}: {resp.text}")
-                except Exception as ex:
-                    print(f"[WARN] Groq model {model_name} exception: {ex}")
+        if not api_key or not api_key.startswith("gsk_"):
+            print("[ERROR] GROQ_API_KEY is not set or invalid in environment variables. "
+                  "Please add it in Render > Environment > GROQ_API_KEY")
+            return _domain_fallback_answer(last_user_msg)
 
-        # Execute bulletproof domain rule engine if Groq call is skipped or fails
+        url = "https://api.groq.com/openai/v1/chat/completions"
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        }
+
+        formatted_messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+        for msg in clean_msgs:
+            role = "user" if msg["role"] in ("user", "human") else "assistant"
+            formatted_messages.append({"role": role, "content": msg["content"]})
+
+        for model_name in GROQ_MODELS:
+            try:
+                payload = {
+                    "model": model_name,
+                    "messages": formatted_messages,
+                    "temperature": 0.3,
+                    "max_tokens": 800,
+                }
+                resp = requests.post(url, json=payload, headers=headers, timeout=25.0)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    print(f"[INFO] Groq model {model_name} responded successfully.")
+                    return data["choices"][0]["message"]["content"]
+                else:
+                    print(f"[WARN] Groq model {model_name} HTTP {resp.status_code}: {resp.text[:300]}")
+            except Exception as ex:
+                print(f"[WARN] Groq model {model_name} exception: {type(ex).__name__}: {ex}")
+
+        print("[ERROR] All Groq models failed — falling back to domain engine.")
         return _domain_fallback_answer(last_user_msg)
 
     except Exception as outer_ex:
