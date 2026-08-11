@@ -145,13 +145,49 @@ function EnvironmentalModal({ onClose }) {
   )
 }
 
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { hasError: false, error: null }
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error }
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error("ConstructIQ Component Error:", error, errorInfo)
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: '2rem', background: '#FFF5F5', border: '1.5px solid #FEB2B2', borderRadius: '12px', margin: '2rem', textAlign: 'center' }}>
+          <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>⚠️</div>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#C53030', marginBottom: '0.5rem' }}>Application Render Error</h2>
+          <p style={{ fontSize: '0.85rem', color: '#4A5568', marginBottom: '1.25rem', maxWidth: '500px', margin: '0 auto 1.25rem auto' }}>
+            {this.state.error?.message || 'An unexpected rendering error occurred. Click reload to refresh.'}
+          </p>
+          <button
+            onClick={() => { this.setState({ hasError: false, error: null }); window.location.reload() }}
+            style={{ background: '#005F6A', color: '#FFFFFF', border: 'none', padding: '10px 20px', borderRadius: '8px', cursor: 'pointer', fontWeight: 700, fontSize: '0.88rem' }}
+          >
+            🔄 Reload Application
+          </button>
+        </div>
+      )
+    }
+    return this.props.children
+  }
+}
+
 export default function App() {
   const activePage = useStore((s) => s.activePage)
   const [showGeoModal, setShowGeoModal] = useState(false)
   const [showEnvModal, setShowEnvModal] = useState(false)
 
   return (
-    <>
+    <ErrorBoundary>
       <TopHeader />
       <div className="app-layout">
         <LeftDrawer
@@ -159,22 +195,24 @@ export default function App() {
           onOpenEnvModal={() => setShowEnvModal(true)}
         />
         <main className="main-content">
-          {activePage === 'estimate' && (
-            <>
-              <ProjectForm />
-              <EstimationPanel />
-            </>
-          )}
-          {activePage === 'monitor' && (
-            <div className="workspace-panel">
-              <MonitoringDashboard />
-            </div>
-          )}
-          {activePage === 'projects' && (
-            <div className="workspace-panel">
-              <ProjectsBrowser />
-            </div>
-          )}
+          <ErrorBoundary>
+            {activePage === 'estimate' && (
+              <>
+                <ProjectForm />
+                <EstimationPanel />
+              </>
+            )}
+            {activePage === 'monitor' && (
+              <div className="workspace-panel">
+                <MonitoringDashboard />
+              </div>
+            )}
+            {activePage === 'projects' && (
+              <div className="workspace-panel">
+                <ProjectsBrowser />
+              </div>
+            )}
+          </ErrorBoundary>
         </main>
       </div>
 
@@ -182,6 +220,7 @@ export default function App() {
       {showEnvModal && <EnvironmentalModal onClose={() => setShowEnvModal(false)} />}
 
       <HydroChatWidget />
-    </>
+    </ErrorBoundary>
   )
 }
+

@@ -84,7 +84,7 @@ export function EstimationPanel() {
   const conf = rag_confidence || {}
 
   const confScore = conf.confidence_score_pct || 84.5
-  const comparables = conf.comparable_projects || []
+  const comparables = Array.isArray(conf.comparable_projects) ? conf.comparable_projects : []
 
   return (
     <div className="workspace-panel">

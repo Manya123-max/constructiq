@@ -78,9 +78,11 @@ export function SiteStatusMap({ compact = false }) {
   const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
 
   const activeBasin = currentForm?.river_basin || estimationResult?.project_inputs?.river_basin || 'Ganga Basin'
+  const defaultFallback = { lat: 30.3753, lng: 78.4744, bbox: '77.5,29.5,79.5,31.2', basin: 'Ganga Basin (Uttarakhand)', state: 'Uttarakhand' }
   const siteInfo = BASIN_GEO_REGISTRY[activeBasin]
     || STATE_COORDINATES[currentForm?.state]
-    || BASIN_GEO_REGISTRY['Ganga Basin']
+    || STATE_COORDINATES[estimationResult?.project_inputs?.state]
+    || defaultFallback
 
   const activeState = currentForm?.state || siteInfo?.state || estimationResult?.project_inputs?.state || 'Uttarakhand'
   const activeCap = currentForm?.capacity_mw || estimationResult?.project_inputs?.capacity_mw || 45
