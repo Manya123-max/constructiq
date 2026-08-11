@@ -76,6 +76,7 @@ def read_root():
 
 class HydroEstimationRequest(BaseModel):
     project_name: Optional[str] = Field(None, description="Custom project name")
+    river_basin: Optional[str] = Field("Ganga Basin", description="River basin name")
     capacity_mw: float = Field(250.0, gt=0, description="Installed Capacity in MW")
     number_of_units: int = Field(4, ge=1, description="Number of turbine-generator units")
     project_category: Optional[str] = Field("Large Hydro", description="Large, Medium, Small, Mini, Micro, Pico Hydro")
@@ -109,6 +110,9 @@ def estimate_project(req: HydroEstimationRequest, db: Session = Depends(get_db))
         res = run_estimation_pipeline(req.model_dump())
         proj_id = f"HP-EST-{str(uuid.uuid4())[:6].upper()}"
         res["project_id"] = proj_id
+        if "project_inputs" in res:
+            res["project_inputs"]["river_basin"] = req.river_basin or "Ganga Basin"
+            res["project_inputs"]["project_name"] = req.project_name
 
         pname = req.project_name.strip() if (req.project_name and req.project_name.strip()) else f"Custom {req.capacity_mw} MW {req.project_category or 'Hydro'} Project"
 
@@ -132,6 +136,7 @@ def estimate_project(req: HydroEstimationRequest, db: Session = Depends(get_db))
         })
         db.commit()
         return res
+
     except Exception as e:
         print(f"[WARN] Estimation database registration: {e}")
         return run_estimation_pipeline(req.model_dump())

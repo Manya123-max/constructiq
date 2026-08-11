@@ -9,6 +9,26 @@ const HYDRO_STATES = [
   'Gujarat', 'West Bengal'
 ]
 
+const STATE_RIVER_BASINS = {
+  'Uttarakhand': ['Ganga Basin', 'Alaknanda River', 'Bhagirathi River', 'Yamuna Basin', 'Mandakini River'],
+  'Himachal Pradesh': ['Sutlej River Basin', 'Beas River Basin', 'Chenab River Basin', 'Ravi River Basin'],
+  'Jammu & Kashmir': ['Chenab River Basin', 'Jhelum River Basin', 'Indus River Basin'],
+  'Ladakh': ['Indus River Basin', 'Zanskar River Basin'],
+  'Sikkim': ['Teesta River Basin', 'Rangeet River Basin'],
+  'Arunachal Pradesh': ['Subansiri River Basin', 'Siang River Basin', 'Dibang River Basin', 'Kameng River Basin'],
+  'Assam': ['Brahmaputra Basin', 'Kopili River Basin'],
+  'Meghalaya': ['Kopili River Basin', 'Umiam River Basin'],
+  'Kerala': ['Periyar River Basin', 'Chalakkudy River Basin', 'Pamba River Basin'],
+  'Karnataka': ['Sharavathi River Basin', 'Cauvery River Basin', 'Krishna Basin'],
+  'Maharashtra': ['Koyna River Basin', 'Krishna Basin', 'Godavari Basin'],
+  'Andhra Pradesh': ['Krishna River Basin', 'Godavari River Basin', 'Penna River Basin'],
+  'Telangana': ['Godavari River Basin', 'Krishna River Basin'],
+  'Odisha': ['Mahanadi Basin', 'Indravati River Basin'],
+  'Madhya Pradesh': ['Narmada River Basin', 'Sone River Basin'],
+  'Gujarat': ['Narmada River Basin', 'Tapti River Basin'],
+  'West Bengal': ['Teesta River Basin', 'Damodar River Basin']
+}
+
 function getCategoryFromMw(mw) {
   if (mw > 100) return 'Large Hydro'
   if (mw >= 25) return 'Medium Hydro'
@@ -26,6 +46,7 @@ function calculateDesignFlow(mw, head) {
 
 const DEFAULT_HYDRO = {
   project_name: '',
+  river_basin: 'Ganga Basin',
   project_category: 'Medium Hydro',
   capacity_mw: 45,
   number_of_units: 3,
@@ -57,6 +78,11 @@ export function ProjectForm() {
 
     setForm((f) => {
       const updated = { ...f, [name]: numVal }
+
+      if (name === 'state' && typeof value === 'string') {
+        const availableBasins = STATE_RIVER_BASINS[value] || ['Ganga Basin']
+        updated.river_basin = availableBasins[0]
+      }
 
       // If Capacity MW or Net Head changes, dynamically re-calculate Flow & Category
       if (name === 'capacity_mw' && typeof numVal === 'number' && numVal > 0) {
@@ -118,6 +144,8 @@ export function ProjectForm() {
     }
   }
 
+  const availableBasins = STATE_RIVER_BASINS[form.state] || ['Ganga Basin']
+
   return (
     <div className="form-panel">
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -140,10 +168,19 @@ export function ProjectForm() {
         </div>
 
         <div className="form-field">
-          <label>State / Basin</label>
+          <label>State / Region</label>
           <select name="state" value={form.state} onChange={handleChange}>
             {HYDRO_STATES.map((s) => (
               <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-field">
+          <label>River / Basin</label>
+          <select name="river_basin" value={form.river_basin || availableBasins[0]} onChange={handleChange}>
+            {availableBasins.map((b) => (
+              <option key={b} value={b}>{b}</option>
             ))}
           </select>
         </div>
