@@ -20,7 +20,8 @@ from sqlalchemy import text
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
 
-from db.database import create_tables, get_db, SessionLocal
+from db.database import create_tables, get_db, SessionLocal, ProjectMaster
+from data_pipeline.seed_database import seed_database
 from agents.estimation.orchestrator import run_estimation_pipeline
 from agents.monitoring.agents import (
     status_agent, delay_agent, rootcause_agent,
@@ -32,6 +33,19 @@ from rag.vector_store import get_vector_store
 async def lifespan(app: FastAPI):
     print("[INFO] Pre-warming ConstructIQ Vector Engine & Database...")
     create_tables()
+    
+    # Auto-seed SQLite database if running fresh in cloud/production
+    db = SessionLocal()
+    try:
+        if db.query(ProjectMaster).count() == 0:
+            print("[INFO] Initializing SQLite database with 400 Hydro Project Records...")
+            seed_database()
+            print("[INFO] Database successfully seeded with 400 Projects.")
+    except Exception as e:
+        print(f"[WARN] Database seeding check: {e}")
+    finally:
+        db.close()
+
     get_vector_store()
     print("[INFO] ConstructIQ Hydro Power API Online & Ready.")
     yield
