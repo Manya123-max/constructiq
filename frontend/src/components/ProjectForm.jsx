@@ -89,17 +89,17 @@ const DEFAULT_HYDRO = {
   project_name: '',
   river_basin: 'Ganga Basin',
   project_category: 'Medium Hydro',
-  capacity_mw: 45,
-  number_of_units: 3,
-  gross_head_m: 125,
-  net_head_m: 120,
-  design_flow_m3s: 42.5,
-  dam_height_m: 45,
-  dam_length_m: 180,
-  tunnel_length_km: 3.5,
-  tunnel_diameter_m: 4.8,
-  penstock_length_m: 250,
-  penstock_diameter_m: 2.5,
+  capacity_mw: '',
+  number_of_units: '',
+  gross_head_m: '',
+  net_head_m: '',
+  design_flow_m3s: '',
+  dam_height_m: '',
+  dam_length_m: '',
+  tunnel_length_km: '',
+  tunnel_diameter_m: '',
+  penstock_length_m: '',
+  penstock_diameter_m: '',
   tunnel_configuration: 'Underground',
   state: 'Uttarakhand',
   project_type: 'run-of-river',
@@ -144,13 +144,13 @@ export function ProjectForm() {
         updated.design_flow_m3s = calculateDesignFlow(numVal, updated.net_head_m || 120)
         // Auto-scale default dam/tunnel dimensions proportionally if needed
         if (numVal > 100) {
-          updated.number_of_units = 4
-          updated.dam_height_m = Math.max(65, updated.dam_height_m)
-          updated.tunnel_length_km = Math.max(8.5, updated.tunnel_length_km)
+          updated.number_of_units = updated.number_of_units || 4
+          updated.dam_height_m = updated.dam_height_m || 65
+          updated.tunnel_length_km = updated.tunnel_length_km || 8.5
         } else if (numVal < 10) {
-          updated.number_of_units = 2
-          updated.dam_height_m = Math.min(15, updated.dam_height_m || 15)
-          updated.tunnel_length_km = Math.min(1.2, updated.tunnel_length_km || 1.2)
+          updated.number_of_units = updated.number_of_units || 2
+          updated.dam_height_m = updated.dam_height_m || 15
+          updated.tunnel_length_km = updated.tunnel_length_km || 1.2
         }
       }
 
@@ -180,12 +180,23 @@ export function ProjectForm() {
     setIsEstimating(true)
     setEstimationError(null)
 
-    // Ensure capacity_mw is a valid number
+    const cap = parseFloat(form.capacity_mw) || 45.0
+    const netHead = parseFloat(form.net_head_m) || 120.0
+    const flow = parseFloat(form.design_flow_m3s) || calculateDesignFlow(cap, netHead)
+
     const payload = {
       ...form,
-      capacity_mw: parseFloat(form.capacity_mw) || 45.0,
-      net_head_m: parseFloat(form.net_head_m) || 120.0,
-      design_flow_m3s: parseFloat(form.design_flow_m3s) || calculateDesignFlow(form.capacity_mw, form.net_head_m),
+      capacity_mw: cap,
+      net_head_m: netHead,
+      gross_head_m: parseFloat(form.gross_head_m) || Math.round(netHead / 0.95),
+      design_flow_m3s: flow,
+      number_of_units: parseInt(form.number_of_units) || (cap > 100 ? 4 : cap < 10 ? 2 : 3),
+      dam_height_m: parseFloat(form.dam_height_m) || (cap > 100 ? 65.0 : 45.0),
+      dam_length_m: parseFloat(form.dam_length_m) || 180.0,
+      tunnel_length_km: parseFloat(form.tunnel_length_km) || (cap > 100 ? 8.5 : 3.5),
+      tunnel_diameter_m: parseFloat(form.tunnel_diameter_m) || 4.8,
+      penstock_length_m: parseFloat(form.penstock_length_m) || 250.0,
+      penstock_diameter_m: parseFloat(form.penstock_diameter_m) || 2.5,
     }
 
     try {
@@ -258,13 +269,14 @@ export function ProjectForm() {
           <input
             type="number"
             name="capacity_mw"
+            placeholder="e.g. 45 MW (Number)"
             value={form.capacity_mw}
             onChange={handleChange}
             step="any"
             min="0"
           />
           <div style={{ fontSize: '0.68rem', color: '#005F6A', marginTop: '2px', fontWeight: 600 }}>
-            Category: {form.project_category}
+            Category: {form.project_category || 'Medium Hydro'}
           </div>
         </div>
 
@@ -286,6 +298,7 @@ export function ProjectForm() {
           <input
             type="number"
             name="net_head_m"
+            placeholder="e.g. 120 m (Number)"
             value={form.net_head_m}
             onChange={handleChange}
             step="any"
@@ -297,6 +310,7 @@ export function ProjectForm() {
           <input
             type="number"
             name="design_flow_m3s"
+            placeholder="e.g. 42.5 m³/s (Auto)"
             value={form.design_flow_m3s}
             onChange={handleChange}
             step="any"
@@ -338,6 +352,7 @@ export function ProjectForm() {
           <input
             type="number"
             name="tunnel_length_km"
+            placeholder="e.g. 3.5 km (Number)"
             value={form.tunnel_length_km}
             onChange={handleChange}
             step="any"
@@ -350,6 +365,7 @@ export function ProjectForm() {
             <input
               type="number"
               name="penstock_length_m"
+              placeholder="e.g. 250 m"
               value={form.penstock_length_m}
               onChange={handleChange}
             />
@@ -359,6 +375,7 @@ export function ProjectForm() {
             <input
               type="number"
               name="penstock_diameter_m"
+              placeholder="e.g. 2.5 m"
               value={form.penstock_diameter_m}
               onChange={handleChange}
               step="any"
