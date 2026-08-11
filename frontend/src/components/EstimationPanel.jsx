@@ -168,7 +168,7 @@ export function EstimationPanel() {
           </div>
           <div className="stat-huge" style={{ color: '#005F6A' }}>{fmt(gen.annual_generation_gwh)}</div>
           <div style={{ marginTop: '0.75rem', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-            Capacity Factor (PLF %): <strong style={{ color: '#00E676' }}>{gen.capacity_factor_pct || (gen.capacity_factor ? (gen.capacity_factor * 100).toFixed(1) : '45.0')}%</strong>
+            Capacity Factor (PLF %): <strong style={{ color: '#047857' }}>{gen.capacity_factor_pct || (gen.capacity_factor ? (gen.capacity_factor * 100).toFixed(1) : '45.0')}%</strong>
           </div>
         </div>
 
@@ -206,7 +206,7 @@ export function EstimationPanel() {
             <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Regulatory Benchmark Approval</span>
           </div>
           <div className="confidence-ring-box">
-            <div className="ring-outer" style={{ borderColor: confScore >= 80 ? '#00E676' : '#FF9E00' }}>
+            <div className="ring-outer" style={{ borderColor: confScore >= 80 ? '#047857' : '#FF9E00' }}>
               {confScore}%
             </div>
             <div style={{ fontSize: '0.68rem', fontWeight: 800, color: 'var(--text-muted)', marginTop: '4px' }}>
@@ -219,11 +219,46 @@ export function EstimationPanel() {
             <span className="govt-badge amber">✓ CPPP</span>
           </div>
           <div style={{ marginTop: '0.75rem', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-            <strong>HISTORICAL BENCHMARK TWINS:</strong>
+            <strong style={{ display: 'block', marginBottom: '4px', fontSize: '0.68rem', letterSpacing: '0.02em', color: 'var(--text-muted)' }}>
+              HISTORICAL BENCHMARK TWINS:
+            </strong>
             {comparables.slice(0, 3).map((p, idx) => (
-              <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', marginTop: '2px' }}>
-                <span>{p.project_name || p.id || `Twin ${idx+1}`}</span>
-                <span style={{ color: '#00E676', fontWeight: 700 }}>{p.capacity_mw ? `${p.capacity_mw} MW` : 'Matched'}</span>
+              <div
+                key={idx}
+                style={{
+                  display: 'flex',
+                  justify: 'space-between',
+                  alignItems: 'center',
+                  marginTop: '3px',
+                  gap: '6px'
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: '0.67rem',
+                    color: 'var(--text-dark)',
+                    fontWeight: 500,
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    flex: 1,
+                    minWidth: 0
+                  }}
+                  title={p.project_name || p.id || `Twin ${idx+1}`}
+                >
+                  {p.project_name || p.id || `Twin ${idx+1}`}
+                </span>
+                <span
+                  style={{
+                    color: '#047857',
+                    fontWeight: 700,
+                    fontSize: '0.65rem',
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0
+                  }}
+                >
+                  {p.capacity_mw ? `${p.capacity_mw} MW` : 'Matched'}
+                </span>
               </div>
             ))}
           </div>
