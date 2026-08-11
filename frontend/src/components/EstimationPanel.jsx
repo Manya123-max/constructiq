@@ -300,19 +300,19 @@ export function EstimationPanel() {
                 <td>Rebar - Fe500D Grade (Apex Steel)</td>
                 <td>{fmt(mat.reinforcement_steel_mt ? mat.reinforcement_steel_mt * 0.15 : 450)} MT</td>
                 <td>Phase 1 Immediate</td>
-                <td><span className="badge-stat emerald">CONFIRMED</span></td>
+                <td><span className="badge-stat cyan">PLANNED</span></td>
               </tr>
               <tr>
                 <td>Ready-Mix Structural Concrete</td>
                 <td>{fmt(mat.concrete_m3 ? mat.concrete_m3 * 0.10 : 1200)} m³</td>
                 <td>Phase 2 Site Pour</td>
-                <td><span style={{ background: '#FFEBEE', color: '#D50000', padding: '3px 8px', borderRadius: '4px', fontSize: '0.7rem', fontWeight: 700 }}>SCHEDULED</span></td>
+                <td><span className="badge-stat cyan">PLANNED</span></td>
               </tr>
               <tr>
                 <td>High Tensile Penstock Steel Plates (E350)</td>
                 <td>{fmt(mat.penstock_steel_mt ? mat.penstock_steel_mt * 0.25 : 210)} MT</td>
                 <td>Phase 3 Tunneling</td>
-                <td><span style={{ background: '#FFF8E1', color: '#B78103', padding: '3px 8px', borderRadius: '4px', fontSize: '0.7rem', fontWeight: 700 }}>IN TRANSIT</span></td>
+                <td><span className="badge-stat cyan">PLANNED</span></td>
               </tr>
             </tbody>
           </table>
