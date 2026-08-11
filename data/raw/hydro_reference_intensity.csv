@@ -1,0 +1,7 @@
+category,concrete_m3_min,concrete_m3_max,rebar_mt_min,rebar_mt_max,penstock_steel_mt_min,penstock_steel_mt_max,excavation_m3_min,excavation_m3_max,scope_description
+Large Hydro,800000,1500000,15000.0,40000,3000.0,10000.0,5000000,20000000,"Major dam, spillway, headrace tunnel, underground powerhouse, tailrace tunnel"
+Medium Hydro,50000,200000,2000.0,8000,500.0,2000.0,500000,3000000,"Diversion weir/barrage, desilting basin, headrace channel/tunnel, surface/underground powerhouse"
+Small Hydro,5000,30000,300.0,1500,100.0,500.0,50000,300000,"Trench intake/weir, power channel, forebay, penstock, surface powerhouse"
+Mini Hydro,500,3000,30.0,150,10.0,50.0,5000,30000,"Small intake, canal, pipe penstock, compact surface powerhouse"
+Micro Hydro,20,200,2.0,15,1.0,5.0,500,3000,"Run-of-river intake, HDPE/steel pipe, small civil base, shed"
+Pico Hydro,1,10,0.1,1,0.05,0.5,20,200,"Ultra-compact intake pipe, micro-turbine frame, minimal masonry"

@@ -1,0 +1,116 @@
+{
+  "material_model": {
+    "r2": 0.9881318524300439,
+    "mae": 16856.022861700396,
+    "features": [
+      "capacity_mw",
+      "number_of_units",
+      "gross_head_m",
+      "net_head_m",
+      "design_flow_m3s",
+      "dam_height_m",
+      "dam_length_m",
+      "penstock_length_m",
+      "penstock_diameter_m",
+      "tunnel_length_km",
+      "tunnel_diameter_m",
+      "reservoir_volume_mcm",
+      "catchment_area_km2",
+      "elevation_m",
+      "excavation_volume_m3",
+      "terrain_complexity_score",
+      "civil_complexity_score",
+      "hydro_complexity_score",
+      "project_type",
+      "turbine_type",
+      "dam_type",
+      "powerhouse_type",
+      "terrain_type",
+      "state"
+    ],
+    "targets": [
+      "concrete_m3",
+      "cement_mt",
+      "reinforcement_steel_mt",
+      "structural_steel_mt",
+      "penstock_steel_mt",
+      "aggregate_m3",
+      "sand_m3",
+      "excavation_m3"
+    ]
+  },
+  "generation_model": {
+    "r2": 0.9760248536066658,
+    "mae": 195.14143832240842,
+    "features": [
+      "capacity_mw",
+      "number_of_units",
+      "gross_head_m",
+      "net_head_m",
+      "design_flow_m3s",
+      "annual_inflow_mcm",
+      "reservoir_volume_mcm",
+      "catchment_area_km2",
+      "turbine_efficiency",
+      "generator_efficiency",
+      "design_efficiency",
+      "availability_factor",
+      "project_type",
+      "turbine_type",
+      "state"
+    ],
+    "target": "annual_generation_gwh"
+  },
+  "cost_model": {
+    "r2": 0.9611533585406616,
+    "mae": 355.92648558230667,
+    "features": [
+      "capacity_mw",
+      "number_of_units",
+      "net_head_m",
+      "dam_height_m",
+      "tunnel_length_km",
+      "penstock_length_m",
+      "project_type",
+      "turbine_type",
+      "state",
+      "commissioning_year",
+      "concrete_m3",
+      "cement_mt",
+      "reinforcement_steel_mt",
+      "structural_steel_mt",
+      "penstock_steel_mt",
+      "aggregate_m3",
+      "sand_m3",
+      "excavation_m3"
+    ],
+    "targets": [
+      "civil_cost_cr",
+      "equipment_cost_cr",
+      "total_project_cost_cr"
+    ]
+  },
+  "duration_model": {
+    "r2": 0.9471458519133685,
+    "mae": 5.525355105891026,
+    "features": [
+      "capacity_mw",
+      "number_of_units",
+      "dam_height_m",
+      "dam_length_m",
+      "tunnel_length_km",
+      "tunnel_diameter_m",
+      "penstock_length_m",
+      "excavation_volume_m3",
+      "concrete_m3",
+      "terrain_complexity_score",
+      "civil_complexity_score",
+      "hydro_complexity_score",
+      "project_type",
+      "dam_type",
+      "powerhouse_type",
+      "state"
+    ],
+    "target": "construction_duration_months"
+  }
+}

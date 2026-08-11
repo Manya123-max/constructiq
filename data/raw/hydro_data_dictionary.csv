@@ -1,0 +1,71 @@
+column_name,table_name,description,unit,data_type,source_type,input_or_target,derived_flag,allowed_range,generation_logic
+project_id,hydro_projects,Project feature project_id,various,str,synthetic,input,False,min: HP-001 max: HP-400,Constraint-based synthetic hydro physics formula
+project_name,hydro_projects,Project feature project_name,various,str,synthetic,input,False,min: Allain Duhangan Hydro Project Unit-107 max: Vyasi Hydro Project Unit-49,Constraint-based synthetic hydro physics formula
+project_category,hydro_projects,Project feature project_category,various,str,synthetic,input,False,min: Large Hydro max: Small Hydro,Constraint-based synthetic hydro physics formula
+project_type,hydro_projects,Project feature project_type,various,str,synthetic,input,False,min: pumped max: storage,Constraint-based synthetic hydro physics formula
+state,hydro_projects,Project feature state,various,str,synthetic,input,False,min: Andhra Pradesh max: West Bengal,Constraint-based synthetic hydro physics formula
+district,hydro_projects,Project feature district,various,str,synthetic,input,False,min: Alluri Sitharama Raju max: West Sikkim,Constraint-based synthetic hydro physics formula
+river,hydro_projects,Project feature river,various,str,synthetic,input,False,min: Alaknanda max: Yamuna,Constraint-based synthetic hydro physics formula
+river_basin,hydro_projects,Project feature river_basin,various,str,synthetic,input,False,min: Brahmaputra Basin max: West Flowing Rivers,Constraint-based synthetic hydro physics formula
+terrain_type,hydro_projects,Project feature terrain_type,various,str,synthetic,input,False,min: Gorge max: Plain,Constraint-based synthetic hydro physics formula
+development_type,hydro_projects,Project feature development_type,various,str,synthetic,input,False,min: Brownfield max: Refurbishment,Constraint-based synthetic hydro physics formula
+climate_zone,hydro_projects,Project feature climate_zone,various,str,synthetic,input,False,min: Alpine max: Tropical,Constraint-based synthetic hydro physics formula
+elevation_m,hydro_projects,Project feature elevation_m,various,float64,synthetic,input,False,min: 101.1 max: 3174.8,Constraint-based synthetic hydro physics formula
+capacity_mw,hydro_projects,Project feature capacity_mw,various,float64,synthetic,input,False,min: 0.00055 max: 1972.03,Constraint-based synthetic hydro physics formula
+number_of_units,hydro_projects,Project feature number_of_units,various,int64,synthetic,input,False,min: 1 max: 8,Constraint-based synthetic hydro physics formula
+unit_capacity_mw,hydro_projects,Project feature unit_capacity_mw,various,float64,synthetic,input,False,min: 0.0006 max: 451.6875,Constraint-based synthetic hydro physics formula
+commissioning_year,hydro_projects,Project feature commissioning_year,various,int64,synthetic,input,False,min: 2000 max: 2022,Constraint-based synthetic hydro physics formula
+project_life_years,hydro_projects,Project feature project_life_years,various,int64,synthetic,input,False,min: 35 max: 50,Constraint-based synthetic hydro physics formula
+gross_head_m,hydro_projects,Project feature gross_head_m,various,float64,synthetic,input,False,min: 5.2 max: 549.8,Constraint-based synthetic hydro physics formula
+net_head_m,hydro_projects,Project feature net_head_m,various,float64,synthetic,input,False,min: 5.0 max: 523.2,Constraint-based synthetic hydro physics formula
+design_flow_m3s,hydro_projects,Project feature design_flow_m3s,various,float64,synthetic,input,False,min: 0.002 max: 3778.758,Constraint-based synthetic hydro physics formula
+minimum_flow_m3s,hydro_projects,Project feature minimum_flow_m3s,various,float64,synthetic,input,False,min: 0.0 max: 634.825,Constraint-based synthetic hydro physics formula
+maximum_flow_m3s,hydro_projects,Project feature maximum_flow_m3s,various,float64,synthetic,input,False,min: 0.003 max: 4545.038,Constraint-based synthetic hydro physics formula
+annual_inflow_mcm,hydro_projects,Project feature annual_inflow_mcm,various,float64,synthetic,input,False,min: 0.05 max: 109318.75,Constraint-based synthetic hydro physics formula
+catchment_area_km2,hydro_projects,Project feature catchment_area_km2,various,float64,synthetic,input,False,min: 2.2 max: 14985.3,Constraint-based synthetic hydro physics formula
+reservoir_volume_mcm,hydro_projects,Project feature reservoir_volume_mcm,various,float64,synthetic,input,False,min: 0.012 max: 2489.9,Constraint-based synthetic hydro physics formula
+dam_type,hydro_projects,Project feature dam_type,various,str,synthetic,input,False,min: Barrage/Weir max: Trench Intake,Constraint-based synthetic hydro physics formula
+dam_height_m,hydro_projects,Project feature dam_height_m,various,float64,synthetic,input,False,min: 2.0 max: 229.6,Constraint-based synthetic hydro physics formula
+dam_length_m,hydro_projects,Project feature dam_length_m,various,float64,synthetic,input,False,min: 7.4 max: 1092.2,Constraint-based synthetic hydro physics formula
+reservoir_area_km2,hydro_projects,Project feature reservoir_area_km2,various,float64,synthetic,input,False,min: 0.0 max: 401.92,Constraint-based synthetic hydro physics formula
+tunnel_length_km,hydro_projects,Project feature tunnel_length_km,various,float64,synthetic,input,False,min: 0.0 max: 21.88,Constraint-based synthetic hydro physics formula
+tunnel_diameter_m,hydro_projects,Project feature tunnel_diameter_m,various,float64,synthetic,input,False,min: 0.0 max: 10.97,Constraint-based synthetic hydro physics formula
+penstock_length_m,hydro_projects,Project feature penstock_length_m,various,float64,synthetic,input,False,min: 10.9 max: 1189.8,Constraint-based synthetic hydro physics formula
+penstock_diameter_m,hydro_projects,Project feature penstock_diameter_m,various,float64,synthetic,input,False,min: 0.2 max: 7.48,Constraint-based synthetic hydro physics formula
+powerhouse_type,hydro_projects,Project feature powerhouse_type,various,str,synthetic,input,False,min: Semi-underground max: Underground,Constraint-based synthetic hydro physics formula
+powerhouse_area_m2,hydro_projects,Project feature powerhouse_area_m2,various,float64,synthetic,input,False,min: 10.0 max: 34048.8,Constraint-based synthetic hydro physics formula
+excavation_volume_m3,hydro_projects,Project feature excavation_volume_m3,various,float64,synthetic,input,False,min: 21.5 max: 23064207.8,Constraint-based synthetic hydro physics formula
+turbine_type,hydro_projects,Project feature turbine_type,various,str,synthetic,input,False,min: Cross-flow max: Pelton,Constraint-based synthetic hydro physics formula
+turbine_efficiency,hydro_projects,Project feature turbine_efficiency,various,float64,synthetic,input,False,min: 0.91 max: 0.95,Constraint-based synthetic hydro physics formula
+generator_efficiency,hydro_projects,Project feature generator_efficiency,various,float64,synthetic,input,False,min: 0.95 max: 0.98,Constraint-based synthetic hydro physics formula
+design_efficiency,hydro_projects,Project feature design_efficiency,various,float64,synthetic,input,False,min: 0.866 max: 0.929,Constraint-based synthetic hydro physics formula
+number_of_turbines,hydro_projects,Project feature number_of_turbines,various,int64,synthetic,input,False,min: 1 max: 8,Constraint-based synthetic hydro physics formula
+number_of_generators,hydro_projects,Project feature number_of_generators,various,int64,synthetic,input,False,min: 1 max: 8,Constraint-based synthetic hydro physics formula
+transformer_count,hydro_projects,Project feature transformer_count,various,int64,synthetic,input,False,min: 1 max: 9,Constraint-based synthetic hydro physics formula
+transformer_capacity_mva,hydro_projects,Project feature transformer_capacity_mva,various,float64,synthetic,input,False,min: 0.0 max: 584.54,Constraint-based synthetic hydro physics formula
+crane_capacity_t,hydro_projects,Project feature crane_capacity_t,various,float64,synthetic,input,False,min: 10.6 max: 299.7,Constraint-based synthetic hydro physics formula
+penstock_sections,hydro_projects,Project feature penstock_sections,various,int64,synthetic,input,False,min: 1 max: 4,Constraint-based synthetic hydro physics formula
+project_complexity_score,hydro_projects,Project feature project_complexity_score,various,float64,synthetic,input,True,min: 1.6 max: 4.4,Constraint-based synthetic hydro physics formula
+terrain_complexity_score,hydro_projects,Project feature terrain_complexity_score,various,float64,synthetic,input,True,min: 1.5 max: 4.8,Constraint-based synthetic hydro physics formula
+civil_complexity_score,hydro_projects,Project feature civil_complexity_score,various,float64,synthetic,input,True,min: 1.2 max: 4.9,Constraint-based synthetic hydro physics formula
+hydro_complexity_score,hydro_projects,Project feature hydro_complexity_score,various,float64,synthetic,input,True,min: 1.3 max: 4.7,Constraint-based synthetic hydro physics formula
+annual_generation_gwh,hydro_projects,Project feature annual_generation_gwh,various,float64,synthetic,target,False,min: 0.0 max: 10122.04,Constraint-based synthetic hydro physics formula
+capacity_factor,hydro_projects,Project feature capacity_factor,various,float64,synthetic,input,False,min: 0.381 max: 0.619,Constraint-based synthetic hydro physics formula
+plant_load_factor,hydro_projects,Project feature plant_load_factor,various,float64,synthetic,input,False,min: 38.1 max: 61.9,Constraint-based synthetic hydro physics formula
+availability_factor,hydro_projects,Project feature availability_factor,various,float64,synthetic,input,False,min: 0.861 max: 0.95,Constraint-based synthetic hydro physics formula
+annual_operating_hours,hydro_projects,Project feature annual_operating_hours,various,float64,synthetic,input,False,min: 7542.4 max: 8322.0,Constraint-based synthetic hydro physics formula
+construction_duration_months,hydro_projects,Project feature construction_duration_months,various,float64,synthetic,target,False,min: 3.5 max: 120.0,Constraint-based synthetic hydro physics formula
+civil_construction_months,hydro_projects,Project feature civil_construction_months,various,float64,synthetic,input,False,min: 2.1 max: 71.6,Constraint-based synthetic hydro physics formula
+dam_construction_months,hydro_projects,Project feature dam_construction_months,various,float64,synthetic,input,False,min: 1.3 max: 47.7,Constraint-based synthetic hydro physics formula
+tunnel_construction_months,hydro_projects,Project feature tunnel_construction_months,various,float64,synthetic,input,False,min: 0.0 max: 53.2,Constraint-based synthetic hydro physics formula
+powerhouse_construction_months,hydro_projects,Project feature powerhouse_construction_months,various,float64,synthetic,input,False,min: 1.1 max: 36.8,Constraint-based synthetic hydro physics formula
+electromechanical_installation_months,hydro_projects,Project feature electromechanical_installation_months,various,float64,synthetic,input,False,min: 0.8 max: 32.3,Constraint-based synthetic hydro physics formula
+concrete_m3_per_mw,hydro_projects,Project feature concrete_m3_per_mw,various,float64,synthetic,input,True,min: 289.26 max: 13272.73,Constraint-based synthetic hydro physics formula
+cement_mt_per_mw,hydro_projects,Project feature cement_mt_per_mw,various,float64,synthetic,input,True,min: 103.31 max: 4727.27,Constraint-based synthetic hydro physics formula
+reinforcement_steel_mt_per_mw,hydro_projects,Project feature reinforcement_steel_mt_per_mw,various,float64,synthetic,input,True,min: 18.71 max: 793.65,Constraint-based synthetic hydro physics formula
+structural_steel_mt_per_mw,hydro_projects,Project feature structural_steel_mt_per_mw,various,float64,synthetic,input,True,min: 0.0 max: 181.82,Constraint-based synthetic hydro physics formula
+penstock_steel_mt_per_mw,hydro_projects,Project feature penstock_steel_mt_per_mw,various,float64,synthetic,input,True,min: 0.0 max: 317.46,Constraint-based synthetic hydro physics formula
+excavation_m3_per_mw,hydro_projects,Project feature excavation_m3_per_mw,various,float64,synthetic,input,True,min: 5334.99 max: 124761.9,Constraint-based synthetic hydro physics formula
+synthetic_generation_version,hydro_projects,Project feature synthetic_generation_version,various,str,synthetic,target,False,min: v1.0 max: v1.0,Constraint-based synthetic hydro physics formula
+generation_seed,hydro_projects,Project feature generation_seed,various,int64,synthetic,target,False,min: 42 max: 42,Constraint-based synthetic hydro physics formula
+source_type,hydro_projects,Project feature source_type,various,str,synthetic,input,False,min: synthetic max: synthetic,Constraint-based synthetic hydro physics formula

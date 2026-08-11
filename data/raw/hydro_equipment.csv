@@ -1,0 +1,1457 @@
+project_id,equipment_type,quantity,capacity_per_unit,unit_of_measure,technology
+HP-001,Turbine,8,70.6713,MW,Francis
+HP-001,Generator,8,70.6713,MW,Synchronous Hydro Generator
+HP-001,Main Transformer,9,91.46,MVA,Step-up Power Transformer
+HP-001,EOT Crane,2,251.9,Tonne,Overhead EOT Crane
+HP-002,Turbine,4,358.3725,MW,Francis
+HP-002,Generator,4,358.3725,MW,Synchronous Hydro Generator
+HP-002,Main Transformer,5,463.78,MVA,Step-up Power Transformer
+HP-002,EOT Crane,2,163.4,Tonne,Overhead EOT Crane
+HP-003,Turbine,8,93.3,MW,Pelton
+HP-003,Generator,8,93.3,MW,Synchronous Hydro Generator
+HP-003,Main Transformer,9,120.74,MVA,Step-up Power Transformer
+HP-003,EOT Crane,2,140.9,Tonne,Overhead EOT Crane
+HP-004,Turbine,8,144.0625,MW,Francis
+HP-004,Generator,8,144.0625,MW,Synchronous Hydro Generator
+HP-004,Main Transformer,9,186.43,MVA,Step-up Power Transformer
+HP-005,Turbine,6,169.105,MW,Francis
+HP-005,Generator,6,169.105,MW,Synchronous Hydro Generator
+HP-005,Main Transformer,7,218.84,MVA,Step-up Power Transformer
+HP-005,EOT Crane,2,281.4,Tonne,Overhead EOT Crane
+HP-006,Turbine,4,280.3875,MW,Francis
+HP-006,Generator,4,280.3875,MW,Synchronous Hydro Generator
+HP-006,Main Transformer,5,362.85,MVA,Step-up Power Transformer
+HP-006,EOT Crane,2,252.0,Tonne,Overhead EOT Crane
+HP-007,Turbine,8,85.72,MW,Pelton
+HP-007,Generator,8,85.72,MW,Synchronous Hydro Generator
+HP-007,Main Transformer,9,110.93,MVA,Step-up Power Transformer
+HP-007,EOT Crane,2,85.8,Tonne,Overhead EOT Crane
+HP-008,Turbine,8,115.7163,MW,Pelton
+HP-008,Generator,8,115.7163,MW,Synchronous Hydro Generator
+HP-008,Main Transformer,9,149.75,MVA,Step-up Power Transformer
+HP-008,EOT Crane,2,288.4,Tonne,Overhead EOT Crane
+HP-009,Turbine,4,340.34,MW,Francis
+HP-009,Generator,4,340.34,MW,Synchronous Hydro Generator
+HP-009,Main Transformer,5,440.44,MVA,Step-up Power Transformer
+HP-009,EOT Crane,2,228.0,Tonne,Overhead EOT Crane
+HP-010,Turbine,6,155.9683,MW,Francis
+HP-010,Generator,6,155.9683,MW,Synchronous Hydro Generator
+HP-010,Main Transformer,7,201.84,MVA,Step-up Power Transformer
+HP-010,EOT Crane,2,17.9,Tonne,Overhead EOT Crane
+HP-011,Turbine,6,99.0617,MW,Francis
+HP-011,Generator,6,99.0617,MW,Synchronous Hydro Generator
+HP-011,Main Transformer,7,128.2,MVA,Step-up Power Transformer
+HP-011,EOT Crane,2,243.6,Tonne,Overhead EOT Crane
+HP-012,Turbine,4,228.495,MW,Francis
+HP-012,Generator,4,228.495,MW,Synchronous Hydro Generator
+HP-012,Main Transformer,5,295.7,MVA,Step-up Power Transformer
+HP-012,EOT Crane,2,140.0,Tonne,Overhead EOT Crane
+HP-013,Turbine,6,113.6433,MW,Pelton
+HP-013,Generator,6,113.6433,MW,Synchronous Hydro Generator
+HP-013,Main Transformer,7,147.07,MVA,Step-up Power Transformer
+HP-014,Turbine,6,273.5317,MW,Pelton
+HP-014,Generator,6,273.5317,MW,Synchronous Hydro Generator
+HP-014,Main Transformer,7,353.98,MVA,Step-up Power Transformer
+HP-014,EOT Crane,2,99.2,Tonne,Overhead EOT Crane
+HP-015,Turbine,8,123.8225,MW,Francis
+HP-015,Generator,8,123.8225,MW,Synchronous Hydro Generator
+HP-015,Main Transformer,9,160.24,MVA,Step-up Power Transformer
+HP-015,EOT Crane,2,249.2,Tonne,Overhead EOT Crane
+HP-016,Turbine,3,152.1633,MW,Pelton
+HP-016,Generator,3,152.1633,MW,Synchronous Hydro Generator
+HP-016,Main Transformer,4,196.92,MVA,Step-up Power Transformer
+HP-016,EOT Crane,2,299.7,Tonne,Overhead EOT Crane
+HP-017,Turbine,4,182.925,MW,Pelton
+HP-017,Generator,4,182.925,MW,Synchronous Hydro Generator
+HP-017,Main Transformer,5,236.73,MVA,Step-up Power Transformer
+HP-017,EOT Crane,2,93.3,Tonne,Overhead EOT Crane
+HP-018,Turbine,4,359.355,MW,Pelton
+HP-018,Generator,4,359.355,MW,Synchronous Hydro Generator
+HP-018,Main Transformer,5,465.05,MVA,Step-up Power Transformer
+HP-019,Turbine,4,393.4825,MW,Pelton
+HP-019,Generator,4,393.4825,MW,Synchronous Hydro Generator
+HP-019,Main Transformer,5,509.21,MVA,Step-up Power Transformer
+HP-019,EOT Crane,2,205.1,Tonne,Overhead EOT Crane
+HP-020,Turbine,5,61.19,MW,Pelton
+HP-020,Generator,5,61.19,MW,Synchronous Hydro Generator
+HP-020,Main Transformer,6,79.19,MVA,Step-up Power Transformer
+HP-021,Turbine,8,199.3663,MW,Francis
+HP-021,Generator,8,199.3663,MW,Synchronous Hydro Generator
+HP-021,Main Transformer,9,258.0,MVA,Step-up Power Transformer
+HP-021,EOT Crane,2,31.3,Tonne,Overhead EOT Crane
+HP-022,Turbine,6,103.7667,MW,Francis
+HP-022,Generator,6,103.7667,MW,Synchronous Hydro Generator
+HP-022,Main Transformer,7,134.29,MVA,Step-up Power Transformer
+HP-022,EOT Crane,2,40.0,Tonne,Overhead EOT Crane
+HP-023,Turbine,8,95.66,MW,Pelton
+HP-023,Generator,8,95.66,MW,Synchronous Hydro Generator
+HP-023,Main Transformer,9,123.8,MVA,Step-up Power Transformer
+HP-023,EOT Crane,2,43.0,Tonne,Overhead EOT Crane
+HP-024,Turbine,4,171.5175,MW,Pelton
+HP-024,Generator,4,171.5175,MW,Synchronous Hydro Generator
+HP-024,Main Transformer,5,221.96,MVA,Step-up Power Transformer
+HP-024,EOT Crane,2,235.1,Tonne,Overhead EOT Crane
+HP-025,Turbine,3,126.11,MW,Pelton
+HP-025,Generator,3,126.11,MW,Synchronous Hydro Generator
+HP-025,Main Transformer,4,163.2,MVA,Step-up Power Transformer
+HP-025,EOT Crane,2,34.5,Tonne,Overhead EOT Crane
+HP-026,Turbine,6,182.63,MW,Pelton
+HP-026,Generator,6,182.63,MW,Synchronous Hydro Generator
+HP-026,Main Transformer,7,236.34,MVA,Step-up Power Transformer
+HP-026,EOT Crane,2,49.9,Tonne,Overhead EOT Crane
+HP-027,Turbine,4,441.29,MW,Pelton
+HP-027,Generator,4,441.29,MW,Synchronous Hydro Generator
+HP-027,Main Transformer,5,571.08,MVA,Step-up Power Transformer
+HP-028,Turbine,4,222.09,MW,Francis
+HP-028,Generator,4,222.09,MW,Synchronous Hydro Generator
+HP-028,Main Transformer,5,287.41,MVA,Step-up Power Transformer
+HP-029,Turbine,5,36.562,MW,Francis
+HP-029,Generator,5,36.562,MW,Synchronous Hydro Generator
+HP-029,Main Transformer,6,47.32,MVA,Step-up Power Transformer
+HP-029,EOT Crane,2,210.7,Tonne,Overhead EOT Crane
+HP-030,Turbine,3,83.35,MW,Pelton
+HP-030,Generator,3,83.35,MW,Synchronous Hydro Generator
+HP-030,Main Transformer,4,107.86,MVA,Step-up Power Transformer
+HP-030,EOT Crane,2,154.7,Tonne,Overhead EOT Crane
+HP-031,Turbine,6,239.6167,MW,Francis
+HP-031,Generator,6,239.6167,MW,Synchronous Hydro Generator
+HP-031,Main Transformer,7,310.09,MVA,Step-up Power Transformer
+HP-031,EOT Crane,2,109.9,Tonne,Overhead EOT Crane
+HP-032,Turbine,4,263.8725,MW,Pelton
+HP-032,Generator,4,263.8725,MW,Synchronous Hydro Generator
+HP-032,Main Transformer,5,341.48,MVA,Step-up Power Transformer
+HP-032,EOT Crane,2,144.7,Tonne,Overhead EOT Crane
+HP-033,Turbine,6,325.535,MW,Francis
+HP-033,Generator,6,325.535,MW,Synchronous Hydro Generator
+HP-033,Main Transformer,7,421.28,MVA,Step-up Power Transformer
+HP-034,Turbine,6,325.4433,MW,Pelton
+HP-034,Generator,6,325.4433,MW,Synchronous Hydro Generator
+HP-034,Main Transformer,7,421.16,MVA,Step-up Power Transformer
+HP-034,EOT Crane,2,234.6,Tonne,Overhead EOT Crane
+HP-035,Turbine,6,316.9333,MW,Pelton
+HP-035,Generator,6,316.9333,MW,Synchronous Hydro Generator
+HP-035,Main Transformer,7,410.15,MVA,Step-up Power Transformer
+HP-035,EOT Crane,2,247.3,Tonne,Overhead EOT Crane
+HP-036,Turbine,8,239.3875,MW,Francis
+HP-036,Generator,8,239.3875,MW,Synchronous Hydro Generator
+HP-036,Main Transformer,9,309.8,MVA,Step-up Power Transformer
+HP-036,EOT Crane,2,64.0,Tonne,Overhead EOT Crane
+HP-037,Turbine,8,147.3963,MW,Pelton
+HP-037,Generator,8,147.3963,MW,Synchronous Hydro Generator
+HP-037,Main Transformer,9,190.75,MVA,Step-up Power Transformer
+HP-037,EOT Crane,2,214.0,Tonne,Overhead EOT Crane
+HP-038,Turbine,8,64.9613,MW,Pelton
+HP-038,Generator,8,64.9613,MW,Synchronous Hydro Generator
+HP-038,Main Transformer,9,84.07,MVA,Step-up Power Transformer
+HP-039,Turbine,6,146.1517,MW,Francis
+HP-039,Generator,6,146.1517,MW,Synchronous Hydro Generator
+HP-039,Main Transformer,7,189.14,MVA,Step-up Power Transformer
+HP-039,EOT Crane,2,228.8,Tonne,Overhead EOT Crane
+HP-040,Turbine,4,176.4975,MW,Francis
+HP-040,Generator,4,176.4975,MW,Synchronous Hydro Generator
+HP-040,Main Transformer,5,228.41,MVA,Step-up Power Transformer
+HP-041,Turbine,4,438.0025,MW,Pelton
+HP-041,Generator,4,438.0025,MW,Synchronous Hydro Generator
+HP-041,Main Transformer,5,566.83,MVA,Step-up Power Transformer
+HP-041,EOT Crane,2,152.3,Tonne,Overhead EOT Crane
+HP-042,Turbine,4,256.9625,MW,Pelton
+HP-042,Generator,4,256.9625,MW,Synchronous Hydro Generator
+HP-042,Main Transformer,5,332.54,MVA,Step-up Power Transformer
+HP-042,EOT Crane,2,199.6,Tonne,Overhead EOT Crane
+HP-043,Turbine,4,204.17,MW,Pelton
+HP-043,Generator,4,204.17,MW,Synchronous Hydro Generator
+HP-043,Main Transformer,5,264.22,MVA,Step-up Power Transformer
+HP-044,Turbine,6,26.065,MW,Pelton
+HP-044,Generator,6,26.065,MW,Synchronous Hydro Generator
+HP-044,Main Transformer,7,33.73,MVA,Step-up Power Transformer
+HP-044,EOT Crane,2,52.3,Tonne,Overhead EOT Crane
+HP-045,Turbine,6,264.515,MW,Francis
+HP-045,Generator,6,264.515,MW,Synchronous Hydro Generator
+HP-045,Main Transformer,7,342.31,MVA,Step-up Power Transformer
+HP-045,EOT Crane,2,128.7,Tonne,Overhead EOT Crane
+HP-046,Turbine,8,168.9363,MW,Francis
+HP-046,Generator,8,168.9363,MW,Synchronous Hydro Generator
+HP-046,Main Transformer,9,218.62,MVA,Step-up Power Transformer
+HP-047,Turbine,4,241.2975,MW,Pelton
+HP-047,Generator,4,241.2975,MW,Synchronous Hydro Generator
+HP-047,Main Transformer,5,312.27,MVA,Step-up Power Transformer
+HP-047,EOT Crane,2,180.2,Tonne,Overhead EOT Crane
+HP-048,Turbine,6,203.56,MW,Francis
+HP-048,Generator,6,203.56,MW,Synchronous Hydro Generator
+HP-048,Main Transformer,7,263.43,MVA,Step-up Power Transformer
+HP-048,EOT Crane,2,87.7,Tonne,Overhead EOT Crane
+HP-049,Turbine,4,284.53,MW,Pelton
+HP-049,Generator,4,284.53,MW,Synchronous Hydro Generator
+HP-049,Main Transformer,5,368.22,MVA,Step-up Power Transformer
+HP-049,EOT Crane,2,123.9,Tonne,Overhead EOT Crane
+HP-050,Turbine,8,101.6112,MW,Pelton
+HP-050,Generator,8,101.6112,MW,Synchronous Hydro Generator
+HP-050,Main Transformer,9,131.5,MVA,Step-up Power Transformer
+HP-050,EOT Crane,2,82.6,Tonne,Overhead EOT Crane
+HP-051,Turbine,4,322.1725,MW,Kaplan
+HP-051,Generator,4,322.1725,MW,Synchronous Hydro Generator
+HP-051,Main Transformer,5,416.93,MVA,Step-up Power Transformer
+HP-051,EOT Crane,2,101.2,Tonne,Overhead EOT Crane
+HP-052,Turbine,8,155.2425,MW,Pelton
+HP-052,Generator,8,155.2425,MW,Synchronous Hydro Generator
+HP-052,Main Transformer,9,200.9,MVA,Step-up Power Transformer
+HP-052,EOT Crane,2,99.9,Tonne,Overhead EOT Crane
+HP-053,Turbine,8,151.7837,MW,Pelton
+HP-053,Generator,8,151.7837,MW,Synchronous Hydro Generator
+HP-053,Main Transformer,9,196.43,MVA,Step-up Power Transformer
+HP-054,Turbine,3,62.4867,MW,Pelton
+HP-054,Generator,3,62.4867,MW,Synchronous Hydro Generator
+HP-054,Main Transformer,4,80.87,MVA,Step-up Power Transformer
+HP-055,Turbine,4,122.4875,MW,Francis
+HP-055,Generator,4,122.4875,MW,Synchronous Hydro Generator
+HP-055,Main Transformer,5,158.51,MVA,Step-up Power Transformer
+HP-055,EOT Crane,2,185.0,Tonne,Overhead EOT Crane
+HP-056,Turbine,6,323.3267,MW,Pelton
+HP-056,Generator,6,323.3267,MW,Synchronous Hydro Generator
+HP-056,Main Transformer,7,418.42,MVA,Step-up Power Transformer
+HP-057,Turbine,6,147.14,MW,Francis
+HP-057,Generator,6,147.14,MW,Synchronous Hydro Generator
+HP-057,Main Transformer,7,190.42,MVA,Step-up Power Transformer
+HP-057,EOT Crane,2,181.8,Tonne,Overhead EOT Crane
+HP-058,Turbine,6,316.7283,MW,Francis
+HP-058,Generator,6,316.7283,MW,Synchronous Hydro Generator
+HP-058,Main Transformer,7,409.88,MVA,Step-up Power Transformer
+HP-058,EOT Crane,2,99.0,Tonne,Overhead EOT Crane
+HP-059,Turbine,8,105.5125,MW,Pelton
+HP-059,Generator,8,105.5125,MW,Synchronous Hydro Generator
+HP-059,Main Transformer,9,136.55,MVA,Step-up Power Transformer
+HP-059,EOT Crane,2,118.9,Tonne,Overhead EOT Crane
+HP-060,Turbine,8,246.5037,MW,Pelton
+HP-060,Generator,8,246.5037,MW,Synchronous Hydro Generator
+HP-060,Main Transformer,9,319.0,MVA,Step-up Power Transformer
+HP-060,EOT Crane,2,87.9,Tonne,Overhead EOT Crane
+HP-061,Turbine,4,188.3175,MW,Francis
+HP-061,Generator,4,188.3175,MW,Synchronous Hydro Generator
+HP-061,Main Transformer,5,243.71,MVA,Step-up Power Transformer
+HP-061,EOT Crane,2,161.5,Tonne,Overhead EOT Crane
+HP-062,Turbine,6,202.8533,MW,Pelton
+HP-062,Generator,6,202.8533,MW,Synchronous Hydro Generator
+HP-062,Main Transformer,7,262.52,MVA,Step-up Power Transformer
+HP-062,EOT Crane,2,29.0,Tonne,Overhead EOT Crane
+HP-063,Turbine,3,155.4433,MW,Francis
+HP-063,Generator,3,155.4433,MW,Synchronous Hydro Generator
+HP-063,Main Transformer,4,201.16,MVA,Step-up Power Transformer
+HP-063,EOT Crane,2,257.0,Tonne,Overhead EOT Crane
+HP-064,Turbine,8,136.1575,MW,Pelton
+HP-064,Generator,8,136.1575,MW,Synchronous Hydro Generator
+HP-064,Main Transformer,9,176.2,MVA,Step-up Power Transformer
+HP-064,EOT Crane,2,95.2,Tonne,Overhead EOT Crane
+HP-065,Turbine,6,44.96,MW,Francis
+HP-065,Generator,6,44.96,MW,Synchronous Hydro Generator
+HP-065,Main Transformer,7,58.18,MVA,Step-up Power Transformer
+HP-065,EOT Crane,2,148.4,Tonne,Overhead EOT Crane
+HP-066,Turbine,8,224.3525,MW,Pelton
+HP-066,Generator,8,224.3525,MW,Synchronous Hydro Generator
+HP-066,Main Transformer,9,290.34,MVA,Step-up Power Transformer
+HP-066,EOT Crane,2,130.9,Tonne,Overhead EOT Crane
+HP-067,Turbine,3,163.5067,MW,Francis
+HP-067,Generator,3,163.5067,MW,Synchronous Hydro Generator
+HP-067,Main Transformer,4,211.6,MVA,Step-up Power Transformer
+HP-068,Turbine,4,70.1475,MW,Pelton
+HP-068,Generator,4,70.1475,MW,Synchronous Hydro Generator
+HP-068,Main Transformer,5,90.78,MVA,Step-up Power Transformer
+HP-068,EOT Crane,2,75.0,Tonne,Overhead EOT Crane
+HP-069,Turbine,8,169.6612,MW,Pelton
+HP-069,Generator,8,169.6612,MW,Synchronous Hydro Generator
+HP-069,Main Transformer,9,219.56,MVA,Step-up Power Transformer
+HP-069,EOT Crane,2,254.9,Tonne,Overhead EOT Crane
+HP-070,Turbine,4,197.58,MW,Francis
+HP-070,Generator,4,197.58,MW,Synchronous Hydro Generator
+HP-070,Main Transformer,5,255.69,MVA,Step-up Power Transformer
+HP-070,EOT Crane,2,246.4,Tonne,Overhead EOT Crane
+HP-071,Turbine,6,295.775,MW,Pelton
+HP-071,Generator,6,295.775,MW,Synchronous Hydro Generator
+HP-071,Main Transformer,7,382.77,MVA,Step-up Power Transformer
+HP-071,EOT Crane,2,237.8,Tonne,Overhead EOT Crane
+HP-072,Turbine,6,235.36,MW,Pelton
+HP-072,Generator,6,235.36,MW,Synchronous Hydro Generator
+HP-072,Main Transformer,7,304.58,MVA,Step-up Power Transformer
+HP-072,EOT Crane,2,47.7,Tonne,Overhead EOT Crane
+HP-073,Turbine,8,181.055,MW,Pelton
+HP-073,Generator,8,181.055,MW,Synchronous Hydro Generator
+HP-073,Main Transformer,9,234.31,MVA,Step-up Power Transformer
+HP-073,EOT Crane,2,118.7,Tonne,Overhead EOT Crane
+HP-074,Turbine,4,451.6875,MW,Pelton
+HP-074,Generator,4,451.6875,MW,Synchronous Hydro Generator
+HP-074,Main Transformer,5,584.54,MVA,Step-up Power Transformer
+HP-074,EOT Crane,2,278.7,Tonne,Overhead EOT Crane
+HP-075,Turbine,8,139.205,MW,Francis
+HP-075,Generator,8,139.205,MW,Synchronous Hydro Generator
+HP-075,Main Transformer,9,180.15,MVA,Step-up Power Transformer
+HP-076,Turbine,8,226.28,MW,Pelton
+HP-076,Generator,8,226.28,MW,Synchronous Hydro Generator
+HP-076,Main Transformer,9,292.83,MVA,Step-up Power Transformer
+HP-076,EOT Crane,2,53.1,Tonne,Overhead EOT Crane
+HP-077,Turbine,8,131.5225,MW,Pelton
+HP-077,Generator,8,131.5225,MW,Synchronous Hydro Generator
+HP-077,Main Transformer,9,170.21,MVA,Step-up Power Transformer
+HP-077,EOT Crane,2,239.9,Tonne,Overhead EOT Crane
+HP-078,Turbine,4,134.265,MW,Pelton
+HP-078,Generator,4,134.265,MW,Synchronous Hydro Generator
+HP-078,Main Transformer,5,173.75,MVA,Step-up Power Transformer
+HP-078,EOT Crane,2,58.6,Tonne,Overhead EOT Crane
+HP-079,Turbine,8,104.055,MW,Pelton
+HP-079,Generator,8,104.055,MW,Synchronous Hydro Generator
+HP-079,Main Transformer,9,134.66,MVA,Step-up Power Transformer
+HP-079,EOT Crane,2,118.8,Tonne,Overhead EOT Crane
+HP-080,Turbine,6,65.6933,MW,Pelton
+HP-080,Generator,6,65.6933,MW,Synchronous Hydro Generator
+HP-080,Main Transformer,7,85.01,MVA,Step-up Power Transformer
+HP-080,EOT Crane,2,161.1,Tonne,Overhead EOT Crane
+HP-081,Turbine,8,129.9187,MW,Francis
+HP-081,Generator,8,129.9187,MW,Synchronous Hydro Generator
+HP-081,Main Transformer,9,168.13,MVA,Step-up Power Transformer
+HP-081,EOT Crane,2,119.4,Tonne,Overhead EOT Crane
+HP-082,Turbine,4,243.855,MW,Pelton
+HP-082,Generator,4,243.855,MW,Synchronous Hydro Generator
+HP-082,Main Transformer,5,315.58,MVA,Step-up Power Transformer
+HP-082,EOT Crane,2,117.6,Tonne,Overhead EOT Crane
+HP-083,Turbine,8,246.2937,MW,Pelton
+HP-083,Generator,8,246.2937,MW,Synchronous Hydro Generator
+HP-083,Main Transformer,9,318.73,MVA,Step-up Power Transformer
+HP-083,EOT Crane,2,224.2,Tonne,Overhead EOT Crane
+HP-084,Turbine,6,59.2633,MW,Pelton
+HP-084,Generator,6,59.2633,MW,Synchronous Hydro Generator
+HP-084,Main Transformer,7,76.69,MVA,Step-up Power Transformer
+HP-085,Turbine,6,108.9417,MW,Pelton
+HP-085,Generator,6,108.9417,MW,Synchronous Hydro Generator
+HP-085,Main Transformer,7,140.98,MVA,Step-up Power Transformer
+HP-085,EOT Crane,2,166.4,Tonne,Overhead EOT Crane
+HP-086,Turbine,6,169.1983,MW,Francis
+HP-086,Generator,6,169.1983,MW,Synchronous Hydro Generator
+HP-086,Main Transformer,7,218.96,MVA,Step-up Power Transformer
+HP-086,EOT Crane,2,152.7,Tonne,Overhead EOT Crane
+HP-087,Turbine,8,243.4288,MW,Francis
+HP-087,Generator,8,243.4288,MW,Synchronous Hydro Generator
+HP-087,Main Transformer,9,315.03,MVA,Step-up Power Transformer
+HP-088,Turbine,6,290.16,MW,Pelton
+HP-088,Generator,6,290.16,MW,Synchronous Hydro Generator
+HP-088,Main Transformer,7,375.5,MVA,Step-up Power Transformer
+HP-088,EOT Crane,2,89.8,Tonne,Overhead EOT Crane
+HP-089,Turbine,3,131.5433,MW,Francis
+HP-089,Generator,3,131.5433,MW,Synchronous Hydro Generator
+HP-089,Main Transformer,4,170.23,MVA,Step-up Power Transformer
+HP-090,Turbine,8,201.1362,MW,Francis
+HP-090,Generator,8,201.1362,MW,Synchronous Hydro Generator
+HP-090,Main Transformer,9,260.29,MVA,Step-up Power Transformer
+HP-090,EOT Crane,2,139.8,Tonne,Overhead EOT Crane
+HP-091,Turbine,4,89.1875,MW,Pelton
+HP-091,Generator,4,89.1875,MW,Synchronous Hydro Generator
+HP-091,Main Transformer,5,115.42,MVA,Step-up Power Transformer
+HP-091,EOT Crane,2,256.3,Tonne,Overhead EOT Crane
+HP-092,Turbine,6,113.1933,MW,Francis
+HP-092,Generator,6,113.1933,MW,Synchronous Hydro Generator
+HP-092,Main Transformer,7,146.49,MVA,Step-up Power Transformer
+HP-092,EOT Crane,2,188.7,Tonne,Overhead EOT Crane
+HP-093,Turbine,8,232.0012,MW,Pelton
+HP-093,Generator,8,232.0012,MW,Synchronous Hydro Generator
+HP-093,Main Transformer,9,300.24,MVA,Step-up Power Transformer
+HP-093,EOT Crane,2,157.5,Tonne,Overhead EOT Crane
+HP-094,Turbine,4,119.485,MW,Francis
+HP-094,Generator,4,119.485,MW,Synchronous Hydro Generator
+HP-094,Main Transformer,5,154.63,MVA,Step-up Power Transformer
+HP-094,EOT Crane,2,273.8,Tonne,Overhead EOT Crane
+HP-095,Turbine,4,289.7475,MW,Pelton
+HP-095,Generator,4,289.7475,MW,Synchronous Hydro Generator
+HP-095,Main Transformer,5,374.97,MVA,Step-up Power Transformer
+HP-095,EOT Crane,2,295.8,Tonne,Overhead EOT Crane
+HP-096,Turbine,6,297.7383,MW,Pelton
+HP-096,Generator,6,297.7383,MW,Synchronous Hydro Generator
+HP-096,Main Transformer,7,385.31,MVA,Step-up Power Transformer
+HP-096,EOT Crane,2,270.0,Tonne,Overhead EOT Crane
+HP-097,Turbine,4,353.5725,MW,Pelton
+HP-097,Generator,4,353.5725,MW,Synchronous Hydro Generator
+HP-097,Main Transformer,5,457.56,MVA,Step-up Power Transformer
+HP-097,EOT Crane,2,90.7,Tonne,Overhead EOT Crane
+HP-098,Turbine,5,40.944,MW,Francis
+HP-098,Generator,5,40.944,MW,Synchronous Hydro Generator
+HP-098,Main Transformer,6,52.99,MVA,Step-up Power Transformer
+HP-098,EOT Crane,2,190.7,Tonne,Overhead EOT Crane
+HP-099,Turbine,4,371.37,MW,Pelton
+HP-099,Generator,4,371.37,MW,Synchronous Hydro Generator
+HP-099,Main Transformer,5,480.6,MVA,Step-up Power Transformer
+HP-099,EOT Crane,2,225.3,Tonne,Overhead EOT Crane
+HP-100,Turbine,5,27.132,MW,Francis
+HP-100,Generator,5,27.132,MW,Synchronous Hydro Generator
+HP-100,Main Transformer,6,35.11,MVA,Step-up Power Transformer
+HP-100,EOT Crane,2,20.6,Tonne,Overhead EOT Crane
+HP-101,Turbine,2,47.465,MW,Pelton
+HP-101,Generator,2,47.465,MW,Synchronous Hydro Generator
+HP-101,Main Transformer,2,61.43,MVA,Step-up Power Transformer
+HP-101,EOT Crane,1,247.1,Tonne,Overhead EOT Crane
+HP-102,Turbine,3,22.5267,MW,Pelton
+HP-102,Generator,3,22.5267,MW,Synchronous Hydro Generator
+HP-102,Main Transformer,3,29.15,MVA,Step-up Power Transformer
+HP-102,EOT Crane,1,238.3,Tonne,Overhead EOT Crane
+HP-103,Turbine,2,43.88,MW,Francis
+HP-103,Generator,2,43.88,MW,Synchronous Hydro Generator
+HP-103,Main Transformer,2,56.79,MVA,Step-up Power Transformer
+HP-104,Turbine,4,10.66,MW,Francis
+HP-104,Generator,4,10.66,MW,Synchronous Hydro Generator
+HP-104,Main Transformer,4,13.8,MVA,Step-up Power Transformer
+HP-104,EOT Crane,1,116.9,Tonne,Overhead EOT Crane
+HP-105,Turbine,4,15.9425,MW,Francis
+HP-105,Generator,4,15.9425,MW,Synchronous Hydro Generator
+HP-105,Main Transformer,4,20.63,MVA,Step-up Power Transformer
+HP-105,EOT Crane,1,139.5,Tonne,Overhead EOT Crane
+HP-106,Turbine,4,21.2375,MW,Pelton
+HP-106,Generator,4,21.2375,MW,Synchronous Hydro Generator
+HP-106,Main Transformer,4,27.48,MVA,Step-up Power Transformer
+HP-106,EOT Crane,1,143.7,Tonne,Overhead EOT Crane
+HP-107,Turbine,4,12.5775,MW,Kaplan
+HP-107,Generator,4,12.5775,MW,Synchronous Hydro Generator
+HP-107,Main Transformer,4,16.28,MVA,Step-up Power Transformer
+HP-107,EOT Crane,1,152.6,Tonne,Overhead EOT Crane
+HP-108,Turbine,4,15.475,MW,Pelton
+HP-108,Generator,4,15.475,MW,Synchronous Hydro Generator
+HP-108,Main Transformer,4,20.03,MVA,Step-up Power Transformer
+HP-108,EOT Crane,1,68.9,Tonne,Overhead EOT Crane
+HP-109,Turbine,4,19.2975,MW,Francis
+HP-109,Generator,4,19.2975,MW,Synchronous Hydro Generator
+HP-109,Main Transformer,4,24.97,MVA,Step-up Power Transformer
+HP-109,EOT Crane,1,247.2,Tonne,Overhead EOT Crane
+HP-110,Turbine,4,7.4325,MW,Francis
+HP-110,Generator,4,7.4325,MW,Synchronous Hydro Generator
+HP-110,Main Transformer,4,9.62,MVA,Step-up Power Transformer
+HP-111,Turbine,2,43.495,MW,Pelton
+HP-111,Generator,2,43.495,MW,Synchronous Hydro Generator
+HP-111,Main Transformer,2,56.29,MVA,Step-up Power Transformer
+HP-112,Turbine,2,26.58,MW,Francis
+HP-112,Generator,2,26.58,MW,Synchronous Hydro Generator
+HP-112,Main Transformer,2,34.4,MVA,Step-up Power Transformer
+HP-112,EOT Crane,1,275.0,Tonne,Overhead EOT Crane
+HP-113,Turbine,3,26.67,MW,Pelton
+HP-113,Generator,3,26.67,MW,Synchronous Hydro Generator
+HP-113,Main Transformer,3,34.51,MVA,Step-up Power Transformer
+HP-113,EOT Crane,1,205.6,Tonne,Overhead EOT Crane
+HP-114,Turbine,4,17.86,MW,Pelton
+HP-114,Generator,4,17.86,MW,Synchronous Hydro Generator
+HP-114,Main Transformer,4,23.11,MVA,Step-up Power Transformer
+HP-114,EOT Crane,1,212.2,Tonne,Overhead EOT Crane
+HP-115,Turbine,3,18.7467,MW,Pelton
+HP-115,Generator,3,18.7467,MW,Synchronous Hydro Generator
+HP-115,Main Transformer,3,24.26,MVA,Step-up Power Transformer
+HP-115,EOT Crane,1,173.1,Tonne,Overhead EOT Crane
+HP-116,Turbine,2,29.315,MW,Pelton
+HP-116,Generator,2,29.315,MW,Synchronous Hydro Generator
+HP-116,Main Transformer,2,37.94,MVA,Step-up Power Transformer
+HP-116,EOT Crane,1,152.2,Tonne,Overhead EOT Crane
+HP-117,Turbine,3,12.0333,MW,Francis
+HP-117,Generator,3,12.0333,MW,Synchronous Hydro Generator
+HP-117,Main Transformer,3,15.57,MVA,Step-up Power Transformer
+HP-117,EOT Crane,1,75.1,Tonne,Overhead EOT Crane
+HP-118,Turbine,3,29.19,MW,Francis
+HP-118,Generator,3,29.19,MW,Synchronous Hydro Generator
+HP-118,Main Transformer,3,37.78,MVA,Step-up Power Transformer
+HP-118,EOT Crane,1,208.8,Tonne,Overhead EOT Crane
+HP-119,Turbine,2,17.635,MW,Francis
+HP-119,Generator,2,17.635,MW,Synchronous Hydro Generator
+HP-119,Main Transformer,2,22.82,MVA,Step-up Power Transformer
+HP-120,Turbine,2,46.57,MW,Francis
+HP-120,Generator,2,46.57,MW,Synchronous Hydro Generator
+HP-120,Main Transformer,2,60.27,MVA,Step-up Power Transformer
+HP-120,EOT Crane,1,160.7,Tonne,Overhead EOT Crane
+HP-121,Turbine,3,26.3867,MW,Pelton
+HP-121,Generator,3,26.3867,MW,Synchronous Hydro Generator
+HP-121,Main Transformer,3,34.15,MVA,Step-up Power Transformer
+HP-121,EOT Crane,1,148.0,Tonne,Overhead EOT Crane
+HP-122,Turbine,2,41.3,MW,Francis
+HP-122,Generator,2,41.3,MW,Synchronous Hydro Generator
+HP-122,Main Transformer,2,53.45,MVA,Step-up Power Transformer
+HP-122,EOT Crane,1,175.0,Tonne,Overhead EOT Crane
+HP-123,Turbine,4,22.27,MW,Pelton
+HP-123,Generator,4,22.27,MW,Synchronous Hydro Generator
+HP-123,Main Transformer,4,28.82,MVA,Step-up Power Transformer
+HP-123,EOT Crane,1,231.8,Tonne,Overhead EOT Crane
+HP-124,Turbine,2,20.065,MW,Francis
+HP-124,Generator,2,20.065,MW,Synchronous Hydro Generator
+HP-124,Main Transformer,2,25.97,MVA,Step-up Power Transformer
+HP-124,EOT Crane,1,52.8,Tonne,Overhead EOT Crane
+HP-125,Turbine,3,16.3,MW,Francis
+HP-125,Generator,3,16.3,MW,Synchronous Hydro Generator
+HP-125,Main Transformer,3,21.09,MVA,Step-up Power Transformer
+HP-125,EOT Crane,1,285.4,Tonne,Overhead EOT Crane
+HP-126,Turbine,4,17.4975,MW,Francis
+HP-126,Generator,4,17.4975,MW,Synchronous Hydro Generator
+HP-126,Main Transformer,4,22.64,MVA,Step-up Power Transformer
+HP-126,EOT Crane,1,276.2,Tonne,Overhead EOT Crane
+HP-127,Turbine,3,31.23,MW,Pelton
+HP-127,Generator,3,31.23,MW,Synchronous Hydro Generator
+HP-127,Main Transformer,3,40.42,MVA,Step-up Power Transformer
+HP-127,EOT Crane,1,130.2,Tonne,Overhead EOT Crane
+HP-128,Turbine,3,32.0367,MW,Pelton
+HP-128,Generator,3,32.0367,MW,Synchronous Hydro Generator
+HP-128,Main Transformer,3,41.46,MVA,Step-up Power Transformer
+HP-128,EOT Crane,1,216.9,Tonne,Overhead EOT Crane
+HP-129,Turbine,3,22.2567,MW,Pelton
+HP-129,Generator,3,22.2567,MW,Synchronous Hydro Generator
+HP-129,Main Transformer,3,28.8,MVA,Step-up Power Transformer
+HP-129,EOT Crane,1,241.5,Tonne,Overhead EOT Crane
+HP-130,Turbine,3,9.23,MW,Francis
+HP-130,Generator,3,9.23,MW,Synchronous Hydro Generator
+HP-130,Main Transformer,3,11.94,MVA,Step-up Power Transformer
+HP-130,EOT Crane,1,200.3,Tonne,Overhead EOT Crane
+HP-131,Turbine,4,22.4375,MW,Pelton
+HP-131,Generator,4,22.4375,MW,Synchronous Hydro Generator
+HP-131,Main Transformer,4,29.04,MVA,Step-up Power Transformer
+HP-131,EOT Crane,1,197.7,Tonne,Overhead EOT Crane
+HP-132,Turbine,4,11.8825,MW,Pelton
+HP-132,Generator,4,11.8825,MW,Synchronous Hydro Generator
+HP-132,Main Transformer,4,15.38,MVA,Step-up Power Transformer
+HP-132,EOT Crane,1,127.5,Tonne,Overhead EOT Crane
+HP-133,Turbine,2,35.695,MW,Francis
+HP-133,Generator,2,35.695,MW,Synchronous Hydro Generator
+HP-133,Main Transformer,2,46.19,MVA,Step-up Power Transformer
+HP-133,EOT Crane,1,151.5,Tonne,Overhead EOT Crane
+HP-134,Turbine,2,24.345,MW,Pelton
+HP-134,Generator,2,24.345,MW,Synchronous Hydro Generator
+HP-134,Main Transformer,2,31.51,MVA,Step-up Power Transformer
+HP-134,EOT Crane,1,206.3,Tonne,Overhead EOT Crane
+HP-135,Turbine,3,19.1,MW,Pelton
+HP-135,Generator,3,19.1,MW,Synchronous Hydro Generator
+HP-135,Main Transformer,3,24.72,MVA,Step-up Power Transformer
+HP-135,EOT Crane,1,34.7,Tonne,Overhead EOT Crane
+HP-136,Turbine,3,27.1633,MW,Pelton
+HP-136,Generator,3,27.1633,MW,Synchronous Hydro Generator
+HP-136,Main Transformer,3,35.15,MVA,Step-up Power Transformer
+HP-136,EOT Crane,1,138.2,Tonne,Overhead EOT Crane
+HP-137,Turbine,4,7.83,MW,Pelton
+HP-137,Generator,4,7.83,MW,Synchronous Hydro Generator
+HP-137,Main Transformer,4,10.13,MVA,Step-up Power Transformer
+HP-137,EOT Crane,1,40.5,Tonne,Overhead EOT Crane
+HP-138,Turbine,3,11.9967,MW,Francis
+HP-138,Generator,3,11.9967,MW,Synchronous Hydro Generator
+HP-138,Main Transformer,3,15.53,MVA,Step-up Power Transformer
+HP-139,Turbine,3,12.91,MW,Francis
+HP-139,Generator,3,12.91,MW,Synchronous Hydro Generator
+HP-139,Main Transformer,3,16.71,MVA,Step-up Power Transformer
+HP-139,EOT Crane,1,44.9,Tonne,Overhead EOT Crane
+HP-140,Turbine,4,10.85,MW,Francis
+HP-140,Generator,4,10.85,MW,Synchronous Hydro Generator
+HP-140,Main Transformer,4,14.04,MVA,Step-up Power Transformer
+HP-140,EOT Crane,1,128.2,Tonne,Overhead EOT Crane
+HP-141,Turbine,3,27.4067,MW,Pelton
+HP-141,Generator,3,27.4067,MW,Synchronous Hydro Generator
+HP-141,Main Transformer,3,35.47,MVA,Step-up Power Transformer
+HP-141,EOT Crane,1,294.1,Tonne,Overhead EOT Crane
+HP-142,Turbine,2,20.4,MW,Pelton
+HP-142,Generator,2,20.4,MW,Synchronous Hydro Generator
+HP-142,Main Transformer,2,26.4,MVA,Step-up Power Transformer
+HP-142,EOT Crane,1,70.6,Tonne,Overhead EOT Crane
+HP-143,Turbine,4,16.92,MW,Pelton
+HP-143,Generator,4,16.92,MW,Synchronous Hydro Generator
+HP-143,Main Transformer,4,21.9,MVA,Step-up Power Transformer
+HP-143,EOT Crane,1,297.2,Tonne,Overhead EOT Crane
+HP-144,Turbine,3,12.4467,MW,Pelton
+HP-144,Generator,3,12.4467,MW,Synchronous Hydro Generator
+HP-144,Main Transformer,3,16.11,MVA,Step-up Power Transformer
+HP-144,EOT Crane,1,134.2,Tonne,Overhead EOT Crane
+HP-145,Turbine,2,41.86,MW,Pelton
+HP-145,Generator,2,41.86,MW,Synchronous Hydro Generator
+HP-145,Main Transformer,2,54.17,MVA,Step-up Power Transformer
+HP-145,EOT Crane,1,294.8,Tonne,Overhead EOT Crane
+HP-146,Turbine,2,23.735,MW,Pelton
+HP-146,Generator,2,23.735,MW,Synchronous Hydro Generator
+HP-146,Main Transformer,2,30.72,MVA,Step-up Power Transformer
+HP-146,EOT Crane,1,142.3,Tonne,Overhead EOT Crane
+HP-147,Turbine,2,49.14,MW,Pelton
+HP-147,Generator,2,49.14,MW,Synchronous Hydro Generator
+HP-147,Main Transformer,2,63.59,MVA,Step-up Power Transformer
+HP-147,EOT Crane,1,260.3,Tonne,Overhead EOT Crane
+HP-148,Turbine,2,18.395,MW,Pelton
+HP-148,Generator,2,18.395,MW,Synchronous Hydro Generator
+HP-148,Main Transformer,2,23.81,MVA,Step-up Power Transformer
+HP-148,EOT Crane,1,237.1,Tonne,Overhead EOT Crane
+HP-149,Turbine,4,18.515,MW,Francis
+HP-149,Generator,4,18.515,MW,Synchronous Hydro Generator
+HP-149,Main Transformer,4,23.96,MVA,Step-up Power Transformer
+HP-149,EOT Crane,1,123.3,Tonne,Overhead EOT Crane
+HP-150,Turbine,2,33.855,MW,Francis
+HP-150,Generator,2,33.855,MW,Synchronous Hydro Generator
+HP-150,Main Transformer,2,43.81,MVA,Step-up Power Transformer
+HP-150,EOT Crane,1,105.4,Tonne,Overhead EOT Crane
+HP-151,Turbine,4,6.9825,MW,Pelton
+HP-151,Generator,4,6.9825,MW,Synchronous Hydro Generator
+HP-151,Main Transformer,4,9.04,MVA,Step-up Power Transformer
+HP-151,EOT Crane,1,125.0,Tonne,Overhead EOT Crane
+HP-152,Turbine,4,20.2875,MW,Pelton
+HP-152,Generator,4,20.2875,MW,Synchronous Hydro Generator
+HP-152,Main Transformer,4,26.25,MVA,Step-up Power Transformer
+HP-152,EOT Crane,1,204.0,Tonne,Overhead EOT Crane
+HP-153,Turbine,4,7.075,MW,Francis
+HP-153,Generator,4,7.075,MW,Synchronous Hydro Generator
+HP-153,Main Transformer,4,9.16,MVA,Step-up Power Transformer
+HP-153,EOT Crane,1,179.7,Tonne,Overhead EOT Crane
+HP-154,Turbine,2,34.53,MW,Pelton
+HP-154,Generator,2,34.53,MW,Synchronous Hydro Generator
+HP-154,Main Transformer,2,44.69,MVA,Step-up Power Transformer
+HP-154,EOT Crane,1,51.0,Tonne,Overhead EOT Crane
+HP-155,Turbine,4,15.765,MW,Francis
+HP-155,Generator,4,15.765,MW,Synchronous Hydro Generator
+HP-155,Main Transformer,4,20.4,MVA,Step-up Power Transformer
+HP-155,EOT Crane,1,282.7,Tonne,Overhead EOT Crane
+HP-156,Turbine,2,36.54,MW,Francis
+HP-156,Generator,2,36.54,MW,Synchronous Hydro Generator
+HP-156,Main Transformer,2,47.29,MVA,Step-up Power Transformer
+HP-156,EOT Crane,1,164.6,Tonne,Overhead EOT Crane
+HP-157,Turbine,3,27.1433,MW,Pelton
+HP-157,Generator,3,27.1433,MW,Synchronous Hydro Generator
+HP-157,Main Transformer,3,35.13,MVA,Step-up Power Transformer
+HP-157,EOT Crane,1,12.1,Tonne,Overhead EOT Crane
+HP-158,Turbine,3,28.1267,MW,Francis
+HP-158,Generator,3,28.1267,MW,Synchronous Hydro Generator
+HP-158,Main Transformer,3,36.4,MVA,Step-up Power Transformer
+HP-158,EOT Crane,1,240.2,Tonne,Overhead EOT Crane
+HP-159,Turbine,4,11.76,MW,Francis
+HP-159,Generator,4,11.76,MW,Synchronous Hydro Generator
+HP-159,Main Transformer,4,15.22,MVA,Step-up Power Transformer
+HP-159,EOT Crane,1,220.3,Tonne,Overhead EOT Crane
+HP-160,Turbine,4,11.1075,MW,Pelton
+HP-160,Generator,4,11.1075,MW,Synchronous Hydro Generator
+HP-160,Main Transformer,4,14.37,MVA,Step-up Power Transformer
+HP-160,EOT Crane,1,94.5,Tonne,Overhead EOT Crane
+HP-161,Turbine,2,44.305,MW,Francis
+HP-161,Generator,2,44.305,MW,Synchronous Hydro Generator
+HP-161,Main Transformer,2,57.34,MVA,Step-up Power Transformer
+HP-161,EOT Crane,1,207.0,Tonne,Overhead EOT Crane
+HP-162,Turbine,2,19.235,MW,Francis
+HP-162,Generator,2,19.235,MW,Synchronous Hydro Generator
+HP-162,Main Transformer,2,24.89,MVA,Step-up Power Transformer
+HP-162,EOT Crane,1,124.2,Tonne,Overhead EOT Crane
+HP-163,Turbine,2,43.895,MW,Francis
+HP-163,Generator,2,43.895,MW,Synchronous Hydro Generator
+HP-163,Main Transformer,2,56.81,MVA,Step-up Power Transformer
+HP-163,EOT Crane,1,114.1,Tonne,Overhead EOT Crane
+HP-164,Turbine,2,22.06,MW,Francis
+HP-164,Generator,2,22.06,MW,Synchronous Hydro Generator
+HP-164,Main Transformer,2,28.55,MVA,Step-up Power Transformer
+HP-164,EOT Crane,1,152.0,Tonne,Overhead EOT Crane
+HP-165,Turbine,3,23.52,MW,Pelton
+HP-165,Generator,3,23.52,MW,Synchronous Hydro Generator
+HP-165,Main Transformer,3,30.44,MVA,Step-up Power Transformer
+HP-165,EOT Crane,1,26.6,Tonne,Overhead EOT Crane
+HP-166,Turbine,4,18.945,MW,Pelton
+HP-166,Generator,4,18.945,MW,Synchronous Hydro Generator
+HP-166,Main Transformer,4,24.52,MVA,Step-up Power Transformer
+HP-166,EOT Crane,1,189.1,Tonne,Overhead EOT Crane
+HP-167,Turbine,4,12.41,MW,Francis
+HP-167,Generator,4,12.41,MW,Synchronous Hydro Generator
+HP-167,Main Transformer,4,16.06,MVA,Step-up Power Transformer
+HP-167,EOT Crane,1,104.2,Tonne,Overhead EOT Crane
+HP-168,Turbine,4,8.3075,MW,Francis
+HP-168,Generator,4,8.3075,MW,Synchronous Hydro Generator
+HP-168,Main Transformer,4,10.75,MVA,Step-up Power Transformer
+HP-168,EOT Crane,1,77.1,Tonne,Overhead EOT Crane
+HP-169,Turbine,3,24.43,MW,Francis
+HP-169,Generator,3,24.43,MW,Synchronous Hydro Generator
+HP-169,Main Transformer,3,31.62,MVA,Step-up Power Transformer
+HP-169,EOT Crane,1,97.4,Tonne,Overhead EOT Crane
+HP-170,Turbine,4,8.6475,MW,Pelton
+HP-170,Generator,4,8.6475,MW,Synchronous Hydro Generator
+HP-170,Main Transformer,4,11.19,MVA,Step-up Power Transformer
+HP-171,Turbine,2,36.485,MW,Pelton
+HP-171,Generator,2,36.485,MW,Synchronous Hydro Generator
+HP-171,Main Transformer,2,47.22,MVA,Step-up Power Transformer
+HP-171,EOT Crane,1,220.6,Tonne,Overhead EOT Crane
+HP-172,Turbine,2,29.725,MW,Francis
+HP-172,Generator,2,29.725,MW,Synchronous Hydro Generator
+HP-172,Main Transformer,2,38.47,MVA,Step-up Power Transformer
+HP-172,EOT Crane,1,167.6,Tonne,Overhead EOT Crane
+HP-173,Turbine,2,16.355,MW,Francis
+HP-173,Generator,2,16.355,MW,Synchronous Hydro Generator
+HP-173,Main Transformer,2,21.17,MVA,Step-up Power Transformer
+HP-174,Turbine,4,19.775,MW,Francis
+HP-174,Generator,4,19.775,MW,Synchronous Hydro Generator
+HP-174,Main Transformer,4,25.59,MVA,Step-up Power Transformer
+HP-175,Turbine,2,14.595,MW,Francis
+HP-175,Generator,2,14.595,MW,Synchronous Hydro Generator
+HP-175,Main Transformer,2,18.89,MVA,Step-up Power Transformer
+HP-175,EOT Crane,1,292.2,Tonne,Overhead EOT Crane
+HP-176,Turbine,3,9.7333,MW,Pelton
+HP-176,Generator,3,9.7333,MW,Synchronous Hydro Generator
+HP-176,Main Transformer,3,12.6,MVA,Step-up Power Transformer
+HP-176,EOT Crane,1,156.0,Tonne,Overhead EOT Crane
+HP-177,Turbine,3,22.9933,MW,Francis
+HP-177,Generator,3,22.9933,MW,Synchronous Hydro Generator
+HP-177,Main Transformer,3,29.76,MVA,Step-up Power Transformer
+HP-177,EOT Crane,1,115.4,Tonne,Overhead EOT Crane
+HP-178,Turbine,4,24.74,MW,Francis
+HP-178,Generator,4,24.74,MW,Synchronous Hydro Generator
+HP-178,Main Transformer,4,32.02,MVA,Step-up Power Transformer
+HP-178,EOT Crane,1,28.7,Tonne,Overhead EOT Crane
+HP-179,Turbine,2,16.785,MW,Francis
+HP-179,Generator,2,16.785,MW,Synchronous Hydro Generator
+HP-179,Main Transformer,2,21.72,MVA,Step-up Power Transformer
+HP-179,EOT Crane,1,269.2,Tonne,Overhead EOT Crane
+HP-180,Turbine,3,24.9333,MW,Pelton
+HP-180,Generator,3,24.9333,MW,Synchronous Hydro Generator
+HP-180,Main Transformer,3,32.27,MVA,Step-up Power Transformer
+HP-180,EOT Crane,1,182.5,Tonne,Overhead EOT Crane
+HP-181,Turbine,2,23.12,MW,Kaplan
+HP-181,Generator,2,23.12,MW,Synchronous Hydro Generator
+HP-181,Main Transformer,2,29.92,MVA,Step-up Power Transformer
+HP-181,EOT Crane,1,184.0,Tonne,Overhead EOT Crane
+HP-182,Turbine,4,24.5025,MW,Pelton
+HP-182,Generator,4,24.5025,MW,Synchronous Hydro Generator
+HP-182,Main Transformer,4,31.71,MVA,Step-up Power Transformer
+HP-182,EOT Crane,1,201.2,Tonne,Overhead EOT Crane
+HP-183,Turbine,3,19.81,MW,Francis
+HP-183,Generator,3,19.81,MW,Synchronous Hydro Generator
+HP-183,Main Transformer,3,25.64,MVA,Step-up Power Transformer
+HP-183,EOT Crane,1,46.7,Tonne,Overhead EOT Crane
+HP-184,Turbine,3,24.63,MW,Francis
+HP-184,Generator,3,24.63,MW,Synchronous Hydro Generator
+HP-184,Main Transformer,3,31.87,MVA,Step-up Power Transformer
+HP-185,Turbine,3,13.6767,MW,Francis
+HP-185,Generator,3,13.6767,MW,Synchronous Hydro Generator
+HP-185,Main Transformer,3,17.7,MVA,Step-up Power Transformer
+HP-185,EOT Crane,1,33.1,Tonne,Overhead EOT Crane
+HP-186,Turbine,4,11.845,MW,Francis
+HP-186,Generator,4,11.845,MW,Synchronous Hydro Generator
+HP-186,Main Transformer,4,15.33,MVA,Step-up Power Transformer
+HP-186,EOT Crane,1,222.0,Tonne,Overhead EOT Crane
+HP-187,Turbine,2,33.445,MW,Francis
+HP-187,Generator,2,33.445,MW,Synchronous Hydro Generator
+HP-187,Main Transformer,2,43.28,MVA,Step-up Power Transformer
+HP-187,EOT Crane,1,112.8,Tonne,Overhead EOT Crane
+HP-188,Turbine,4,12.5075,MW,Pelton
+HP-188,Generator,4,12.5075,MW,Synchronous Hydro Generator
+HP-188,Main Transformer,4,16.19,MVA,Step-up Power Transformer
+HP-188,EOT Crane,1,58.3,Tonne,Overhead EOT Crane
+HP-189,Turbine,2,30.3,MW,Pelton
+HP-189,Generator,2,30.3,MW,Synchronous Hydro Generator
+HP-189,Main Transformer,2,39.21,MVA,Step-up Power Transformer
+HP-189,EOT Crane,1,113.6,Tonne,Overhead EOT Crane
+HP-190,Turbine,4,20.2075,MW,Pelton
+HP-190,Generator,4,20.2075,MW,Synchronous Hydro Generator
+HP-190,Main Transformer,4,26.15,MVA,Step-up Power Transformer
+HP-190,EOT Crane,1,24.5,Tonne,Overhead EOT Crane
+HP-191,Turbine,2,17.85,MW,Francis
+HP-191,Generator,2,17.85,MW,Synchronous Hydro Generator
+HP-191,Main Transformer,2,23.1,MVA,Step-up Power Transformer
+HP-191,EOT Crane,1,188.4,Tonne,Overhead EOT Crane
+HP-192,Turbine,3,23.8567,MW,Pelton
+HP-192,Generator,3,23.8567,MW,Synchronous Hydro Generator
+HP-192,Main Transformer,3,30.87,MVA,Step-up Power Transformer
+HP-192,EOT Crane,1,26.1,Tonne,Overhead EOT Crane
+HP-193,Turbine,4,22.0325,MW,Francis
+HP-193,Generator,4,22.0325,MW,Synchronous Hydro Generator
+HP-193,Main Transformer,4,28.51,MVA,Step-up Power Transformer
+HP-193,EOT Crane,1,60.6,Tonne,Overhead EOT Crane
+HP-194,Turbine,2,29.73,MW,Francis
+HP-194,Generator,2,29.73,MW,Synchronous Hydro Generator
+HP-194,Main Transformer,2,38.47,MVA,Step-up Power Transformer
+HP-194,EOT Crane,1,41.2,Tonne,Overhead EOT Crane
+HP-195,Turbine,2,30.915,MW,Pelton
+HP-195,Generator,2,30.915,MW,Synchronous Hydro Generator
+HP-195,Main Transformer,2,40.01,MVA,Step-up Power Transformer
+HP-195,EOT Crane,1,29.7,Tonne,Overhead EOT Crane
+HP-196,Turbine,2,21.55,MW,Pelton
+HP-196,Generator,2,21.55,MW,Synchronous Hydro Generator
+HP-196,Main Transformer,2,27.89,MVA,Step-up Power Transformer
+HP-196,EOT Crane,1,17.6,Tonne,Overhead EOT Crane
+HP-197,Turbine,3,25.4233,MW,Francis
+HP-197,Generator,3,25.4233,MW,Synchronous Hydro Generator
+HP-197,Main Transformer,3,32.9,MVA,Step-up Power Transformer
+HP-197,EOT Crane,1,73.9,Tonne,Overhead EOT Crane
+HP-198,Turbine,3,14.44,MW,Pelton
+HP-198,Generator,3,14.44,MW,Synchronous Hydro Generator
+HP-198,Main Transformer,3,18.69,MVA,Step-up Power Transformer
+HP-198,EOT Crane,1,228.5,Tonne,Overhead EOT Crane
+HP-199,Turbine,4,20.925,MW,Pelton
+HP-199,Generator,4,20.925,MW,Synchronous Hydro Generator
+HP-199,Main Transformer,4,27.08,MVA,Step-up Power Transformer
+HP-199,EOT Crane,1,169.9,Tonne,Overhead EOT Crane
+HP-200,Turbine,2,22.235,MW,Francis
+HP-200,Generator,2,22.235,MW,Synchronous Hydro Generator
+HP-200,Main Transformer,2,28.77,MVA,Step-up Power Transformer
+HP-201,Turbine,3,2.28,MW,Francis
+HP-201,Generator,3,2.28,MW,Synchronous Hydro Generator
+HP-201,Main Transformer,3,2.95,MVA,Step-up Power Transformer
+HP-201,EOT Crane,1,131.5,Tonne,Overhead EOT Crane
+HP-202,Turbine,3,5.13,MW,Kaplan
+HP-202,Generator,3,5.13,MW,Synchronous Hydro Generator
+HP-202,Main Transformer,3,6.64,MVA,Step-up Power Transformer
+HP-202,EOT Crane,1,224.8,Tonne,Overhead EOT Crane
+HP-203,Turbine,2,9.285,MW,Francis
+HP-203,Generator,2,9.285,MW,Synchronous Hydro Generator
+HP-203,Main Transformer,2,12.02,MVA,Step-up Power Transformer
+HP-204,Turbine,2,11.335,MW,Francis
+HP-204,Generator,2,11.335,MW,Synchronous Hydro Generator
+HP-204,Main Transformer,2,14.67,MVA,Step-up Power Transformer
+HP-205,Turbine,3,2.16,MW,Francis
+HP-205,Generator,3,2.16,MW,Synchronous Hydro Generator
+HP-205,Main Transformer,3,2.8,MVA,Step-up Power Transformer
+HP-205,EOT Crane,1,125.4,Tonne,Overhead EOT Crane
+HP-206,Turbine,3,5.9133,MW,Francis
+HP-206,Generator,3,5.9133,MW,Synchronous Hydro Generator
+HP-206,Main Transformer,3,7.65,MVA,Step-up Power Transformer
+HP-206,EOT Crane,1,118.4,Tonne,Overhead EOT Crane
+HP-207,Turbine,2,10.68,MW,Francis
+HP-207,Generator,2,10.68,MW,Synchronous Hydro Generator
+HP-207,Main Transformer,2,13.82,MVA,Step-up Power Transformer
+HP-207,EOT Crane,1,120.9,Tonne,Overhead EOT Crane
+HP-208,Turbine,3,2.3767,MW,Francis
+HP-208,Generator,3,2.3767,MW,Synchronous Hydro Generator
+HP-208,Main Transformer,3,3.08,MVA,Step-up Power Transformer
+HP-209,Turbine,3,2.1733,MW,Francis
+HP-209,Generator,3,2.1733,MW,Synchronous Hydro Generator
+HP-209,Main Transformer,3,2.81,MVA,Step-up Power Transformer
+HP-209,EOT Crane,1,29.4,Tonne,Overhead EOT Crane
+HP-210,Turbine,3,2.7633,MW,Francis
+HP-210,Generator,3,2.7633,MW,Synchronous Hydro Generator
+HP-210,Main Transformer,3,3.58,MVA,Step-up Power Transformer
+HP-210,EOT Crane,1,214.8,Tonne,Overhead EOT Crane
+HP-211,Turbine,3,7.0967,MW,Francis
+HP-211,Generator,3,7.0967,MW,Synchronous Hydro Generator
+HP-211,Main Transformer,3,9.18,MVA,Step-up Power Transformer
+HP-211,EOT Crane,1,146.5,Tonne,Overhead EOT Crane
+HP-212,Turbine,2,9.585,MW,Francis
+HP-212,Generator,2,9.585,MW,Synchronous Hydro Generator
+HP-212,Main Transformer,2,12.4,MVA,Step-up Power Transformer
+HP-212,EOT Crane,1,100.2,Tonne,Overhead EOT Crane
+HP-213,Turbine,2,10.575,MW,Kaplan
+HP-213,Generator,2,10.575,MW,Synchronous Hydro Generator
+HP-213,Main Transformer,2,13.69,MVA,Step-up Power Transformer
+HP-213,EOT Crane,1,174.9,Tonne,Overhead EOT Crane
+HP-214,Turbine,2,4.92,MW,Francis
+HP-214,Generator,2,4.92,MW,Synchronous Hydro Generator
+HP-214,Main Transformer,2,6.37,MVA,Step-up Power Transformer
+HP-215,Turbine,2,6.865,MW,Francis
+HP-215,Generator,2,6.865,MW,Synchronous Hydro Generator
+HP-215,Main Transformer,2,8.88,MVA,Step-up Power Transformer
+HP-215,EOT Crane,1,183.1,Tonne,Overhead EOT Crane
+HP-216,Turbine,3,0.8733,MW,Francis
+HP-216,Generator,3,0.8733,MW,Synchronous Hydro Generator
+HP-216,Main Transformer,3,1.13,MVA,Step-up Power Transformer
+HP-216,EOT Crane,1,140.6,Tonne,Overhead EOT Crane
+HP-217,Turbine,3,8.0833,MW,Francis
+HP-217,Generator,3,8.0833,MW,Synchronous Hydro Generator
+HP-217,Main Transformer,3,10.46,MVA,Step-up Power Transformer
+HP-217,EOT Crane,1,276.4,Tonne,Overhead EOT Crane
+HP-218,Turbine,2,4.74,MW,Francis
+HP-218,Generator,2,4.74,MW,Synchronous Hydro Generator
+HP-218,Main Transformer,2,6.13,MVA,Step-up Power Transformer
+HP-218,EOT Crane,1,215.6,Tonne,Overhead EOT Crane
+HP-219,Turbine,2,5.82,MW,Francis
+HP-219,Generator,2,5.82,MW,Synchronous Hydro Generator
+HP-219,Main Transformer,2,7.53,MVA,Step-up Power Transformer
+HP-219,EOT Crane,1,235.5,Tonne,Overhead EOT Crane
+HP-220,Turbine,3,6.4,MW,Francis
+HP-220,Generator,3,6.4,MW,Synchronous Hydro Generator
+HP-220,Main Transformer,3,8.28,MVA,Step-up Power Transformer
+HP-220,EOT Crane,1,266.2,Tonne,Overhead EOT Crane
+HP-221,Turbine,2,5.225,MW,Francis
+HP-221,Generator,2,5.225,MW,Synchronous Hydro Generator
+HP-221,Main Transformer,2,6.76,MVA,Step-up Power Transformer
+HP-222,Turbine,3,1.4567,MW,Francis
+HP-222,Generator,3,1.4567,MW,Synchronous Hydro Generator
+HP-222,Main Transformer,3,1.89,MVA,Step-up Power Transformer
+HP-222,EOT Crane,1,53.0,Tonne,Overhead EOT Crane
+HP-223,Turbine,3,3.7633,MW,Francis
+HP-223,Generator,3,3.7633,MW,Synchronous Hydro Generator
+HP-223,Main Transformer,3,4.87,MVA,Step-up Power Transformer
+HP-223,EOT Crane,1,224.4,Tonne,Overhead EOT Crane
+HP-224,Turbine,2,3.03,MW,Francis
+HP-224,Generator,2,3.03,MW,Synchronous Hydro Generator
+HP-224,Main Transformer,2,3.92,MVA,Step-up Power Transformer
+HP-224,EOT Crane,1,99.6,Tonne,Overhead EOT Crane
+HP-225,Turbine,2,11.23,MW,Francis
+HP-225,Generator,2,11.23,MW,Synchronous Hydro Generator
+HP-225,Main Transformer,2,14.53,MVA,Step-up Power Transformer
+HP-225,EOT Crane,1,131.0,Tonne,Overhead EOT Crane
+HP-226,Turbine,2,8.395,MW,Francis
+HP-226,Generator,2,8.395,MW,Synchronous Hydro Generator
+HP-226,Main Transformer,2,10.86,MVA,Step-up Power Transformer
+HP-226,EOT Crane,1,181.0,Tonne,Overhead EOT Crane
+HP-227,Turbine,3,3.17,MW,Kaplan
+HP-227,Generator,3,3.17,MW,Synchronous Hydro Generator
+HP-227,Main Transformer,3,4.1,MVA,Step-up Power Transformer
+HP-227,EOT Crane,1,164.2,Tonne,Overhead EOT Crane
+HP-228,Turbine,2,9.785,MW,Kaplan
+HP-228,Generator,2,9.785,MW,Synchronous Hydro Generator
+HP-228,Main Transformer,2,12.66,MVA,Step-up Power Transformer
+HP-228,EOT Crane,1,68.5,Tonne,Overhead EOT Crane
+HP-229,Turbine,2,1.315,MW,Francis
+HP-229,Generator,2,1.315,MW,Synchronous Hydro Generator
+HP-229,Main Transformer,2,1.7,MVA,Step-up Power Transformer
+HP-230,Turbine,2,10.705,MW,Francis
+HP-230,Generator,2,10.705,MW,Synchronous Hydro Generator
+HP-230,Main Transformer,2,13.85,MVA,Step-up Power Transformer
+HP-230,EOT Crane,1,42.6,Tonne,Overhead EOT Crane
+HP-231,Turbine,3,7.2067,MW,Francis
+HP-231,Generator,3,7.2067,MW,Synchronous Hydro Generator
+HP-231,Main Transformer,3,9.33,MVA,Step-up Power Transformer
+HP-231,EOT Crane,1,252.3,Tonne,Overhead EOT Crane
+HP-232,Turbine,2,6.505,MW,Francis
+HP-232,Generator,2,6.505,MW,Synchronous Hydro Generator
+HP-232,Main Transformer,2,8.42,MVA,Step-up Power Transformer
+HP-232,EOT Crane,1,67.6,Tonne,Overhead EOT Crane
+HP-233,Turbine,2,5.15,MW,Francis
+HP-233,Generator,2,5.15,MW,Synchronous Hydro Generator
+HP-233,Main Transformer,2,6.66,MVA,Step-up Power Transformer
+HP-233,EOT Crane,1,30.5,Tonne,Overhead EOT Crane
+HP-234,Turbine,2,9.31,MW,Francis
+HP-234,Generator,2,9.31,MW,Synchronous Hydro Generator
+HP-234,Main Transformer,2,12.05,MVA,Step-up Power Transformer
+HP-235,Turbine,3,5.7567,MW,Francis
+HP-235,Generator,3,5.7567,MW,Synchronous Hydro Generator
+HP-235,Main Transformer,3,7.45,MVA,Step-up Power Transformer
+HP-235,EOT Crane,1,105.4,Tonne,Overhead EOT Crane
+HP-236,Turbine,2,10.725,MW,Francis
+HP-236,Generator,2,10.725,MW,Synchronous Hydro Generator
+HP-236,Main Transformer,2,13.88,MVA,Step-up Power Transformer
+HP-236,EOT Crane,1,213.1,Tonne,Overhead EOT Crane
+HP-237,Turbine,3,5.9767,MW,Francis
+HP-237,Generator,3,5.9767,MW,Synchronous Hydro Generator
+HP-237,Main Transformer,3,7.73,MVA,Step-up Power Transformer
+HP-237,EOT Crane,1,85.8,Tonne,Overhead EOT Crane
+HP-238,Turbine,2,5.175,MW,Francis
+HP-238,Generator,2,5.175,MW,Synchronous Hydro Generator
+HP-238,Main Transformer,2,6.7,MVA,Step-up Power Transformer
+HP-238,EOT Crane,1,48.7,Tonne,Overhead EOT Crane
+HP-239,Turbine,3,5.99,MW,Francis
+HP-239,Generator,3,5.99,MW,Synchronous Hydro Generator
+HP-239,Main Transformer,3,7.75,MVA,Step-up Power Transformer
+HP-239,EOT Crane,1,193.6,Tonne,Overhead EOT Crane
+HP-240,Turbine,2,1.695,MW,Kaplan
+HP-240,Generator,2,1.695,MW,Synchronous Hydro Generator
+HP-240,Main Transformer,2,2.19,MVA,Step-up Power Transformer
+HP-240,EOT Crane,1,201.0,Tonne,Overhead EOT Crane
+HP-241,Turbine,3,2.5467,MW,Kaplan
+HP-241,Generator,3,2.5467,MW,Synchronous Hydro Generator
+HP-241,Main Transformer,3,3.3,MVA,Step-up Power Transformer
+HP-241,EOT Crane,1,167.4,Tonne,Overhead EOT Crane
+HP-242,Turbine,2,12.07,MW,Francis
+HP-242,Generator,2,12.07,MW,Synchronous Hydro Generator
+HP-242,Main Transformer,2,15.62,MVA,Step-up Power Transformer
+HP-242,EOT Crane,1,199.5,Tonne,Overhead EOT Crane
+HP-243,Turbine,3,6.9533,MW,Kaplan
+HP-243,Generator,3,6.9533,MW,Synchronous Hydro Generator
+HP-243,Main Transformer,3,9.0,MVA,Step-up Power Transformer
+HP-243,EOT Crane,1,224.1,Tonne,Overhead EOT Crane
+HP-244,Turbine,3,6.2,MW,Francis
+HP-244,Generator,3,6.2,MW,Synchronous Hydro Generator
+HP-244,Main Transformer,3,8.02,MVA,Step-up Power Transformer
+HP-245,Turbine,3,5.9,MW,Francis
+HP-245,Generator,3,5.9,MW,Synchronous Hydro Generator
+HP-245,Main Transformer,3,7.64,MVA,Step-up Power Transformer
+HP-245,EOT Crane,1,271.1,Tonne,Overhead EOT Crane
+HP-246,Turbine,3,3.6667,MW,Francis
+HP-246,Generator,3,3.6667,MW,Synchronous Hydro Generator
+HP-246,Main Transformer,3,4.75,MVA,Step-up Power Transformer
+HP-246,EOT Crane,1,99.2,Tonne,Overhead EOT Crane
+HP-247,Turbine,2,4.875,MW,Francis
+HP-247,Generator,2,4.875,MW,Synchronous Hydro Generator
+HP-247,Main Transformer,2,6.31,MVA,Step-up Power Transformer
+HP-247,EOT Crane,1,288.9,Tonne,Overhead EOT Crane
+HP-248,Turbine,3,5.4133,MW,Francis
+HP-248,Generator,3,5.4133,MW,Synchronous Hydro Generator
+HP-248,Main Transformer,3,7.01,MVA,Step-up Power Transformer
+HP-248,EOT Crane,1,204.8,Tonne,Overhead EOT Crane
+HP-249,Turbine,2,10.285,MW,Francis
+HP-249,Generator,2,10.285,MW,Synchronous Hydro Generator
+HP-249,Main Transformer,2,13.31,MVA,Step-up Power Transformer
+HP-249,EOT Crane,1,157.2,Tonne,Overhead EOT Crane
+HP-250,Turbine,2,7.59,MW,Francis
+HP-250,Generator,2,7.59,MW,Synchronous Hydro Generator
+HP-250,Main Transformer,2,9.82,MVA,Step-up Power Transformer
+HP-250,EOT Crane,1,149.3,Tonne,Overhead EOT Crane
+HP-251,Turbine,3,2.4067,MW,Francis
+HP-251,Generator,3,2.4067,MW,Synchronous Hydro Generator
+HP-251,Main Transformer,3,3.11,MVA,Step-up Power Transformer
+HP-251,EOT Crane,1,51.0,Tonne,Overhead EOT Crane
+HP-252,Turbine,3,0.7667,MW,Francis
+HP-252,Generator,3,0.7667,MW,Synchronous Hydro Generator
+HP-252,Main Transformer,3,0.99,MVA,Step-up Power Transformer
+HP-253,Turbine,2,11.31,MW,Francis
+HP-253,Generator,2,11.31,MW,Synchronous Hydro Generator
+HP-253,Main Transformer,2,14.64,MVA,Step-up Power Transformer
+HP-253,EOT Crane,1,138.8,Tonne,Overhead EOT Crane
+HP-254,Turbine,3,6.0567,MW,Kaplan
+HP-254,Generator,3,6.0567,MW,Synchronous Hydro Generator
+HP-254,Main Transformer,3,7.84,MVA,Step-up Power Transformer
+HP-254,EOT Crane,1,140.1,Tonne,Overhead EOT Crane
+HP-255,Turbine,2,8.38,MW,Kaplan
+HP-255,Generator,2,8.38,MW,Synchronous Hydro Generator
+HP-255,Main Transformer,2,10.84,MVA,Step-up Power Transformer
+HP-256,Turbine,2,3.345,MW,Francis
+HP-256,Generator,2,3.345,MW,Synchronous Hydro Generator
+HP-256,Main Transformer,2,4.33,MVA,Step-up Power Transformer
+HP-256,EOT Crane,1,25.5,Tonne,Overhead EOT Crane
+HP-257,Turbine,2,4.205,MW,Francis
+HP-257,Generator,2,4.205,MW,Synchronous Hydro Generator
+HP-257,Main Transformer,2,5.44,MVA,Step-up Power Transformer
+HP-257,EOT Crane,1,210.0,Tonne,Overhead EOT Crane
+HP-258,Turbine,2,7.4,MW,Kaplan
+HP-258,Generator,2,7.4,MW,Synchronous Hydro Generator
+HP-258,Main Transformer,2,9.58,MVA,Step-up Power Transformer
+HP-258,EOT Crane,1,239.8,Tonne,Overhead EOT Crane
+HP-259,Turbine,3,8.2267,MW,Francis
+HP-259,Generator,3,8.2267,MW,Synchronous Hydro Generator
+HP-259,Main Transformer,3,10.65,MVA,Step-up Power Transformer
+HP-259,EOT Crane,1,285.8,Tonne,Overhead EOT Crane
+HP-260,Turbine,3,5.9933,MW,Francis
+HP-260,Generator,3,5.9933,MW,Synchronous Hydro Generator
+HP-260,Main Transformer,3,7.76,MVA,Step-up Power Transformer
+HP-260,EOT Crane,1,182.1,Tonne,Overhead EOT Crane
+HP-261,Turbine,2,3.075,MW,Kaplan
+HP-261,Generator,2,3.075,MW,Synchronous Hydro Generator
+HP-261,Main Transformer,2,3.98,MVA,Step-up Power Transformer
+HP-262,Turbine,2,1.745,MW,Kaplan
+HP-262,Generator,2,1.745,MW,Synchronous Hydro Generator
+HP-262,Main Transformer,2,2.26,MVA,Step-up Power Transformer
+HP-263,Turbine,3,1.9233,MW,Francis
+HP-263,Generator,3,1.9233,MW,Synchronous Hydro Generator
+HP-263,Main Transformer,3,2.49,MVA,Step-up Power Transformer
+HP-263,EOT Crane,1,262.6,Tonne,Overhead EOT Crane
+HP-264,Turbine,3,1.36,MW,Francis
+HP-264,Generator,3,1.36,MW,Synchronous Hydro Generator
+HP-264,Main Transformer,3,1.76,MVA,Step-up Power Transformer
+HP-264,EOT Crane,1,165.8,Tonne,Overhead EOT Crane
+HP-265,Turbine,3,8.0433,MW,Francis
+HP-265,Generator,3,8.0433,MW,Synchronous Hydro Generator
+HP-265,Main Transformer,3,10.41,MVA,Step-up Power Transformer
+HP-265,EOT Crane,1,101.8,Tonne,Overhead EOT Crane
+HP-266,Turbine,2,2.045,MW,Francis
+HP-266,Generator,2,2.045,MW,Synchronous Hydro Generator
+HP-266,Main Transformer,2,2.65,MVA,Step-up Power Transformer
+HP-266,EOT Crane,1,217.3,Tonne,Overhead EOT Crane
+HP-267,Turbine,2,8.86,MW,Francis
+HP-267,Generator,2,8.86,MW,Synchronous Hydro Generator
+HP-267,Main Transformer,2,11.47,MVA,Step-up Power Transformer
+HP-267,EOT Crane,1,286.6,Tonne,Overhead EOT Crane
+HP-268,Turbine,2,11.785,MW,Kaplan
+HP-268,Generator,2,11.785,MW,Synchronous Hydro Generator
+HP-268,Main Transformer,2,15.25,MVA,Step-up Power Transformer
+HP-268,EOT Crane,1,124.6,Tonne,Overhead EOT Crane
+HP-269,Turbine,3,7.8667,MW,Francis
+HP-269,Generator,3,7.8667,MW,Synchronous Hydro Generator
+HP-269,Main Transformer,3,10.18,MVA,Step-up Power Transformer
+HP-269,EOT Crane,1,122.1,Tonne,Overhead EOT Crane
+HP-270,Turbine,3,6.9333,MW,Francis
+HP-270,Generator,3,6.9333,MW,Synchronous Hydro Generator
+HP-270,Main Transformer,3,8.97,MVA,Step-up Power Transformer
+HP-271,Turbine,2,3.215,MW,Francis
+HP-271,Generator,2,3.215,MW,Synchronous Hydro Generator
+HP-271,Main Transformer,2,4.16,MVA,Step-up Power Transformer
+HP-271,EOT Crane,1,242.5,Tonne,Overhead EOT Crane
+HP-272,Turbine,3,4.21,MW,Francis
+HP-272,Generator,3,4.21,MW,Synchronous Hydro Generator
+HP-272,Main Transformer,3,5.45,MVA,Step-up Power Transformer
+HP-272,EOT Crane,1,10.6,Tonne,Overhead EOT Crane
+HP-273,Turbine,3,5.9,MW,Kaplan
+HP-273,Generator,3,5.9,MW,Synchronous Hydro Generator
+HP-273,Main Transformer,3,7.64,MVA,Step-up Power Transformer
+HP-273,EOT Crane,1,213.9,Tonne,Overhead EOT Crane
+HP-274,Turbine,3,1.49,MW,Francis
+HP-274,Generator,3,1.49,MW,Synchronous Hydro Generator
+HP-274,Main Transformer,3,1.93,MVA,Step-up Power Transformer
+HP-274,EOT Crane,1,53.0,Tonne,Overhead EOT Crane
+HP-275,Turbine,2,11.39,MW,Francis
+HP-275,Generator,2,11.39,MW,Synchronous Hydro Generator
+HP-275,Main Transformer,2,14.74,MVA,Step-up Power Transformer
+HP-276,Turbine,3,0.7,MW,Kaplan
+HP-276,Generator,3,0.7,MW,Synchronous Hydro Generator
+HP-276,Main Transformer,3,0.91,MVA,Step-up Power Transformer
+HP-276,EOT Crane,1,57.5,Tonne,Overhead EOT Crane
+HP-277,Turbine,2,8.315,MW,Francis
+HP-277,Generator,2,8.315,MW,Synchronous Hydro Generator
+HP-277,Main Transformer,2,10.76,MVA,Step-up Power Transformer
+HP-277,EOT Crane,1,126.7,Tonne,Overhead EOT Crane
+HP-278,Turbine,3,6.3733,MW,Francis
+HP-278,Generator,3,6.3733,MW,Synchronous Hydro Generator
+HP-278,Main Transformer,3,8.25,MVA,Step-up Power Transformer
+HP-278,EOT Crane,1,91.4,Tonne,Overhead EOT Crane
+HP-279,Turbine,3,3.02,MW,Francis
+HP-279,Generator,3,3.02,MW,Synchronous Hydro Generator
+HP-279,Main Transformer,3,3.91,MVA,Step-up Power Transformer
+HP-279,EOT Crane,1,146.1,Tonne,Overhead EOT Crane
+HP-280,Turbine,2,7.765,MW,Francis
+HP-280,Generator,2,7.765,MW,Synchronous Hydro Generator
+HP-280,Main Transformer,2,10.05,MVA,Step-up Power Transformer
+HP-280,EOT Crane,1,195.8,Tonne,Overhead EOT Crane
+HP-281,Turbine,3,2.43,MW,Francis
+HP-281,Generator,3,2.43,MW,Synchronous Hydro Generator
+HP-281,Main Transformer,3,3.14,MVA,Step-up Power Transformer
+HP-281,EOT Crane,1,61.3,Tonne,Overhead EOT Crane
+HP-282,Turbine,3,4.1367,MW,Francis
+HP-282,Generator,3,4.1367,MW,Synchronous Hydro Generator
+HP-282,Main Transformer,3,5.35,MVA,Step-up Power Transformer
+HP-282,EOT Crane,1,109.0,Tonne,Overhead EOT Crane
+HP-283,Turbine,3,2.5833,MW,Francis
+HP-283,Generator,3,2.5833,MW,Synchronous Hydro Generator
+HP-283,Main Transformer,3,3.34,MVA,Step-up Power Transformer
+HP-283,EOT Crane,1,165.7,Tonne,Overhead EOT Crane
+HP-284,Turbine,3,4.7967,MW,Francis
+HP-284,Generator,3,4.7967,MW,Synchronous Hydro Generator
+HP-284,Main Transformer,3,6.21,MVA,Step-up Power Transformer
+HP-284,EOT Crane,1,208.5,Tonne,Overhead EOT Crane
+HP-285,Turbine,2,1.84,MW,Francis
+HP-285,Generator,2,1.84,MW,Synchronous Hydro Generator
+HP-285,Main Transformer,2,2.38,MVA,Step-up Power Transformer
+HP-285,EOT Crane,1,246.8,Tonne,Overhead EOT Crane
+HP-286,Turbine,2,3.755,MW,Francis
+HP-286,Generator,2,3.755,MW,Synchronous Hydro Generator
+HP-286,Main Transformer,2,4.86,MVA,Step-up Power Transformer
+HP-286,EOT Crane,1,117.7,Tonne,Overhead EOT Crane
+HP-287,Turbine,3,3.0533,MW,Francis
+HP-287,Generator,3,3.0533,MW,Synchronous Hydro Generator
+HP-287,Main Transformer,3,3.95,MVA,Step-up Power Transformer
+HP-288,Turbine,2,7.895,MW,Francis
+HP-288,Generator,2,7.895,MW,Synchronous Hydro Generator
+HP-288,Main Transformer,2,10.22,MVA,Step-up Power Transformer
+HP-288,EOT Crane,1,47.8,Tonne,Overhead EOT Crane
+HP-289,Turbine,3,3.03,MW,Francis
+HP-289,Generator,3,3.03,MW,Synchronous Hydro Generator
+HP-289,Main Transformer,3,3.92,MVA,Step-up Power Transformer
+HP-289,EOT Crane,1,195.3,Tonne,Overhead EOT Crane
+HP-290,Turbine,2,3.39,MW,Francis
+HP-290,Generator,2,3.39,MW,Synchronous Hydro Generator
+HP-290,Main Transformer,2,4.39,MVA,Step-up Power Transformer
+HP-290,EOT Crane,1,180.0,Tonne,Overhead EOT Crane
+HP-291,Turbine,3,4.6667,MW,Francis
+HP-291,Generator,3,4.6667,MW,Synchronous Hydro Generator
+HP-291,Main Transformer,3,6.04,MVA,Step-up Power Transformer
+HP-291,EOT Crane,1,95.2,Tonne,Overhead EOT Crane
+HP-292,Turbine,3,5.48,MW,Kaplan
+HP-292,Generator,3,5.48,MW,Synchronous Hydro Generator
+HP-292,Main Transformer,3,7.09,MVA,Step-up Power Transformer
+HP-292,EOT Crane,1,21.7,Tonne,Overhead EOT Crane
+HP-293,Turbine,2,4.925,MW,Francis
+HP-293,Generator,2,4.925,MW,Synchronous Hydro Generator
+HP-293,Main Transformer,2,6.37,MVA,Step-up Power Transformer
+HP-293,EOT Crane,1,178.0,Tonne,Overhead EOT Crane
+HP-294,Turbine,2,7.475,MW,Kaplan
+HP-294,Generator,2,7.475,MW,Synchronous Hydro Generator
+HP-294,Main Transformer,2,9.67,MVA,Step-up Power Transformer
+HP-294,EOT Crane,1,267.3,Tonne,Overhead EOT Crane
+HP-295,Turbine,2,7.29,MW,Francis
+HP-295,Generator,2,7.29,MW,Synchronous Hydro Generator
+HP-295,Main Transformer,2,9.43,MVA,Step-up Power Transformer
+HP-295,EOT Crane,1,43.9,Tonne,Overhead EOT Crane
+HP-296,Turbine,2,1.93,MW,Francis
+HP-296,Generator,2,1.93,MW,Synchronous Hydro Generator
+HP-296,Main Transformer,2,2.5,MVA,Step-up Power Transformer
+HP-296,EOT Crane,1,23.8,Tonne,Overhead EOT Crane
+HP-297,Turbine,2,5.55,MW,Francis
+HP-297,Generator,2,5.55,MW,Synchronous Hydro Generator
+HP-297,Main Transformer,2,7.18,MVA,Step-up Power Transformer
+HP-297,EOT Crane,1,158.0,Tonne,Overhead EOT Crane
+HP-298,Turbine,2,12.39,MW,Francis
+HP-298,Generator,2,12.39,MW,Synchronous Hydro Generator
+HP-298,Main Transformer,2,16.03,MVA,Step-up Power Transformer
+HP-298,EOT Crane,1,152.9,Tonne,Overhead EOT Crane
+HP-299,Turbine,3,7.7433,MW,Francis
+HP-299,Generator,3,7.7433,MW,Synchronous Hydro Generator
+HP-299,Main Transformer,3,10.02,MVA,Step-up Power Transformer
+HP-299,EOT Crane,1,93.8,Tonne,Overhead EOT Crane
+HP-300,Turbine,3,7.16,MW,Francis
+HP-300,Generator,3,7.16,MW,Synchronous Hydro Generator
+HP-300,Main Transformer,3,9.27,MVA,Step-up Power Transformer
+HP-300,EOT Crane,1,176.6,Tonne,Overhead EOT Crane
+HP-301,Turbine,1,0.705,MW,Francis
+HP-301,Generator,1,0.705,MW,Synchronous Hydro Generator
+HP-301,Main Transformer,1,0.91,MVA,Step-up Power Transformer
+HP-302,Turbine,2,0.566,MW,Francis
+HP-302,Generator,2,0.566,MW,Synchronous Hydro Generator
+HP-302,Main Transformer,2,0.73,MVA,Step-up Power Transformer
+HP-303,Turbine,1,0.68,MW,Francis
+HP-303,Generator,1,0.68,MW,Synchronous Hydro Generator
+HP-303,Main Transformer,1,0.88,MVA,Step-up Power Transformer
+HP-304,Turbine,1,0.824,MW,Francis
+HP-304,Generator,1,0.824,MW,Synchronous Hydro Generator
+HP-304,Main Transformer,1,1.07,MVA,Step-up Power Transformer
+HP-305,Turbine,1,0.644,MW,Francis
+HP-305,Generator,1,0.644,MW,Synchronous Hydro Generator
+HP-305,Main Transformer,1,0.83,MVA,Step-up Power Transformer
+HP-306,Turbine,2,0.7955,MW,Kaplan
+HP-306,Generator,2,0.7955,MW,Synchronous Hydro Generator
+HP-306,Main Transformer,2,1.03,MVA,Step-up Power Transformer
+HP-307,Turbine,2,0.5035,MW,Francis
+HP-307,Generator,2,0.5035,MW,Synchronous Hydro Generator
+HP-307,Main Transformer,2,0.65,MVA,Step-up Power Transformer
+HP-308,Turbine,1,1.611,MW,Francis
+HP-308,Generator,1,1.611,MW,Synchronous Hydro Generator
+HP-308,Main Transformer,1,2.08,MVA,Step-up Power Transformer
+HP-309,Turbine,2,0.363,MW,Francis
+HP-309,Generator,2,0.363,MW,Synchronous Hydro Generator
+HP-309,Main Transformer,2,0.47,MVA,Step-up Power Transformer
+HP-310,Turbine,2,0.805,MW,Francis
+HP-310,Generator,2,0.805,MW,Synchronous Hydro Generator
+HP-310,Main Transformer,2,1.04,MVA,Step-up Power Transformer
+HP-311,Turbine,1,1.297,MW,Francis
+HP-311,Generator,1,1.297,MW,Synchronous Hydro Generator
+HP-311,Main Transformer,1,1.68,MVA,Step-up Power Transformer
+HP-312,Turbine,2,0.145,MW,Francis
+HP-312,Generator,2,0.145,MW,Synchronous Hydro Generator
+HP-312,Main Transformer,2,0.19,MVA,Step-up Power Transformer
+HP-313,Turbine,1,1.879,MW,Francis
+HP-313,Generator,1,1.879,MW,Synchronous Hydro Generator
+HP-313,Main Transformer,1,2.43,MVA,Step-up Power Transformer
+HP-314,Turbine,2,0.894,MW,Francis
+HP-314,Generator,2,0.894,MW,Synchronous Hydro Generator
+HP-314,Main Transformer,2,1.16,MVA,Step-up Power Transformer
+HP-315,Turbine,2,0.488,MW,Francis
+HP-315,Generator,2,0.488,MW,Synchronous Hydro Generator
+HP-315,Main Transformer,2,0.63,MVA,Step-up Power Transformer
+HP-316,Turbine,1,0.768,MW,Francis
+HP-316,Generator,1,0.768,MW,Synchronous Hydro Generator
+HP-316,Main Transformer,1,0.99,MVA,Step-up Power Transformer
+HP-317,Turbine,1,1.1,MW,Francis
+HP-317,Generator,1,1.1,MW,Synchronous Hydro Generator
+HP-317,Main Transformer,1,1.42,MVA,Step-up Power Transformer
+HP-318,Turbine,1,1.696,MW,Francis
+HP-318,Generator,1,1.696,MW,Synchronous Hydro Generator
+HP-318,Main Transformer,1,2.19,MVA,Step-up Power Transformer
+HP-319,Turbine,2,0.535,MW,Francis
+HP-319,Generator,2,0.535,MW,Synchronous Hydro Generator
+HP-319,Main Transformer,2,0.69,MVA,Step-up Power Transformer
+HP-320,Turbine,2,0.45,MW,Francis
+HP-320,Generator,2,0.45,MW,Synchronous Hydro Generator
+HP-320,Main Transformer,2,0.58,MVA,Step-up Power Transformer
+HP-321,Turbine,1,1.126,MW,Francis
+HP-321,Generator,1,1.126,MW,Synchronous Hydro Generator
+HP-321,Main Transformer,1,1.46,MVA,Step-up Power Transformer
+HP-322,Turbine,1,0.728,MW,Francis
+HP-322,Generator,1,0.728,MW,Synchronous Hydro Generator
+HP-322,Main Transformer,1,0.94,MVA,Step-up Power Transformer
+HP-323,Turbine,1,1.284,MW,Francis
+HP-323,Generator,1,1.284,MW,Synchronous Hydro Generator
+HP-323,Main Transformer,1,1.66,MVA,Step-up Power Transformer
+HP-324,Turbine,1,1.195,MW,Kaplan
+HP-324,Generator,1,1.195,MW,Synchronous Hydro Generator
+HP-324,Main Transformer,1,1.55,MVA,Step-up Power Transformer
+HP-325,Turbine,2,0.279,MW,Francis
+HP-325,Generator,2,0.279,MW,Synchronous Hydro Generator
+HP-325,Main Transformer,2,0.36,MVA,Step-up Power Transformer
+HP-326,Turbine,2,0.7685,MW,Francis
+HP-326,Generator,2,0.7685,MW,Synchronous Hydro Generator
+HP-326,Main Transformer,2,0.99,MVA,Step-up Power Transformer
+HP-327,Turbine,1,0.333,MW,Francis
+HP-327,Generator,1,0.333,MW,Synchronous Hydro Generator
+HP-327,Main Transformer,1,0.43,MVA,Step-up Power Transformer
+HP-328,Turbine,1,1.119,MW,Francis
+HP-328,Generator,1,1.119,MW,Synchronous Hydro Generator
+HP-328,Main Transformer,1,1.45,MVA,Step-up Power Transformer
+HP-329,Turbine,1,1.906,MW,Francis
+HP-329,Generator,1,1.906,MW,Synchronous Hydro Generator
+HP-329,Main Transformer,1,2.47,MVA,Step-up Power Transformer
+HP-330,Turbine,2,0.406,MW,Francis
+HP-330,Generator,2,0.406,MW,Synchronous Hydro Generator
+HP-330,Main Transformer,2,0.53,MVA,Step-up Power Transformer
+HP-331,Turbine,1,0.121,MW,Francis
+HP-331,Generator,1,0.121,MW,Synchronous Hydro Generator
+HP-331,Main Transformer,1,0.16,MVA,Step-up Power Transformer
+HP-332,Turbine,2,0.462,MW,Kaplan
+HP-332,Generator,2,0.462,MW,Synchronous Hydro Generator
+HP-332,Main Transformer,2,0.6,MVA,Step-up Power Transformer
+HP-333,Turbine,1,1.981,MW,Francis
+HP-333,Generator,1,1.981,MW,Synchronous Hydro Generator
+HP-333,Main Transformer,1,2.56,MVA,Step-up Power Transformer
+HP-334,Turbine,1,0.828,MW,Francis
+HP-334,Generator,1,0.828,MW,Synchronous Hydro Generator
+HP-334,Main Transformer,1,1.07,MVA,Step-up Power Transformer
+HP-335,Turbine,2,0.4275,MW,Francis
+HP-335,Generator,2,0.4275,MW,Synchronous Hydro Generator
+HP-335,Main Transformer,2,0.55,MVA,Step-up Power Transformer
+HP-336,Turbine,1,1.695,MW,Francis
+HP-336,Generator,1,1.695,MW,Synchronous Hydro Generator
+HP-336,Main Transformer,1,2.19,MVA,Step-up Power Transformer
+HP-337,Turbine,1,1.913,MW,Francis
+HP-337,Generator,1,1.913,MW,Synchronous Hydro Generator
+HP-337,Main Transformer,1,2.48,MVA,Step-up Power Transformer
+HP-338,Turbine,2,0.9645,MW,Francis
+HP-338,Generator,2,0.9645,MW,Synchronous Hydro Generator
+HP-338,Main Transformer,2,1.25,MVA,Step-up Power Transformer
+HP-339,Turbine,1,1.389,MW,Kaplan
+HP-339,Generator,1,1.389,MW,Synchronous Hydro Generator
+HP-339,Main Transformer,1,1.8,MVA,Step-up Power Transformer
+HP-340,Turbine,1,0.289,MW,Francis
+HP-340,Generator,1,0.289,MW,Synchronous Hydro Generator
+HP-340,Main Transformer,1,0.37,MVA,Step-up Power Transformer
+HP-341,Turbine,2,0.0382,MW,Francis
+HP-341,Generator,2,0.0382,MW,Synchronous Hydro Generator
+HP-341,Main Transformer,2,0.05,MVA,Step-up Power Transformer
+HP-342,Turbine,1,0.0119,MW,Francis
+HP-342,Generator,1,0.0119,MW,Synchronous Hydro Generator
+HP-342,Main Transformer,1,0.02,MVA,Step-up Power Transformer
+HP-343,Turbine,2,0.0379,MW,Francis
+HP-343,Generator,2,0.0379,MW,Synchronous Hydro Generator
+HP-343,Main Transformer,2,0.05,MVA,Step-up Power Transformer
+HP-344,Turbine,2,0.0294,MW,Francis
+HP-344,Generator,2,0.0294,MW,Synchronous Hydro Generator
+HP-344,Main Transformer,2,0.04,MVA,Step-up Power Transformer
+HP-345,Turbine,1,0.0729,MW,Francis
+HP-345,Generator,1,0.0729,MW,Synchronous Hydro Generator
+HP-345,Main Transformer,1,0.09,MVA,Step-up Power Transformer
+HP-346,Turbine,1,0.0725,MW,Francis
+HP-346,Generator,1,0.0725,MW,Synchronous Hydro Generator
+HP-346,Main Transformer,1,0.09,MVA,Step-up Power Transformer
+HP-347,Turbine,1,0.0414,MW,Francis
+HP-347,Generator,1,0.0414,MW,Synchronous Hydro Generator
+HP-347,Main Transformer,1,0.05,MVA,Step-up Power Transformer
+HP-348,Turbine,1,0.0172,MW,Francis
+HP-348,Generator,1,0.0172,MW,Synchronous Hydro Generator
+HP-348,Main Transformer,1,0.02,MVA,Step-up Power Transformer
+HP-349,Turbine,1,0.0677,MW,Francis
+HP-349,Generator,1,0.0677,MW,Synchronous Hydro Generator
+HP-349,Main Transformer,1,0.09,MVA,Step-up Power Transformer
+HP-350,Turbine,1,0.0455,MW,Francis
+HP-350,Generator,1,0.0455,MW,Synchronous Hydro Generator
+HP-350,Main Transformer,1,0.06,MVA,Step-up Power Transformer
+HP-351,Turbine,1,0.078,MW,Francis
+HP-351,Generator,1,0.078,MW,Synchronous Hydro Generator
+HP-351,Main Transformer,1,0.1,MVA,Step-up Power Transformer
+HP-352,Turbine,1,0.0436,MW,Francis
+HP-352,Generator,1,0.0436,MW,Synchronous Hydro Generator
+HP-352,Main Transformer,1,0.06,MVA,Step-up Power Transformer
+HP-353,Turbine,2,0.0273,MW,Francis
+HP-353,Generator,2,0.0273,MW,Synchronous Hydro Generator
+HP-353,Main Transformer,2,0.04,MVA,Step-up Power Transformer
+HP-354,Turbine,1,0.0263,MW,Francis
+HP-354,Generator,1,0.0263,MW,Synchronous Hydro Generator
+HP-354,Main Transformer,1,0.03,MVA,Step-up Power Transformer
+HP-355,Turbine,1,0.0173,MW,Francis
+HP-355,Generator,1,0.0173,MW,Synchronous Hydro Generator
+HP-355,Main Transformer,1,0.02,MVA,Step-up Power Transformer
+HP-356,Turbine,1,0.0148,MW,Francis
+HP-356,Generator,1,0.0148,MW,Synchronous Hydro Generator
+HP-356,Main Transformer,1,0.02,MVA,Step-up Power Transformer
+HP-357,Turbine,2,0.0488,MW,Cross-flow
+HP-357,Generator,2,0.0488,MW,Synchronous Hydro Generator
+HP-357,Main Transformer,2,0.06,MVA,Step-up Power Transformer
+HP-358,Turbine,2,0.0478,MW,Francis
+HP-358,Generator,2,0.0478,MW,Synchronous Hydro Generator
+HP-358,Main Transformer,2,0.06,MVA,Step-up Power Transformer
+HP-359,Turbine,1,0.033,MW,Francis
+HP-359,Generator,1,0.033,MW,Synchronous Hydro Generator
+HP-359,Main Transformer,1,0.04,MVA,Step-up Power Transformer
+HP-360,Turbine,2,0.0314,MW,Francis
+HP-360,Generator,2,0.0314,MW,Synchronous Hydro Generator
+HP-360,Main Transformer,2,0.04,MVA,Step-up Power Transformer
+HP-361,Turbine,2,0.049,MW,Francis
+HP-361,Generator,2,0.049,MW,Synchronous Hydro Generator
+HP-361,Main Transformer,2,0.06,MVA,Step-up Power Transformer
+HP-362,Turbine,1,0.0363,MW,Francis
+HP-362,Generator,1,0.0363,MW,Synchronous Hydro Generator
+HP-362,Main Transformer,1,0.05,MVA,Step-up Power Transformer
+HP-363,Turbine,1,0.0474,MW,Francis
+HP-363,Generator,1,0.0474,MW,Synchronous Hydro Generator
+HP-363,Main Transformer,1,0.06,MVA,Step-up Power Transformer
+HP-364,Turbine,1,0.0237,MW,Francis
+HP-364,Generator,1,0.0237,MW,Synchronous Hydro Generator
+HP-364,Main Transformer,1,0.03,MVA,Step-up Power Transformer
+HP-365,Turbine,1,0.0254,MW,Francis
+HP-365,Generator,1,0.0254,MW,Synchronous Hydro Generator
+HP-365,Main Transformer,1,0.03,MVA,Step-up Power Transformer
+HP-366,Turbine,2,0.0278,MW,Francis
+HP-366,Generator,2,0.0278,MW,Synchronous Hydro Generator
+HP-366,Main Transformer,2,0.04,MVA,Step-up Power Transformer
+HP-367,Turbine,1,0.0324,MW,Francis
+HP-367,Generator,1,0.0324,MW,Synchronous Hydro Generator
+HP-367,Main Transformer,1,0.04,MVA,Step-up Power Transformer
+HP-368,Turbine,1,0.0336,MW,Francis
+HP-368,Generator,1,0.0336,MW,Synchronous Hydro Generator
+HP-368,Main Transformer,1,0.04,MVA,Step-up Power Transformer
+HP-369,Turbine,1,0.0397,MW,Francis
+HP-369,Generator,1,0.0397,MW,Synchronous Hydro Generator
+HP-369,Main Transformer,1,0.05,MVA,Step-up Power Transformer
+HP-370,Turbine,1,0.082,MW,Francis
+HP-370,Generator,1,0.082,MW,Synchronous Hydro Generator
+HP-370,Main Transformer,1,0.11,MVA,Step-up Power Transformer
+HP-371,Turbine,1,0.0779,MW,Francis
+HP-371,Generator,1,0.0779,MW,Synchronous Hydro Generator
+HP-371,Main Transformer,1,0.1,MVA,Step-up Power Transformer
+HP-372,Turbine,1,0.0435,MW,Cross-flow
+HP-372,Generator,1,0.0435,MW,Synchronous Hydro Generator
+HP-372,Main Transformer,1,0.06,MVA,Step-up Power Transformer
+HP-373,Turbine,2,0.0396,MW,Francis
+HP-373,Generator,2,0.0396,MW,Synchronous Hydro Generator
+HP-373,Main Transformer,2,0.05,MVA,Step-up Power Transformer
+HP-374,Turbine,2,0.0331,MW,Cross-flow
+HP-374,Generator,2,0.0331,MW,Synchronous Hydro Generator
+HP-374,Main Transformer,2,0.04,MVA,Step-up Power Transformer
+HP-375,Turbine,1,0.034,MW,Francis
+HP-375,Generator,1,0.034,MW,Synchronous Hydro Generator
+HP-375,Main Transformer,1,0.04,MVA,Step-up Power Transformer
+HP-376,Turbine,1,0.0278,MW,Francis
+HP-376,Generator,1,0.0278,MW,Synchronous Hydro Generator
+HP-376,Main Transformer,1,0.04,MVA,Step-up Power Transformer
+HP-377,Turbine,1,0.0504,MW,Francis
+HP-377,Generator,1,0.0504,MW,Synchronous Hydro Generator
+HP-377,Main Transformer,1,0.07,MVA,Step-up Power Transformer
+HP-378,Turbine,1,0.0161,MW,Cross-flow
+HP-378,Generator,1,0.0161,MW,Synchronous Hydro Generator
+HP-378,Main Transformer,1,0.02,MVA,Step-up Power Transformer
+HP-379,Turbine,1,0.0659,MW,Francis
+HP-379,Generator,1,0.0659,MW,Synchronous Hydro Generator
+HP-379,Main Transformer,1,0.09,MVA,Step-up Power Transformer
+HP-380,Turbine,1,0.0352,MW,Francis
+HP-380,Generator,1,0.0352,MW,Synchronous Hydro Generator
+HP-380,Main Transformer,1,0.05,MVA,Step-up Power Transformer
+HP-381,Turbine,1,0.0018,MW,Francis
+HP-381,Generator,1,0.0018,MW,Synchronous Hydro Generator
+HP-381,Main Transformer,1,0.0,MVA,Step-up Power Transformer
+HP-382,Turbine,1,0.0026,MW,Francis
+HP-382,Generator,1,0.0026,MW,Synchronous Hydro Generator
+HP-382,Main Transformer,1,0.0,MVA,Step-up Power Transformer
+HP-383,Turbine,1,0.0021,MW,Francis
+HP-383,Generator,1,0.0021,MW,Synchronous Hydro Generator
+HP-383,Main Transformer,1,0.0,MVA,Step-up Power Transformer
+HP-384,Turbine,1,0.0006,MW,Francis
+HP-384,Generator,1,0.0006,MW,Synchronous Hydro Generator
+HP-384,Main Transformer,1,0.0,MVA,Step-up Power Transformer
+HP-385,Turbine,1,0.004,MW,Francis
+HP-385,Generator,1,0.004,MW,Synchronous Hydro Generator
+HP-385,Main Transformer,1,0.01,MVA,Step-up Power Transformer
+HP-386,Turbine,1,0.0033,MW,Francis
+HP-386,Generator,1,0.0033,MW,Synchronous Hydro Generator
+HP-386,Main Transformer,1,0.0,MVA,Step-up Power Transformer
+HP-387,Turbine,1,0.0041,MW,Francis
+HP-387,Generator,1,0.0041,MW,Synchronous Hydro Generator
+HP-387,Main Transformer,1,0.01,MVA,Step-up Power Transformer
+HP-388,Turbine,1,0.0042,MW,Francis
+HP-388,Generator,1,0.0042,MW,Synchronous Hydro Generator
+HP-388,Main Transformer,1,0.01,MVA,Step-up Power Transformer
+HP-389,Turbine,1,0.0029,MW,Francis
+HP-389,Generator,1,0.0029,MW,Synchronous Hydro Generator
+HP-389,Main Transformer,1,0.0,MVA,Step-up Power Transformer
+HP-390,Turbine,1,0.0013,MW,Francis
+HP-390,Generator,1,0.0013,MW,Synchronous Hydro Generator
+HP-390,Main Transformer,1,0.0,MVA,Step-up Power Transformer
+HP-391,Turbine,1,0.004,MW,Francis
+HP-391,Generator,1,0.004,MW,Synchronous Hydro Generator
+HP-391,Main Transformer,1,0.01,MVA,Step-up Power Transformer
+HP-392,Turbine,1,0.0014,MW,Francis
+HP-392,Generator,1,0.0014,MW,Synchronous Hydro Generator
+HP-392,Main Transformer,1,0.0,MVA,Step-up Power Transformer
+HP-393,Turbine,1,0.004,MW,Francis
+HP-393,Generator,1,0.004,MW,Synchronous Hydro Generator
+HP-393,Main Transformer,1,0.01,MVA,Step-up Power Transformer
+HP-394,Turbine,1,0.0012,MW,Francis
+HP-394,Generator,1,0.0012,MW,Synchronous Hydro Generator
+HP-394,Main Transformer,1,0.0,MVA,Step-up Power Transformer
+HP-395,Turbine,1,0.0046,MW,Francis
+HP-395,Generator,1,0.0046,MW,Synchronous Hydro Generator
+HP-395,Main Transformer,1,0.01,MVA,Step-up Power Transformer
+HP-396,Turbine,1,0.0006,MW,Francis
+HP-396,Generator,1,0.0006,MW,Synchronous Hydro Generator
+HP-396,Main Transformer,1,0.0,MVA,Step-up Power Transformer
+HP-397,Turbine,1,0.0047,MW,Cross-flow
+HP-397,Generator,1,0.0047,MW,Synchronous Hydro Generator
+HP-397,Main Transformer,1,0.01,MVA,Step-up Power Transformer
+HP-398,Turbine,1,0.0037,MW,Francis
+HP-398,Generator,1,0.0037,MW,Synchronous Hydro Generator
+HP-398,Main Transformer,1,0.0,MVA,Step-up Power Transformer
+HP-399,Turbine,1,0.0048,MW,Francis
+HP-399,Generator,1,0.0048,MW,Synchronous Hydro Generator
+HP-399,Main Transformer,1,0.01,MVA,Step-up Power Transformer
+HP-400,Turbine,1,0.004,MW,Francis
+HP-400,Generator,1,0.004,MW,Synchronous Hydro Generator
+HP-400,Main Transformer,1,0.01,MVA,Step-up Power Transformer
