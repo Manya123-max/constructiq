@@ -77,7 +77,8 @@ def generate_chat_response(messages: Any) -> str:
             url = "https://api.groq.com/openai/v1/chat/completions"
             headers = {
                 "Authorization": f"Bearer {api_key}",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             }
             
             formatted_messages = [{"role": "system", "content": SYSTEM_PROMPT}]
@@ -93,7 +94,7 @@ def generate_chat_response(messages: Any) -> str:
                         "temperature": 0.3,
                         "max_tokens": 800,
                     }
-                    resp = requests.post(url, json=payload, headers=headers, timeout=8.0)
+                    resp = requests.post(url, json=payload, headers=headers, timeout=10.0)
                     if resp.status_code == 200:
                         data = resp.json()
                         return data["choices"][0]["message"]["content"]
@@ -106,13 +107,7 @@ def generate_chat_response(messages: Any) -> str:
         return _domain_fallback_answer(last_user_msg)
 
     except Exception as outer_ex:
-        print(f"[ERROR] generate_chat_response exception: {outer_ex}")
-        return (
-            "🌊 ConstructIQ Hydro Specialist AI Assistant:\n\n"
-            "• Francis Turbine Flow: Q = P / (9.81 × H_net × η). Example: 45 MW at 120m Head requires ~43.5 m³/s flow.\n"
-            "• Concrete Intensity: 2,500 – 4,200 m³ / MW installed capacity.\n"
-            "• Active River Basins: Ganga Basin (Uttarakhand), Sutlej/Indus (Himachal), Subansiri (Arunachal), Periyar (Kerala), Krishna (AP)."
-        )
+        return _domain_fallback_answer("hydro")
 
 def _domain_fallback_answer(query: str) -> str:
     """Intelligent multi-branch domain knowledge engine for hydro inquiries."""
