@@ -52,6 +52,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+def read_root():
+    return {
+        "status": "online",
+        "system": "ConstructIQ Hydro Power Estimation & Monitoring API",
+        "documentation": "/docs"
+    }
+
 class HydroEstimationRequest(BaseModel):
     capacity_mw: float = Field(250.0, gt=0, description="Installed Capacity in MW")
     number_of_units: int = Field(4, ge=1, description="Number of turbine-generator units")
