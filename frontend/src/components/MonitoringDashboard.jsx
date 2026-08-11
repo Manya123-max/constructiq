@@ -16,6 +16,7 @@ export function MonitoringDashboard() {
   const [selectedProjectId, setSelectedProjectId] = useState('HP-001')
   const [activeTab, setActiveTab] = useState('status')
   const [data, setData] = useState(null)
+  const [projectMeta, setProjectMeta] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -25,6 +26,13 @@ export function MonitoringDashboard() {
       setSelectedProjectId(estimationResult.project_id)
     }
   }, [estimationResult])
+
+  // Fetch project metadata (name, cost, capacity) per selected project for dynamic CapEx card
+  useEffect(() => {
+    api.getProject(selectedProjectId)
+      .then((res) => setProjectMeta(res.data))
+      .catch(() => setProjectMeta(null))
+  }, [selectedProjectId])
 
   useEffect(() => {
     setLoading(true)
@@ -47,6 +55,20 @@ export function MonitoringDashboard() {
   const actualPct = data?.actual_pct ?? 68.4
   const variancePct = data?.variance ?? (plannedPct - actualPct)
   const healthStatus = data?.status || (variancePct > 5 ? 'Critical Delay' : variancePct > 2 ? 'Minor Delay' : 'On Track')
+
+  // Dynamic CapEx from project_master table (project_cost_cr field)
+  const capexCr = projectMeta?.project_cost_cr
+    || estimationResult?.model_3_cost?.total_project_cost_cr
+    || null
+
+  // Dynamic risk bar proportions based on real delayed vs on-track counts from backend
+  const delayedCount = data?.delayed_count ?? 3
+  const onTrackCount = data?.on_track_count ?? 3
+  const totalActivities = data?.total_activities ?? (delayedCount + onTrackCount) || 6
+  const redFlex = Math.max(1, delayedCount)
+  const greenFlex = Math.max(1, onTrackCount)
+  const amberFlex = Math.max(1, totalActivities - delayedCount - onTrackCount)
+
 
   return (
     <div>
@@ -151,10 +173,10 @@ export function MonitoringDashboard() {
                 PROJECT COST (CAPEX) 💳
               </div>
               <div className="stat-huge" style={{ fontSize: '1.7rem', color: '#005F6A', margin: '4px 0' }}>
-                ₹ {data?.total_cost_cr || (estimationResult?.model_3_cost?.total_project_cost_cr ? estimationResult.model_3_cost.total_project_cost_cr.toFixed(0) : '2,430')} Cr
+                ₹ {capexCr ? Number(capexCr).toLocaleString('en-IN', { maximumFractionDigits: 0 }) : '—'} Cr
               </div>
               <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                Verified Expenditure
+                {projectMeta?.project_name || selectedProjectId}
               </div>
             </div>
 
@@ -163,12 +185,12 @@ export function MonitoringDashboard() {
                 ACTIVE TELEMETRY RISKS 🎯
               </div>
               <div className="stat-huge" style={{ fontSize: '1.9rem', margin: '4px 0' }}>
-                {data?.delayed_count || data?.materials?.length || 4} <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600 }}>Active Alerts</span>
+                {delayedCount} <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600 }}>Delayed Activities</span>
               </div>
               <div style={{ display: 'flex', gap: '4px', height: '4px', borderRadius: '2px', overflow: 'hidden', marginTop: '6px' }}>
-                <div style={{ flex: 3, background: '#FF1744' }} />
-                <div style={{ flex: 4, background: '#FF9E00' }} />
-                <div style={{ flex: 3, background: '#00E676' }} />
+                <div style={{ flex: redFlex, background: '#FF1744' }} />
+                <div style={{ flex: amberFlex, background: '#FF9E00' }} />
+                <div style={{ flex: greenFlex, background: '#00E676' }} />
               </div>
             </div>
           </div>
@@ -292,22 +314,22 @@ export function MonitoringDashboard() {
               <table className="table-custom">
                 <thead>
                   <tr>
-                    <th>DELAYED ACTIVITY</th>
-                    <th>IDENTIFIED ROOT CAUSE</th>
+                    <th>ROOT CAUSE TYPE</th>
+                    <th>DESCRIPTION</th>
                     <th>IMPACT</th>
                     <th>RECOMMENDED MITIGATION</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {(data?.root_causes || [
-                    { activity: 'Headrace Tunnel Boring', cause: 'Unexpected Shear Zone Rock Fall', impact: '24 Days Delay', mitigation: 'Steel Rib Insertion & Grouting' },
-                    { activity: 'Dam Concrete Pouring', cause: 'Monsoon Heavy River Flow Overflow', impact: '12 Days Delay', mitigation: 'Cofferdam Height Expansion' },
+                  {(data?.contributing_factors || [
+                    { type: 'Geological Variation', description: 'Unexpected shear zone in tunnel face requiring additional support', impact: 'High', mitigation: 'Steel rib insertion & grouting' },
+                    { type: 'Monsoon Disruption', description: 'Heavy rainfall stalled civil works and access roads', impact: 'Medium', mitigation: 'Prioritize indoor powerhouse works during precipitation' },
                   ]).map((item, idx) => (
                     <tr key={idx}>
-                      <td><strong>{item.activity || item.name}</strong></td>
-                      <td style={{ color: '#D50000', fontWeight: 600 }}>{item.cause || item.root_cause}</td>
-                      <td>{item.impact}</td>
-                      <td><span className="badge-stat emerald">{item.mitigation}</span></td>
+                      <td><strong>{item.type || item.activity || item.name}</strong></td>
+                      <td style={{ color: '#D50000', fontWeight: 600 }}>{item.description || item.cause || item.root_cause}</td>
+                      <td><span className={`badge-stat ${item.impact === 'High' ? 'rose' : item.impact === 'Medium' ? 'amber' : 'emerald'}`}>{item.impact}</span></td>
+                      <td>{item.mitigation}</td>
                     </tr>
                   ))}
                 </tbody>
