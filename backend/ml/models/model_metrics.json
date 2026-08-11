@@ -1,7 +1,7 @@
 {
   "material_model": {
-    "r2": 0.9881318524300439,
-    "mae": 16856.022861700396,
+    "r2": 0.9882475123158311,
+    "mae": 17117.9105244242,
     "features": [
       "capacity_mw",
       "number_of_units",
@@ -40,8 +40,8 @@
     ]
   },
   "generation_model": {
-    "r2": 0.9760248536066658,
-    "mae": 195.14143832240842,
+    "r2": 0.9770756789896228,
+    "mae": 191.73485791956892,
     "features": [
       "capacity_mw",
       "number_of_units",
@@ -62,8 +62,8 @@
     "target": "annual_generation_gwh"
   },
   "cost_model": {
-    "r2": 0.9611533585406616,
-    "mae": 355.92648558230667,
+    "r2": 0.9610311826066334,
+    "mae": 357.78281321180856,
     "features": [
       "capacity_mw",
       "number_of_units",
@@ -91,8 +91,8 @@
     ]
   },
   "duration_model": {
-    "r2": 0.9471458519133685,
-    "mae": 5.525355105891026,
+    "r2": 0.9466988344648954,
+    "mae": 5.541597979628198,
     "features": [
       "capacity_mw",
       "number_of_units",
