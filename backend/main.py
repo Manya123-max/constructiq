@@ -142,7 +142,13 @@ def health():
 @app.get("/api/projects")
 def list_projects(limit: int = 100, db: Session = Depends(get_db)):
     rows = db.execute(
-        text("SELECT * FROM project_master ORDER BY project_id DESC LIMIT :lim"),
+        text("""
+            SELECT pm.*, hf.dam_height_category as project_category, hf.unit_capacity_mw
+            FROM project_master pm
+            LEFT JOIN hydro_project_features hf ON pm.project_id = hf.project_id
+            ORDER BY pm.project_id ASC
+            LIMIT :lim
+        """),
         {"lim": limit}
     ).fetchall()
     return {"success": True, "data": [dict(r._mapping) for r in rows]}
