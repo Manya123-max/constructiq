@@ -56,10 +56,13 @@ export function MonitoringDashboard() {
   const variancePct = data?.variance ?? (plannedPct - actualPct)
   const healthStatus = data?.status || (variancePct > 5 ? 'Critical Delay' : variancePct > 2 ? 'Minor Delay' : 'On Track')
 
+  // Detect if the selected project is a freshly estimated one (not a seeded benchmark)
+  const isNewEstimate = estimationResult?.project_id && selectedProjectId === estimationResult.project_id
+
   // Dynamic CapEx from project_master table (project_cost_cr field)
-  const capexCr = projectMeta?.project_cost_cr
-    || estimationResult?.model_3_cost?.total_project_cost_cr
-    || null
+  const capexCr = isNewEstimate
+    ? estimationResult?.model_3_cost?.total_project_cost_cr
+    : (projectMeta?.project_cost_cr || null)
 
   // Dynamic risk bar proportions based on real delayed vs on-track counts from backend
   const delayedCount = data?.delayed_count ?? 3
@@ -115,18 +118,75 @@ export function MonitoringDashboard() {
         </div>
       </div>
 
-      {/* 5 Monitoring Tabs */}
-      <div className="monitoring-tabs">
-        {TABS.map((t) => (
-          <button
-            key={t.id}
-            className={`tab-link ${activeTab === t.id ? 'active' : ''}`}
-            onClick={() => setActiveTab(t.id)}
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
+      {/* Planning Phase Banner — shown when a new AI-estimated project is selected */}
+      {isNewEstimate && (
+        <div style={{
+          background: 'linear-gradient(135deg, #E8F5E9 0%, #E3F2FD 100%)',
+          border: '1.5px solid #A5D6A7',
+          borderRadius: '12px',
+          padding: '1.25rem 1.5rem',
+          marginBottom: '1.25rem',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.75rem'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ fontSize: '1.5rem' }}>🏗️</span>
+            <div>
+              <div style={{ fontWeight: 800, fontSize: '1rem', color: '#1B5E20' }}>
+                {estimationResult?.project_id} — Planning Phase (Pre-Construction)
+              </div>
+              <div style={{ fontSize: '0.78rem', color: '#388E3C', marginTop: '2px' }}>
+                This project was just estimated by the AI pipeline. Construction has not started — no live site telemetry available yet.
+              </div>
+            </div>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
+            <div style={{ background: '#FFFFFF', borderRadius: '8px', padding: '12px 16px', border: '1px solid #C8E6C9' }}>
+              <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#388E3C', textTransform: 'uppercase' }}>Installed Capacity</div>
+              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#005F6A', marginTop: '4px' }}>
+                {estimationResult?.model_1_turbine?.recommended_capacity_mw?.toFixed(0) || '—'} MW
+              </div>
+            </div>
+            <div style={{ background: '#FFFFFF', borderRadius: '8px', padding: '12px 16px', border: '1px solid #C8E6C9' }}>
+              <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#388E3C', textTransform: 'uppercase' }}>Total CapEx</div>
+              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#005F6A', marginTop: '4px' }}>
+                ₹ {estimationResult?.model_3_cost?.total_project_cost_cr?.toFixed(0) || '—'} Cr
+              </div>
+            </div>
+            <div style={{ background: '#FFFFFF', borderRadius: '8px', padding: '12px 16px', border: '1px solid #C8E6C9' }}>
+              <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#388E3C', textTransform: 'uppercase' }}>Annual Generation</div>
+              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#005F6A', marginTop: '4px' }}>
+                {estimationResult?.model_2_generation?.annual_generation_gwh?.toFixed(0) || '—'} GWh
+              </div>
+            </div>
+            <div style={{ background: '#FFFFFF', borderRadius: '8px', padding: '12px 16px', border: '1px solid #C8E6C9' }}>
+              <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#388E3C', textTransform: 'uppercase' }}>Project Phase</div>
+              <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#FF9800', marginTop: '4px' }}>
+                📋 DPR / Planning
+              </div>
+            </div>
+          </div>
+          <div style={{ fontSize: '0.76rem', color: '#555', background: '#FFFDE7', borderRadius: '6px', padding: '8px 12px', border: '1px solid #FFF176' }}>
+            💡 <strong>How to see live Construction Status:</strong> Select HP-001, HP-002, or HP-003 from the Target Project dropdown to view real-time site telemetry, delay detection, and material availability for benchmark projects.
+          </div>
+        </div>
+      )}
+
+      {/* 5 Monitoring Tabs — only shown for benchmark projects with construction data */}
+      {!isNewEstimate && (
+        <div className="monitoring-tabs">
+          {TABS.map((t) => (
+            <button
+              key={t.id}
+              className={`tab-link ${activeTab === t.id ? 'active' : ''}`}
+              onClick={() => setActiveTab(t.id)}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+      )}
 
       {loading && (
         <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
