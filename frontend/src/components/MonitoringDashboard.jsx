@@ -12,8 +12,9 @@ const TABS = [
 ]
 
 export function MonitoringDashboard() {
-  const { estimationResult, projects } = useStore()
-  const [selectedProjectId, setSelectedProjectId] = useState('HP-001')
+  const { estimationResult, projects, monitorProjectId, setMonitorProjectId } = useStore()
+  const selectedProjectId = monitorProjectId
+  const setSelectedProjectId = setMonitorProjectId
   const [activeTab, setActiveTab] = useState('status')
   const [data, setData] = useState(null)
   const [projectMeta, setProjectMeta] = useState(null)
@@ -30,12 +31,7 @@ export function MonitoringDashboard() {
       .catch(() => {})
   }, [estimationResult])
 
-  // Sync latest estimated project ID if available
-  useEffect(() => {
-    if (estimationResult?.project_id) {
-      setSelectedProjectId(estimationResult.project_id)
-    }
-  }, [estimationResult])
+
 
   // Fetch project metadata (name, cost, capacity) per selected project for dynamic CapEx card / Planning Phase
   useEffect(() => {

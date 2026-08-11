@@ -110,8 +110,8 @@ const DEFAULT_HYDRO = {
 }
 
 export function ProjectForm() {
-  const { setEstimationResult, setIsEstimating, setEstimationError, setCurrentForm, isEstimating } = useStore()
-  const [form, setForm] = useState(DEFAULT_HYDRO)
+  const { currentForm, setEstimationResult, setIsEstimating, setEstimationError, setCurrentForm, isEstimating, setMonitorProjectId } = useStore()
+  const [form, setForm] = useState(currentForm || DEFAULT_HYDRO)
 
   useEffect(() => {
     if (setCurrentForm) {
@@ -191,6 +191,9 @@ export function ProjectForm() {
     try {
       const result = await api.estimate(payload)
       setEstimationResult(result)
+      if (result?.project_id) {
+        setMonitorProjectId(result.project_id)
+      }
     } catch (err) {
       let msg = 'Estimation failed. Please check backend server.'
       const detail = err.response?.data?.detail

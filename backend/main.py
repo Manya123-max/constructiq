@@ -165,16 +165,22 @@ def health():
 
 
 @app.get("/api/projects")
-def list_projects(limit: int = 100, db: Session = Depends(get_db)):
+def list_projects(limit: int = 500, project_type: Optional[str] = None, db: Session = Depends(get_db)):
+    actual_limit = limit
+    if project_type:
+        try:
+            actual_limit = int(project_type)
+        except ValueError:
+            pass
     rows = db.execute(
         text("""
             SELECT pm.*, hf.dam_height_category as project_category, hf.unit_capacity_mw
             FROM project_master pm
             LEFT JOIN hydro_project_features hf ON pm.project_id = hf.project_id
-            ORDER BY pm.project_id ASC
+            ORDER BY CASE WHEN pm.project_id LIKE 'HP-EST-%' THEN 0 ELSE 1 END, pm.project_id ASC
             LIMIT :lim
         """),
-        {"lim": limit}
+        {"lim": actual_limit}
     ).fetchall()
     return {"success": True, "data": [dict(r._mapping) for r in rows]}
 
