@@ -151,12 +151,21 @@ def list_projects(limit: int = 100, db: Session = Depends(get_db)):
 @app.get("/api/projects/{project_id}")
 def get_project(project_id: str, db: Session = Depends(get_db)):
     row = db.execute(
-        text("SELECT * FROM project_master WHERE project_id=:pid"),
+        text("""
+            SELECT pm.*, pc.total_cost_cr as real_cost_cr, pc.civil_cost_cr, pc.em_works_cr
+            FROM project_master pm
+            LEFT JOIN project_cost pc ON pm.project_id = pc.project_id
+            WHERE pm.project_id=:pid
+        """),
         {"pid": project_id}
     ).fetchone()
     if not row:
         raise HTTPException(status_code=404, detail="Project not found")
-    return {"success": True, "data": dict(row._mapping)}
+    data = dict(row._mapping)
+    # Expose the real cost clearly as project_cost_cr for frontend CapEx card
+    if data.get("real_cost_cr"):
+        data["project_cost_cr"] = data["real_cost_cr"]
+    return {"success": True, "data": data}
 
 
 @app.get("/api/projects/{project_id}/materials")
