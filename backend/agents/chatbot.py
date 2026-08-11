@@ -2,32 +2,33 @@
 """
 ConstructIQ — Hydro Power Specialist Conversational Chatbot Engine.
 Integrates Groq LLM (LLaMA-3.3-70B / LLaMA-3.1-8B) with domain-specific hydro engineering context,
-CEA/PARIVESH regulatory norms, and robust multi-model fallback.
+CEA/PARIVESH regulatory norms, and bulletproof domain intelligence fallback.
 """
 
 import os
 import requests
-from typing import List, Dict
+from typing import List, Dict, Any
 
 SYSTEM_PROMPT = """You are ConstructIQ's Senior Hydro Power Specialist & Engineering AI Assistant.
 You specialize in hydroelectric power project estimation, hydraulic design physics, material BOQ (Concrete, Steel, Penstocks), project costing (₹ Cr/MW), construction schedules, and Indian statutory regulatory guidelines (CEA DPRs, MoEFCC PARIVESH clearances, CPPP tenders, CAG audits).
 
 Key Technical & Statutory Knowledge Base:
 1. Hydraulic Power Physics: Power (kW) = 9.81 * Q (m³/s) * H_net (m) * Efficiency (η ~ 0.88–0.92).
-2. Turbine Selection Rules:
+2. Basin Distribution: Ganga Basin (Uttarakhand), Sutlej/Indus Basin (Himachal/J&K), Siang/Subansiri (Arunachal), Periyar (Kerala), Krishna/Godavari (AP/Telangana).
+3. Turbine Selection Rules:
    - Pelton: High Head (>200m), low flow.
    - Francis: Medium Head (40m - 350m), medium to high flow.
    - Kaplan/Propeller: Low Head (<50m), high discharge flow.
    - Cross-Flow/Kaplan: Mini/Micro Hydro (<25 MW).
-3. Material BOQ Benchmarks (Indian Himalayan & Peninsular Conditions):
+4. Material BOQ Benchmarks (Indian Himalayan & Peninsular Conditions):
    - Concrete Volume: 2,500 – 4,200 m³ / MW.
    - Cement Quantity: 700 – 1,200 MT / MW.
    - Reinforcement Steel (Rebar): 180 – 320 MT / MW.
    - Penstock Steel: Grade IS 2062 / E350, 25 – 60 MT / MW depending on pressure head.
-4. Financial Costs & Schedule Benchmarks:
+5. Financial Costs & Schedule Benchmarks:
    - Hydro Project Capital Cost: ₹ 8.5 Cr – ₹ 14.5 Cr / MW (Civil ~60–65%, Electro-Mechanical ~35–40%).
    - Construction Duration: 60 – 90 months for Large/Medium, 24 – 48 months for Small Hydro.
-5. Government Statutory Authorities:
+6. Government Statutory Authorities:
    - CEA (Central Electricity Authority): DPR technical appraisal & grid coupling.
    - PARIVESH (MoEFCC): Environmental Clearance (EC), Forest Clearance (FC), EIA/EMP reports.
    - CPPP (etenders.gov.in): Central public procurement BOQ contracts & tender schedules.
@@ -45,108 +46,144 @@ GROQ_MODELS = [
     "mixtral-8x7b-32768"
 ]
 
-def generate_chat_response(messages: List[Dict[str, str]]) -> str:
+def generate_chat_response(messages: Any) -> str:
     """
     Sends conversation history to Groq API with robust model fallback, or returns domain engine answer.
-    Never raises an unhandled exception to client.
+    Accepts list of dicts or list of Pydantic models safely. Never raises an unhandled exception.
     """
-    api_key = os.environ.get("GROQ_API_KEY", "").strip()
+    try:
+        # Standardize input list of messages into dict format
+        clean_msgs = []
+        if isinstance(messages, list):
+            for item in messages:
+                if isinstance(item, dict):
+                    clean_msgs.append({"role": str(item.get("role", "user")), "content": str(item.get("content", ""))})
+                elif hasattr(item, "role") and hasattr(item, "content"):
+                    clean_msgs.append({"role": str(getattr(item, "role", "user")), "content": str(getattr(item, "content", ""))})
 
-    if api_key and (api_key.startswith("gsk_") or len(api_key) > 20):
-        url = "https://api.groq.com/openai/v1/chat/completions"
-        headers = {
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json"
-        }
-        
-        formatted_messages = [{"role": "system", "content": SYSTEM_PROMPT}]
-        for msg in messages:
-            role = "user" if msg.get("role") in ("user", "human") else "assistant"
-            formatted_messages.append({"role": role, "content": msg.get("content", "")})
+        # Extract latest query string for rule fallback matching
+        last_user_msg = ""
+        for m in reversed(clean_msgs):
+            if m["role"] in ("user", "human"):
+                last_user_msg = m["content"].lower()
+                break
 
-        # Try Groq models in sequence for maximum reliability
-        for model_name in GROQ_MODELS:
-            try:
-                payload = {
-                    "model": model_name,
-                    "messages": formatted_messages,
-                    "temperature": 0.3,
-                    "max_tokens": 800,
-                }
+        # Check Groq API Key in environment
+        api_key = os.environ.get("GROQ_API_KEY", "").strip()
+        if api_key and (api_key.startswith("gsk_") or len(api_key) > 20):
+            url = "https://api.groq.com/openai/v1/chat/completions"
+            headers = {
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json"
+            }
+            
+            formatted_messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+            for msg in clean_msgs:
+                role = "user" if msg["role"] in ("user", "human") else "assistant"
+                formatted_messages.append({"role": role, "content": msg["content"]})
 
-                resp = requests.post(url, json=payload, headers=headers, timeout=10.0)
-                if resp.status_code == 200:
-                    data = resp.json()
-                    return data["choices"][0]["message"]["content"]
-                else:
-                    print(f"[WARN] Groq model {model_name} returned status {resp.status_code}: {resp.text}")
-            except Exception as e:
-                print(f"[WARN] Exception calling Groq model {model_name}: {e}")
+            for model_name in GROQ_MODELS:
+                try:
+                    payload = {
+                        "model": model_name,
+                        "messages": formatted_messages,
+                        "temperature": 0.3,
+                        "max_tokens": 800,
+                    }
+                    resp = requests.post(url, json=payload, headers=headers, timeout=8.0)
+                    if resp.status_code == 200:
+                        data = resp.json()
+                        return data["choices"][0]["message"]["content"]
+                    else:
+                        print(f"[WARN] Groq model {model_name} status {resp.status_code}: {resp.text}")
+                except Exception as ex:
+                    print(f"[WARN] Groq model {model_name} exception: {ex}")
 
-    # Fallback to intelligent rule-based domain engine if Groq is unavailable
-    last_user_msg = ""
-    for msg in reversed(messages):
-        if msg.get("role") in ("user", "human"):
-            last_user_msg = msg.get("content", "").lower()
-            break
+        # Execute bulletproof domain rule engine if Groq call is skipped or fails
+        return _domain_fallback_answer(last_user_msg)
 
-    return _domain_fallback_answer(last_user_msg)
-
+    except Exception as outer_ex:
+        print(f"[ERROR] generate_chat_response exception: {outer_ex}")
+        return (
+            "🌊 ConstructIQ Hydro Specialist AI Assistant:\n\n"
+            "• Francis Turbine Flow: Q = P / (9.81 × H_net × η). Example: 45 MW at 120m Head requires ~43.5 m³/s flow.\n"
+            "• Concrete Intensity: 2,500 – 4,200 m³ / MW installed capacity.\n"
+            "• Active River Basins: Ganga Basin (Uttarakhand), Sutlej/Indus (Himachal), Subansiri (Arunachal), Periyar (Kerala), Krishna (AP)."
+        )
 
 def _domain_fallback_answer(query: str) -> str:
     """Intelligent multi-branch domain knowledge engine for hydro inquiries."""
     
-    if "francis" in query or "flow" in query or "turbine" in query:
+    # 1. Basin / River queries
+    if any(k in query for k in ["basin", "river", "ganga", "sutlej", "indus", "siang", "periyar", "krishna", "godavari", "location"]):
+        return (
+            "🌊 Hydroelectric River Basin Regimes (Indian Context):\n\n"
+            "• Primary Active Basins in ConstructIQ Dataset:\n"
+            "  1. Ganga River Basin (Uttarakhand / UP): High head run-of-river & storage projects (Tehri, Alaknanda, Bhagirathi).\n"
+            "  2. Sutlej / Indus Basin (Himachal / J&K): High discharge glacial rivers (Nathpa Jhakri, Chenab, Beas).\n"
+            "  3. Brahmaputra / Siang Basin (Arunachal / Assam): Ultra-large capacity projects (Subansiri, Siang Upper).\n"
+            "  4. Periyar & Peninsular Basins (Kerala, AP, Karnataka): Medium head reservoir powerhouses (Idukki, Srisailam)."
+        )
+
+    # 2. Francis Turbine queries
+    if "francis" in query or "flow" in query or "discharge" in query:
         return (
             "⚙️ Francis Turbine Flow & Design Calculation:\n\n"
             "• Applicable Head Range: Medium Head (40 m to 350 m).\n"
             "• Discharge Flow Formula: Q = P / (9.81 × H_net × η_turbine × η_generator).\n"
-            "• Example (45 MW Plant, H_net = 120m, 88% Efficiency):\n"
+            "• Calculation Example (for a 45 MW plant at 120m net head, 88% combined efficiency):\n"
             "  Q = 45,000 / (9.81 × 120 × 0.88) ≈ 43.5 m³/s.\n"
-            "• Key Advantage: Superior part-load efficiency profile for variable seasonal flows."
+            "• Key Feature: High peak efficiency and versatile performance across variable seasonal river flows."
         )
 
-    if "cea" in query or "dpr" in query:
+    # 3. Material BOQ / Concrete queries
+    if any(k in query for k in ["concrete", "cement", "steel", "boq", "rebar", "intensity", "material"]):
+        return (
+            "🧱 Construction Material BOQ Benchmarks (per MW Installed Capacity):\n\n"
+            "• Concrete Volume: 2,500 – 4,200 m³ / MW (M25–M40 grade for dam & powerhouse structures).\n"
+            "• Cement Quantity: 700 – 1,200 MT / MW (OPC 43/53 grade).\n"
+            "• Reinforcement Steel (Rebar Fe500D): 180 – 320 MT / MW.\n"
+            "• Penstock Steel (High Tensile Grade E350): 25 – 60 MT / MW depending on static head pressure."
+        )
+
+    # 4. CEA / DPR Statutory queries
+    if "cea" in query or "dpr" in query or "statutory" in query:
         return (
             "🏛️ CEA DPR Submission & Technical Appraisal Guidelines:\n\n"
-            "• Applicability: Required for Hydro Projects > ₹ 1,000 Cr under Section 8 of Electricity Act 2003.\n"
-            "• Chapter Requirements:\n"
-            "  1. Hydrology & Power Potential: 90% dependable year energy calculations.\n"
-            "  2. Geotechnical & Geological Studies: Tunneling Q-system ratings.\n"
-            "  3. Civil Structural Layout: PMF spillway flood routing.\n"
-            "  4. Electro-Mechanical Specs: Turbine/Generator unit ratings.\n"
-            "  5. Financial Viability: Levelized Tariff per kWh."
+            "• Statutory Norm: Required for Hydro Projects with CapEx > ₹ 1,000 Cr under Section 8 of Electricity Act 2003.\n"
+            "• Key Appraisal Pillars:\n"
+            "  1. Hydrology & Power Potential: 90% dependable year energy generation profile.\n"
+            "  2. Geological Mapping: Q-system rock mass ratings for tunnel excavation.\n"
+            "  3. Civil Layout: Probable Maximum Flood (PMF) spillway design.\n"
+            "  4. Electro-Mechanical Specs: Unit sizing, Francis/Pelton selection, GIS switchyard.\n"
+            "  5. Levelized Tariff: Per-unit generation cost analysis."
         )
 
-    if "parivesh" in query or "environmental" in query:
+    # 5. PARIVESH / Environmental Clearances
+    if "parivesh" in query or "environmental" in query or "clearance" in query or "moefcc" in query:
         return (
-            "🍃 PARIVESH (MoEFCC) Environmental Clearance (EC) Guidelines:\n\n"
-            "• Category A Projects (>50 MW): Central MoEFCC EAC approval.\n"
-            "• Mandatory Submissions:\n"
-            "  1. EIA & EMP Reports.\n"
-            "  2. Environmental Flow (E-Flow): Minimum 15–20% lean season flow release.\n"
-            "  3. Catchment Area Treatment (CAT) & Compensatory Afforestation."
+            "🍃 PARIVESH (MoEFCC) Environmental & Forest Clearance Norms:\n\n"
+            "• Category A (>50 MW): Requires Central MoEFCC Expert Appraisal Committee (EAC) approval.\n"
+            "• Key Clearances:\n"
+            "  1. Environmental Clearance (EC): EIA & EMP report approval.\n"
+            "  2. Forest Clearance (FC): Forest diversion approval under Forest Conservation Act.\n"
+            "  3. E-Flow Release: Minimum 15–20% lean season river flow maintenance."
         )
 
-    if any(k in query for k in ["power", "formula", "capacity", "mw"]):
+    # 6. Cost / CapEx queries
+    if any(k in query for k in ["cost", "budget", "price", "cr", "crore", "capex", "estimation"]):
         return (
-            "⚡ Hydroelectric Power Equation:\n\n"
-            "• P (kW) = 9.81 × Q (m³/s) × H_net (m) × η\n"
-            "• P = Generated Power output in kW\n"
-            "• Q = Design flow rate in m³/s\n"
-            "• H_net = Net hydraulic head in meters\n"
-            "• η = Turbine-generator efficiency (~0.90)"
+            "💰 Hydroelectric Capital Cost Benchmarks (Indian Context):\n\n"
+            "• CapEx Outlay: ₹ 8.5 Cr to ₹ 14.5 Cr per MW installed capacity.\n"
+            "• Cost Distribution:\n"
+            "  - Civil Works (Dam, Tunnel, Powerhouse): ~60% – 65% of total outlay.\n"
+            "  - Electro-Mechanical Equipment (Turbines, Generators, Transformers): ~35% – 40%."
         )
 
-    if any(k in query for k in ["cost", "budget", "price", "cr"]):
-        return (
-            "💰 Hydro Financial Benchmarks:\n\n"
-            "• Average CapEx: ₹ 8.5 Cr to ₹ 14.5 Cr per MW.\n"
-            "• Breakdown: Civil Works (~65%), Electro-Mechanical (~35%)."
-        )
-
+    # Default fallback welcome answer
     return (
         "🌊 ConstructIQ Hydro Specialist AI Assistant:\n\n"
-        "Ask me anything about hydro power plant estimations, turbine selection (Francis, Pelton, Kaplan), "
-        "material BOQs, CapEx costs (₹ Cr/MW), and statutory guidelines (CEA DPR, PARIVESH)."
+        "I can help you with hydroelectric power calculations, turbine selection (Francis, Pelton, Kaplan), "
+        "material BOQ benchmarks (Concrete, Rebar, Penstocks), CapEx costs (₹ Cr/MW), "
+        "river basin regimes (Ganga, Sutlej, Subansiri), and statutory guidelines (CEA DPR, PARIVESH)."
     )
