@@ -25,6 +25,7 @@ function calculateDesignFlow(mw, head) {
 }
 
 const DEFAULT_HYDRO = {
+  project_name: '',
   project_category: 'Medium Hydro',
   capacity_mw: 45,
   number_of_units: 3,
@@ -126,6 +127,17 @@ export function ProjectForm() {
       <form onSubmit={handleSubmit}>
         {/* PROJECT INFO SECTION */}
         <div className="form-group-title">PROJECT INFO</div>
+
+        <div className="form-field">
+          <label>Project Name (Optional)</label>
+          <input
+            type="text"
+            name="project_name"
+            placeholder="e.g. Manikaran Hydro Stage II"
+            value={form.project_name || ''}
+            onChange={handleChange}
+          />
+        </div>
 
         <div className="form-field">
           <label>State / Basin</label>

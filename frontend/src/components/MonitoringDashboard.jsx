@@ -95,8 +95,9 @@ export function MonitoringDashboard() {
   const greenFlex = Math.max(1, onTrackCount)
   const amberFlex = Math.max(1, totalActivities - delayedCount - onTrackCount)
 
-  // Build unique dropdown project options
-  const defaultOptions = [
+  // Live Telemetry Benchmark Projects (HP-001, HP-002, HP-003)
+  const liveBenchmarkIds = new Set(['HP-001', 'HP-002', 'HP-003'])
+  const liveBenchmarks = [
     { id: 'HP-001', label: 'HP-001: Tehri Hydro Project (Uttarakhand)' },
     { id: 'HP-002', label: 'HP-002: Nathpa Jhakri Plant (Himachal)' },
     { id: 'HP-003', label: 'HP-003: Subansiri Lower Project (Arunachal)' },
@@ -110,14 +111,23 @@ export function MonitoringDashboard() {
       label: `✨ ${p.project_id}: ${p.project_name || 'AI Simulation Project'}`
     }))
 
-  // Combined dropdown list (ensuring active estimationResult is included)
-  const knownIds = new Set(defaultOptions.map(d => d.id).concat(customEstProjects.map(c => c.id)))
-  if (estimationResult?.project_id && !knownIds.has(estimationResult.project_id)) {
+  // Ensure current active estimation is included
+  if (estimationResult?.project_id && !customEstProjects.some(c => c.id === estimationResult.project_id)) {
+    const activeName = estimationResult.project_inputs?.project_name || 'Active Simulation'
     customEstProjects.unshift({
       id: estimationResult.project_id,
-      label: `⚡ ${estimationResult.project_id} (Active Simulation)`
+      label: `⚡ ${estimationResult.project_id}: ${activeName}`
     })
   }
+
+  // All Other Benchmark Database Projects (HP-004 to HP-400)
+  const otherBenchmarkProjects = allProjectsList
+    .filter((p) => p.project_id && !p.project_id.startsWith('HP-EST-') && !liveBenchmarkIds.has(p.project_id))
+    .slice(0, 50)
+    .map((p) => ({
+      id: p.project_id,
+      label: `${p.project_id}: ${p.project_name}`
+    }))
 
   return (
     <div>
@@ -147,17 +157,24 @@ export function MonitoringDashboard() {
               border: '1px solid #CBD5E1',
               borderRadius: '6px',
               color: '#0F172A',
-              maxWidth: '320px'
+              maxWidth: '340px'
             }}
           >
             <optgroup label="Live Benchmark Site Telemetry">
-              {defaultOptions.map(opt => (
+              {liveBenchmarks.map(opt => (
                 <option key={opt.id} value={opt.id}>{opt.label}</option>
               ))}
             </optgroup>
             {customEstProjects.length > 0 && (
               <optgroup label="AI Estimated Projects (Planning Phase)">
                 {customEstProjects.map(opt => (
+                  <option key={opt.id} value={opt.id}>{opt.label}</option>
+                ))}
+              </optgroup>
+            )}
+            {otherBenchmarkProjects.length > 0 && (
+              <optgroup label="Dataset Benchmark Projects">
+                {otherBenchmarkProjects.map(opt => (
                   <option key={opt.id} value={opt.id}>{opt.label}</option>
                 ))}
               </optgroup>
