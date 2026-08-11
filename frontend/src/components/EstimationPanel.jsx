@@ -98,18 +98,19 @@ export function EstimationPanel() {
           <span
             className="badge-stat cyan"
             style={{
-              fontSize: '0.70rem',
+              fontSize: '0.67rem',
               fontWeight: 700,
               whiteSpace: 'nowrap',
-              padding: '5px 10px',
+              wordBreak: 'keep-all',
+              padding: '4px 8px',
               borderRadius: '6px',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '4px'
+              gap: '4px',
+              flexShrink: 0
             }}
           >
-            <span>⏱️</span>
-            <span>{dur.construction_duration_months || 48} Months ({dur.estimated_years || 4.0} Yrs)</span>
+            ⏱️ {dur.construction_duration_months || 48} Months ({dur.estimated_years || 4.0} Yrs)
           </span>
         </div>
       </div>

@@ -121,7 +121,6 @@ export function ProjectForm() {
     <div className="form-panel">
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <h2 className="form-panel-title">Hydroelectric Project Estimator</h2>
-        <span style={{ fontSize: '1.2rem', cursor: 'pointer' }}>⚙️</span>
       </div>
 
       <form onSubmit={handleSubmit}>

@@ -477,11 +477,14 @@ h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; }
 }
 
 .badge-stat {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   padding: 4px 8px;
   border-radius: 4px;
-  font-size: 0.72rem;
+  font-size: 0.70rem;
   font-weight: 700;
+  white-space: nowrap !important;
 }
 
 .badge-stat.emerald { background: #ECFDF5; color: #047857; }
