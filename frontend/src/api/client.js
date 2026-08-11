@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const API_BASE = import.meta.env.VITE_API_URL || 'https://constructiq-t6qw.onrender.com'
+const API_BASE = (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.includes('constructiq'))
+  ? import.meta.env.VITE_API_URL
+  : 'https://constructiq-t6qw.onrender.com'
 
 const client = axios.create({
   baseURL: API_BASE,
