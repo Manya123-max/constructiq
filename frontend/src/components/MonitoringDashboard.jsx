@@ -45,6 +45,14 @@ export function MonitoringDashboard() {
   }, [selectedProjectId])
 
   useEffect(() => {
+    const isNew = String(selectedProjectId).startsWith('HP-EST-') || (estimationResult?.project_id && selectedProjectId === estimationResult.project_id)
+    if (isNew) {
+      setLoading(false)
+      setError(null)
+      setData(null)
+      return
+    }
+
     setLoading(true)
     setError(null)
 
@@ -59,15 +67,15 @@ export function MonitoringDashboard() {
       .then((res) => setData(res.data))
       .catch((err) => setError(err.message || 'Failed to fetch agent monitoring telemetry.'))
       .finally(() => setLoading(false))
-  }, [activeTab, selectedProjectId])
-
-  const plannedPct = data?.planned_pct ?? 70.0
-  const actualPct = data?.actual_pct ?? 68.4
-  const variancePct = data?.variance ?? (plannedPct - actualPct)
-  const healthStatus = data?.status || (variancePct > 5 ? 'Critical Delay' : variancePct > 2 ? 'Minor Delay' : 'On Track')
+  }, [activeTab, selectedProjectId, estimationResult])
 
   // Detect if the selected project is a freshly estimated AI project (starts with HP-EST- or matches in-memory result)
   const isNewEstimate = String(selectedProjectId).startsWith('HP-EST-') || (estimationResult?.project_id && selectedProjectId === estimationResult.project_id)
+
+  const plannedPct = isNewEstimate ? 0.0 : (data?.planned_pct ?? 70.0)
+  const actualPct = isNewEstimate ? 0.0 : (data?.actual_pct ?? 68.4)
+  const variancePct = isNewEstimate ? 0.0 : (data?.variance ?? (plannedPct - actualPct))
+  const healthStatus = isNewEstimate ? 'Not Started' : (data?.status || (variancePct > 5 ? 'Critical Delay' : variancePct > 2 ? 'Minor Delay' : 'On Track'))
 
   // Extract display values for the Planning Phase view
   const isCurrentStoreResult = estimationResult?.project_id === selectedProjectId
@@ -88,12 +96,76 @@ export function MonitoringDashboard() {
     : (projectMeta?.project_name || selectedProjectId)
 
   // Dynamic risk bar proportions based on real delayed vs on-track counts from backend
-  const delayedCount = data?.delayed_count ?? 3
-  const onTrackCount = data?.on_track_count ?? 3
-  const totalActivities = data?.total_activities ?? (delayedCount + onTrackCount) || 6
-  const redFlex = Math.max(1, delayedCount)
-  const greenFlex = Math.max(1, onTrackCount)
-  const amberFlex = Math.max(1, totalActivities - delayedCount - onTrackCount)
+  const delayedCount = isNewEstimate ? 0 : (data?.delayed_count ?? 3)
+  const onTrackCount = isNewEstimate ? 0 : (data?.on_track_count ?? 3)
+  const totalActivities = isNewEstimate ? 0 : (data?.total_activities ?? (delayedCount + onTrackCount) || 6)
+  const redFlex = isNewEstimate ? 0 : Math.max(1, delayedCount)
+  const greenFlex = isNewEstimate ? 1 : Math.max(1, onTrackCount)
+  const amberFlex = isNewEstimate ? 0 : Math.max(1, totalActivities - delayedCount - onTrackCount)
+
+  // Helper to format material quantities
+  const formatMaterialQty = (val, unit) => {
+    if (val == null) return `— ${unit}`
+    return `${Number(val).toLocaleString('en-IN', { maximumFractionDigits: 0 })} ${unit}`
+  }
+
+  // Calculate material requirements (read from estimationResult store or proportional to MW capacity)
+  const concreteVal = isCurrentStoreResult 
+    ? estimationResult?.model_1_materials?.concrete_m3
+    : (projectMeta?.capacity_mw ? projectMeta.capacity_mw * 1500 : 350000)
+  const cementVal = isCurrentStoreResult
+    ? estimationResult?.model_1_materials?.cement_mt
+    : (projectMeta?.capacity_mw ? projectMeta.capacity_mw * 350 : 80000)
+  const rebarVal = isCurrentStoreResult
+    ? estimationResult?.model_1_materials?.rebar_steel_mt
+    : (projectMeta?.capacity_mw ? projectMeta.capacity_mw * 80 : 25000)
+  const penstockVal = isCurrentStoreResult
+    ? estimationResult?.model_1_materials?.penstock_steel_mt
+    : (projectMeta?.capacity_mw ? projectMeta.capacity_mw * 15 : 5000)
+
+  // Overrides for activities, delays, contributing factors, materials, and procurement risks
+  const activities = isNewEstimate ? [
+    { name: 'Site Excavation & Foundation', planned_pct: 0, actual_pct: 0, variance: 0, status: 'Not Started' },
+    { name: 'Dam & Concrete Works', planned_pct: 0, actual_pct: 0, variance: 0, status: 'Not Started' },
+    { name: 'Headrace Tunnel Excavation', planned_pct: 0, actual_pct: 0, variance: 0, status: 'Not Started' },
+    { name: 'Powerhouse & E&M Erection', planned_pct: 0, actual_pct: 0, variance: 0, status: 'Not Started' },
+  ] : (data?.activities || [
+    { name: 'Site Excavation & Foundation', planned_pct: 100, actual_pct: 95, variance: 5, status: 'On Track' },
+    { name: 'Dam Concrete Pouring', planned_pct: 65, actual_pct: 48, variance: 17, status: 'Minor Delay' },
+    { name: 'Headrace Tunnel Excavation', planned_pct: 40, actual_pct: 28, variance: 12, status: 'Critical Delay' },
+    { name: 'Powerhouse & E&M Erection', planned_pct: 25, actual_pct: 15, variance: 10, status: 'Minor Delay' },
+  ])
+
+  const delayedActivities = isNewEstimate ? [] : (data?.delayed_activities || [
+    { name: 'Headrace Tunnel Boring Section 3', planned_pct: 40, actual_pct: 28, delay_days: 24, impact: 'Critical Path' },
+    { name: 'Dam Spillway Concrete Block B', planned_pct: 65, actual_pct: 48, delay_days: 12, impact: 'Moderate' },
+  ])
+
+  const contributingFactors = isNewEstimate ? [] : (data?.contributing_factors || [
+    { type: 'Geological Variation', description: 'Unexpected shear zone in tunnel face requiring additional support', impact: 'High', mitigation: 'Steel rib insertion & grouting' },
+    { type: 'Monsoon Disruption', description: 'Heavy rainfall stalled civil works and access roads', impact: 'Medium', mitigation: 'Prioritize indoor powerhouse works during precipitation' },
+  ])
+
+  const materials = isNewEstimate ? [
+    { material_name: 'Grade M25/M40 Structural Concrete', required: formatMaterialQty(concreteVal, 'm³'), available: formatMaterialQty(concreteVal, 'm³'), short: '0 m³', risk_level: 'Low' },
+    { material_name: 'OPC 43/53 Grade Cement', required: formatMaterialQty(cementVal, 'MT'), available: formatMaterialQty(cementVal, 'MT'), short: '0 MT', risk_level: 'Low' },
+    { material_name: 'Fe500D Reinforcement Rebar', required: formatMaterialQty(rebarVal, 'MT'), available: formatMaterialQty(rebarVal, 'MT'), short: '0 MT', risk_level: 'Low' },
+    { material_name: 'Penstock High Tensile Steel', required: formatMaterialQty(penstockVal, 'MT'), available: formatMaterialQty(penstockVal, 'MT'), short: '0 MT', risk_level: 'Low' },
+  ] : (data?.materials || [
+    { material_name: 'Fe500D Reinforcement Rebar', required: '42,500 MT', available: '38,000 MT', short: '4,500 MT', risk_level: 'High' },
+    { material_name: 'Grade M40 Structural Concrete', required: '450,000 m³', available: '410,000 m³', short: '40,000 m³', risk_level: 'Medium' },
+    { material_name: 'Penstock High Tensile Steel', required: '8,400 MT', available: '8,100 MT', short: '300 MT', risk_level: 'Low' },
+  ])
+
+  const procurementRisks = isNewEstimate ? [
+    { item: `${estCapMw ? Math.round(estCapMw / (projectMeta?.number_of_units || 4)) : 250} MW Francis Turbine Runner`, vendor: 'BHEL Bhopal', lead_time_weeks: 24, risk: 'Low Risk' },
+    { item: `Main Step-Up Transformer (${estCapMw ? Math.round(estCapMw * 1.2) : 300} MVA)`, vendor: 'ABB India', lead_time_weeks: 16, risk: 'Low Risk' },
+    { item: 'Penstock Gate Valves (IS 2062)', vendor: 'Triveni Engineering', lead_time_weeks: 10, risk: 'Low Risk' },
+  ] : (data?.procurement_risks || [
+    { item: '250 MW Francis Turbine Runner', vendor: 'BHEL Bhopal', lead_time_weeks: 28, risk: 'Low Risk' },
+    { item: 'Main Step-Up Transformer (300 MVA)', vendor: 'ABB India', lead_time_weeks: 18, risk: 'Medium Risk' },
+    { item: 'Penstock Gate Valves (IS 2062)', vendor: 'Triveni Engineering', lead_time_weeks: 12, risk: 'Low Risk' },
+  ])
 
   // Live Telemetry Benchmark Projects (HP-001, HP-002, HP-003)
   const liveBenchmarkIds = new Set(['HP-001', 'HP-002', 'HP-003'])
@@ -186,75 +258,18 @@ export function MonitoringDashboard() {
         </div>
       </div>
 
-      {/* Planning Phase Banner — shown when a new AI-estimated project is selected */}
-      {isNewEstimate && (
-        <div style={{
-          background: 'linear-gradient(135deg, #E8F5E9 0%, #E3F2FD 100%)',
-          border: '1.5px solid #A5D6A7',
-          borderRadius: '12px',
-          padding: '1.25rem 1.5rem',
-          marginBottom: '1.25rem',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '0.75rem'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span style={{ fontSize: '1.5rem' }}>🏗️</span>
-            <div>
-              <div style={{ fontWeight: 800, fontSize: '1rem', color: '#1B5E20' }}>
-                {estProjTitle} — Planning Phase (Pre-Construction)
-              </div>
-              <div style={{ fontSize: '0.78rem', color: '#388E3C', marginTop: '2px' }}>
-                This project was registered by the ConstructIQ AI pipeline. Physical construction has not started — no live site telemetry available yet.
-              </div>
-            </div>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
-            <div style={{ background: '#FFFFFF', borderRadius: '8px', padding: '12px 16px', border: '1px solid #C8E6C9' }}>
-              <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#388E3C', textTransform: 'uppercase' }}>Installed Capacity</div>
-              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#005F6A', marginTop: '4px' }}>
-                {estCapMw != null ? `${Number(estCapMw).toFixed(0)} MW` : '—'}
-              </div>
-            </div>
-            <div style={{ background: '#FFFFFF', borderRadius: '8px', padding: '12px 16px', border: '1px solid #C8E6C9' }}>
-              <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#388E3C', textTransform: 'uppercase' }}>Total CapEx</div>
-              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#005F6A', marginTop: '4px' }}>
-                ₹ {capexCr != null ? Number(capexCr).toLocaleString('en-IN', { maximumFractionDigits: 0 }) : '—'} Cr
-              </div>
-            </div>
-            <div style={{ background: '#FFFFFF', borderRadius: '8px', padding: '12px 16px', border: '1px solid #C8E6C9' }}>
-              <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#388E3C', textTransform: 'uppercase' }}>Annual Generation</div>
-              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#005F6A', marginTop: '4px' }}>
-                {estGenGwh != null ? `${Number(estGenGwh).toLocaleString('en-IN', { maximumFractionDigits: 0 })} GWh` : '—'}
-              </div>
-            </div>
-            <div style={{ background: '#FFFFFF', borderRadius: '8px', padding: '12px 16px', border: '1px solid #C8E6C9' }}>
-              <div style={{ fontSize: '0.68rem', fontWeight: 800, color: '#388E3C', textTransform: 'uppercase' }}>Project Phase</div>
-              <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#FF9800', marginTop: '4px' }}>
-                📋 DPR / Planning
-              </div>
-            </div>
-          </div>
-          <div style={{ fontSize: '0.76rem', color: '#555', background: '#FFFDE7', borderRadius: '6px', padding: '8px 12px', border: '1px solid #FFF176' }}>
-            💡 <strong>How to see live Construction Status:</strong> Select HP-001, HP-002, or HP-003 from the Target Project dropdown to view real-time site telemetry, delay detection, and material availability for active projects under construction.
-          </div>
-        </div>
-      )}
-
-      {/* 5 Monitoring Tabs — only shown for benchmark projects with construction data */}
-      {!isNewEstimate && (
-        <div className="monitoring-tabs">
-          {TABS.map((t) => (
-            <button
-              key={t.id}
-              className={`tab-link ${activeTab === t.id ? 'active' : ''}`}
-              onClick={() => setActiveTab(t.id)}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
-      )}
+      {/* 5 Monitoring Tabs */}
+      <div className="monitoring-tabs">
+        {TABS.map((t) => (
+          <button
+            key={t.id}
+            className={`tab-link ${activeTab === t.id ? 'active' : ''}`}
+            onClick={() => setActiveTab(t.id)}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
 
       {loading && (
         <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
@@ -343,17 +358,17 @@ export function MonitoringDashboard() {
 
                   {/* Dynamic curves based on actual vs planned pct */}
                   <path d="M 20 180 Q 200 160 350 50 T 480 30" fill="none" stroke="#94A3B8" strokeWidth="2" strokeDasharray="4" />
-                  <path d={`M 20 180 Q 200 168 350 ${180 - (actualPct * 1.3)}`} fill="none" stroke="#005F6A" strokeWidth="3" />
-                  <path d={`M 20 180 Q 200 158 350 ${180 - (plannedPct * 1.3)}`} fill="none" stroke="#D50000" strokeWidth="2.5" />
+                  <path d={isNewEstimate ? "M 20 180 L 350 180" : `M 20 180 Q 200 168 350 ${180 - (actualPct * 1.3)}`} fill="none" stroke="#005F6A" strokeWidth="3" />
+                  <path d={isNewEstimate ? "M 20 180 L 350 180" : `M 20 180 Q 200 158 350 ${180 - (plannedPct * 1.3)}`} fill="none" stroke="#D50000" strokeWidth="2.5" />
 
-                  <circle cx="350" cy={180 - (actualPct * 1.3)} r="5" fill="#005F6A" />
-                  <circle cx="350" cy={180 - (plannedPct * 1.3)} r="5" fill="#D50000" />
+                  <circle cx="350" cy={isNewEstimate ? 180 : 180 - (actualPct * 1.3)} r="5" fill="#005F6A" />
+                  <circle cx="350" cy={isNewEstimate ? 180 : 180 - (plannedPct * 1.3)} r="5" fill="#D50000" />
                 </svg>
               </div>
             </div>
 
             {/* Interactive Live Site Status Map */}
-            <SiteStatusMap compact={false} />
+            <SiteStatusMap compact={false} projectMeta={projectMeta} />
           </div>
 
           {/* Bottom Table: Dynamic Agent View Based on Active Tab */}
@@ -386,19 +401,15 @@ export function MonitoringDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(data?.activities || [
-                    { name: 'Site Excavation & Foundation', planned_pct: 100, actual_pct: 95, variance: 5, status: 'On Track' },
-                    { name: 'Dam Concrete Pouring', planned_pct: 65, actual_pct: 48, variance: 17, status: 'Minor Delay' },
-                    { name: 'Headrace Tunnel Excavation', planned_pct: 40, actual_pct: 28, variance: 12, status: 'Critical Delay' },
-                    { name: 'Powerhouse & E&M Erection', planned_pct: 25, actual_pct: 15, variance: 10, status: 'Minor Delay' },
-                  ]).map((act, idx) => (
+                  {activities.map((act, idx) => (
                     <tr key={idx}>
                       <td><strong>{act.name || act.activity_name}</strong></td>
                       <td>{act.planned_pct}%</td>
                       <td><strong style={{ color: '#005F6A' }}>{act.actual_pct}%</strong></td>
                       <td>{act.variance > 0 ? `-${act.variance}%` : `+${Math.abs(act.variance)}%`}</td>
                       <td>
-                        <span className={`badge-stat ${act.status === 'On Track' ? 'emerald' : act.status === 'Minor Delay' ? 'cyan' : 'rose'}`}>
+                        <span className={`badge-stat ${act.status === 'On Track' ? 'emerald' : act.status === 'Minor Delay' ? 'cyan' : act.status === 'Not Started' ? '' : 'rose'}`}
+                              style={act.status === 'Not Started' ? { background: '#F1F5F9', color: '#475569' } : {}}>
                           {act.status}
                         </span>
                       </td>
@@ -421,18 +432,23 @@ export function MonitoringDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(data?.delayed_activities || [
-                    { name: 'Headrace Tunnel Boring Section 3', planned_pct: 40, actual_pct: 28, delay_days: 24, impact: 'Critical Path' },
-                    { name: 'Dam Spillway Concrete Block B', planned_pct: 65, actual_pct: 48, delay_days: 12, impact: 'Moderate' },
-                  ]).map((act, idx) => (
-                    <tr key={idx}>
-                      <td><strong>{act.name || act.activity_name}</strong></td>
-                      <td>{act.planned_pct}%</td>
-                      <td><strong style={{ color: '#D50000' }}>{act.actual_pct}%</strong></td>
-                      <td><strong style={{ color: '#D50000' }}>{act.delay_days || 14} Days</strong></td>
-                      <td><span className="badge-stat rose">{act.impact || 'Critical'}</span></td>
+                  {delayedActivities.length === 0 ? (
+                    <tr>
+                      <td colSpan="5" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                        🎉 No critical path delays detected. Project is in pre-construction / planning phase.
+                      </td>
                     </tr>
-                  ))}
+                  ) : (
+                    delayedActivities.map((act, idx) => (
+                      <tr key={idx}>
+                        <td><strong>{act.name || act.activity_name}</strong></td>
+                        <td>{act.planned_pct}%</td>
+                        <td><strong style={{ color: '#D50000' }}>{act.actual_pct}%</strong></td>
+                        <td><strong style={{ color: '#D50000' }}>{act.delay_days || 14} Days</strong></td>
+                        <td><span className="badge-stat rose">{act.impact || 'Critical'}</span></td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
             )}
@@ -449,17 +465,22 @@ export function MonitoringDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(data?.contributing_factors || [
-                    { type: 'Geological Variation', description: 'Unexpected shear zone in tunnel face requiring additional support', impact: 'High', mitigation: 'Steel rib insertion & grouting' },
-                    { type: 'Monsoon Disruption', description: 'Heavy rainfall stalled civil works and access roads', impact: 'Medium', mitigation: 'Prioritize indoor powerhouse works during precipitation' },
-                  ]).map((item, idx) => (
-                    <tr key={idx}>
-                      <td><strong>{item.type || item.activity || item.name}</strong></td>
-                      <td style={{ color: '#D50000', fontWeight: 600 }}>{item.description || item.cause || item.root_cause}</td>
-                      <td><span className={`badge-stat ${item.impact === 'High' ? 'rose' : item.impact === 'Medium' ? 'amber' : 'emerald'}`}>{item.impact}</span></td>
-                      <td>{item.mitigation}</td>
+                  {contributingFactors.length === 0 ? (
+                    <tr>
+                      <td colSpan="4" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                        🌱 No active geological or environmental risk factors. Project is in pre-construction / planning phase.
+                      </td>
                     </tr>
-                  ))}
+                  ) : (
+                    contributingFactors.map((item, idx) => (
+                      <tr key={idx}>
+                        <td><strong>{item.type || item.activity || item.name}</strong></td>
+                        <td style={{ color: '#D50000', fontWeight: 600 }}>{item.description || item.cause || item.root_cause}</td>
+                        <td><span className={`badge-stat ${item.impact === 'High' ? 'rose' : item.impact === 'Medium' ? 'amber' : 'emerald'}`}>{item.impact}</span></td>
+                        <td>{item.mitigation}</td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
             )}
@@ -477,11 +498,7 @@ export function MonitoringDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(data?.materials || [
-                    { material_name: 'Fe500D Reinforcement Rebar', required: '42,500 MT', available: '38,000 MT', short: '4,500 MT', risk_level: 'High' },
-                    { material_name: 'Grade M40 Structural Concrete', required: '450,000 m³', available: '410,000 m³', short: '40,000 m³', risk_level: 'Medium' },
-                    { material_name: 'Penstock High Tensile Steel', required: '8,400 MT', available: '8,100 MT', short: '300 MT', risk_level: 'Low' },
-                  ]).map((item, idx) => (
+                  {materials.map((item, idx) => (
                     <tr key={idx}>
                       <td><strong>{item.material_name || item.name}</strong></td>
                       <td>{item.required}</td>
@@ -510,16 +527,12 @@ export function MonitoringDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(data?.procurement_risks || [
-                    { item: '250 MW Francis Turbine Runner', vendor: 'BHEL Bhopal', lead_time_weeks: 28, risk: 'Low Risk' },
-                    { item: 'Main Step-Up Transformer (300 MVA)', vendor: 'ABB India', lead_time_weeks: 18, risk: 'Medium Risk' },
-                    { item: 'Penstock Gate Valves (IS 2062)', vendor: 'Triveni Engineering', lead_time_weeks: 12, risk: 'Low Risk' },
-                  ]).map((item, idx) => (
+                  {procurementRisks.map((item, idx) => (
                     <tr key={idx}>
                       <td><strong>{item.item || item.name}</strong></td>
                       <td>{item.vendor}</td>
                       <td>{item.lead_time_weeks} Weeks</td>
-                      <td><span className="badge-stat emerald">{item.risk}</span></td>
+                      <td><span className={`badge-stat ${item.risk.includes('High') ? 'rose' : item.risk.includes('Medium') ? 'amber' : 'emerald'}`}>{item.risk}</span></td>
                     </tr>
                   ))}
                 </tbody>

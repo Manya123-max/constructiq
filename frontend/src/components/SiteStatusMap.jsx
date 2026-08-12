@@ -71,22 +71,23 @@ const STATE_COORDINATES = {
   'West Bengal': BASIN_GEO_REGISTRY['Teesta River Basin']
 }
 
-export function SiteStatusMap({ compact = false }) {
+export function SiteStatusMap({ compact = false, projectMeta = null }) {
   const estimationResult = useStore((s) => s.estimationResult)
   const currentForm = useStore((s) => s.currentForm)
   const googleApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
   const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
 
-  const activeBasin = currentForm?.river_basin || estimationResult?.project_inputs?.river_basin || 'Ganga Basin'
+  const activeBasin = projectMeta?.river_basin || currentForm?.river_basin || estimationResult?.project_inputs?.river_basin || 'Ganga Basin'
   const defaultFallback = { lat: 30.3753, lng: 78.4744, bbox: '77.5,29.5,79.5,31.2', basin: 'Ganga Basin (Uttarakhand)', state: 'Uttarakhand' }
   const siteInfo = BASIN_GEO_REGISTRY[activeBasin]
+    || STATE_COORDINATES[projectMeta?.state]
     || STATE_COORDINATES[currentForm?.state]
     || STATE_COORDINATES[estimationResult?.project_inputs?.state]
     || defaultFallback
 
-  const activeState = currentForm?.state || siteInfo?.state || estimationResult?.project_inputs?.state || 'Uttarakhand'
-  const activeCap = currentForm?.capacity_mw || estimationResult?.project_inputs?.capacity_mw || 45
-  const activeType = currentForm?.project_type || estimationResult?.project_inputs?.project_type || 'run-of-river'
+  const activeState = projectMeta?.state || currentForm?.state || siteInfo?.state || estimationResult?.project_inputs?.state || 'Uttarakhand'
+  const activeCap = projectMeta?.capacity_mw || currentForm?.capacity_mw || estimationResult?.project_inputs?.capacity_mw || 45
+  const activeType = projectMeta?.project_type || currentForm?.project_type || estimationResult?.project_inputs?.project_type || 'run-of-river'
 
   return (
     <div
