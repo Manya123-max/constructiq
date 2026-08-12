@@ -21,7 +21,7 @@ function renderFormattedMessage(content) {
 }
 
 export function HydroChatWidget() {
-  const { estimationResult, monitorProjectId } = useStore()
+  const { estimationResult, monitorProjectId, currentForm } = useStore()
   const [isOpen, setIsOpen] = useState(false)
   const [unread, setUnread] = useState(true)
   const [messages, setMessages] = useState([
@@ -55,7 +55,8 @@ export function HydroChatWidget() {
     setIsLoading(true)
 
     try {
-      const res = await api.sendChat(newMessages, estimationResult, monitorProjectId)
+      const activeContext = estimationResult || (currentForm ? { project_inputs: currentForm } : null)
+      const res = await api.sendChat(newMessages, activeContext, monitorProjectId)
       if (res && res.reply) {
         setMessages([...newMessages, { role: 'assistant', content: res.reply }])
       } else {
