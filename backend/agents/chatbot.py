@@ -214,160 +214,29 @@ def _domain_fallback_answer(
 ) -> str:
     """Intelligent multi-branch domain knowledge engine for hydro inquiries (supporting active context)."""
     
-    q = (query or "").lower().strip()
-    
-    # Extract project input parameters if present in estimation_result
-    inputs = {}
-    mats = {}
-    gen = {}
-    cost = {}
-    dur = {}
-    if estimation_result:
-        inputs = estimation_result.get("project_inputs", {}) or {}
-        mats = estimation_result.get("model_1_materials", {}) or {}
-        gen = estimation_result.get("model_2_generation", {}) or {}
-        cost = estimation_result.get("model_3_cost", {}) or {}
-        dur = estimation_result.get("model_4_duration", {}) or {}
-
-    # ─── 1. Capacity & Sizing Queries ─────────────────────────────────────────
-    if any(k in q for k in ["capacity", "mw", "megawatt", "size", "rating", "unit", "units", "how big", "scale"]):
-        if inputs:
-            cap = inputs.get("capacity_mw", 45)
-            units = inputs.get("number_of_units", 3)
-            ucap = inputs.get("unit_capacity_mw") or round(cap / max(units, 1), 2)
-            cat = inputs.get("project_category") or ("Large Hydro" if cap > 100 else "Medium Hydro" if cap >= 25 else "Small Hydro")
-            ptype = inputs.get("project_type", "run-of-river")
+    # ─── 1. Cost & CapEx Queries ──────────────────────────────────────────────
+    if any(k in query for k in ["cost", "budget", "price", "cr", "crore", "capex", "estimation", "financial"]):
+        if estimation_result:
+            inputs = estimation_result.get("project_inputs", {}) or {}
+            cost = estimation_result.get("model_3_cost", {}) or {}
+            cap = inputs.get("capacity_mw", 100)
             return (
-                f"⚡ Installed Capacity Details for Active Project:\n\n"
-                f"• **Total Capacity:** {cap} MW\n"
-                f"• **Unit Configuration:** {units} Generation Units × {ucap} MW each\n"
-                f"• **Hydro Category:** {cat}\n"
-                f"• **Plant Type:** {ptype}\n"
-                f"• **State:** {inputs.get('state', 'Uttarakhand')}"
+                f"💰 Estimated Capital Cost for your Custom Project ({cap} MW):\n\n"
+                f"• **Total Estimated CapEx:** ₹ {cost.get('total_project_cost_cr', '—')} Cr\n"
+                f"• Civil Works (Dam, Tunnel, Powerhouse): ₹ {cost.get('civil_cost_cr', '—')} Cr\n"
+                f"• Electro-Mechanical Equipment (Turbines, GIS): ₹ {cost.get('equipment_cost_cr', '—')} Cr\n"
+                f"• Other Costs & Normalization adjustments: ₹ {cost.get('other_cost_cr', '—')} Cr\n"
+                f"• Cost Normalized (to 2024 index): ₹ {cost.get('cost_normalized_2024_cr', '—')} Cr\n\n"
+                f"This cost prediction was computed using a Gradient Boosting algorithm trained on similar historical CEA DPR and CAG audit datasets."
             )
         elif monitoring_context:
-            pid = monitoring_context.get("project_id")
-            name = monitoring_context.get("project_name", "Monitored Plant")
-            cap = monitoring_context.get("capacity_mw", 0)
-            ptype = monitoring_context.get("project_type", "Hydro")
-            return (
-                f"⚡ Capacity Profile for Monitored Project {pid} ({name}):\n\n"
-                f"• **Installed Capacity:** {cap} MW\n"
-                f"• **Plant Category:** {ptype}\n"
-                f"• **State:** {monitoring_context.get('state', 'India')}"
-            )
-        else:
-            return (
-                "⚡ Hydroelectric Capacity Classification (CEA Standards):\n\n"
-                "• **Pico Hydro:** < 0.1 MW\n"
-                "• **Micro Hydro:** 0.1 MW – 1 MW\n"
-                "• **Mini Hydro:** 1 MW – 5 MW\n"
-                "• **Small Hydro:** 5 MW – 25 MW\n"
-                "• **Medium Hydro:** 25 MW – 100 MW\n"
-                "• **Large Hydro:** > 100 MW"
-            )
-
-    # ─── 2. Net Head & Hydraulic Elevation Queries ────────────────────────────
-    if any(k in q for k in ["head", "net head", "gross head", "drop", "elevation", "height", "fall", "water head"]):
-        if inputs:
-            net_head = inputs.get("net_head_m", 120)
-            gross_head = inputs.get("gross_head_m") or round(net_head / 0.95, 1)
-            flow = inputs.get("design_flow_m3s", 42.5)
-            ttype = inputs.get("turbine_type", "Francis")
-            return (
-                f"💧 Hydraulic Head & Flow Parameters for Active Project:\n\n"
-                f"• **Net Head (H_net):** {net_head} meters\n"
-                f"• **Gross Head (H_gross):** {gross_head} meters (approx. 5% friction loss factor)\n"
-                f"• **Design Discharge Flow (Q):** {flow} m³/s\n"
-                f"• **Selected Turbine:** {ttype} Turbine"
-            )
-        else:
-            return (
-                "💧 Hydraulic Head Classification in Hydro Power Physics:\n\n"
-                "• **Low Head (< 50m):** Uses Kaplan / Propeller turbines with high flow discharge.\n"
-                "• **Medium Head (50m – 250m):** Uses Francis turbines (most versatile design).\n"
-                "• **High Head (> 250m):** Uses Pelton impulse turbines with multi-jet nozzles.\n\n"
-                "Formula: Power (kW) = 9.81 × Design Flow (m³/s) × Net Head (m) × Efficiency (η)."
-            )
-
-    # ─── 3. Turbine & Equipment Queries ──────────────────────────────────────
-    if any(k in q for k in ["turbine", "pelton", "francis", "kaplan", "runner", "generator", "transformer", "equipment"]):
-        if inputs:
-            ttype = inputs.get("turbine_type", "Francis")
-            units = inputs.get("number_of_units", 3)
-            cap = inputs.get("capacity_mw", 45)
-            net_head = inputs.get("net_head_m", 120)
-            return (
-                f"⚙️ Electro-Mechanical Equipment Specs for Active Project:\n\n"
-                f"• **Turbine Type:** {ttype} Hydro Turbine\n"
-                f"• **Unit Count:** {units} Turbines ({round(cap/max(units,1), 2)} MW per unit)\n"
-                f"• **Operating Net Head:** {net_head} m\n"
-                f"• **Design Flow:** {inputs.get('design_flow_m3s', 42.5)} m³/s\n"
-                f"• **Powerhouse Type:** {inputs.get('powerhouse_type', 'Underground')}"
-            )
-        else:
-            return (
-                "⚙️ Hydro Turbine Selection Criteria:\n\n"
-                "• **Francis Turbine:** Medium Head (40m – 350m). Efficiency ~93–95%.\n"
-                "• **Pelton Turbine:** High Head (> 250m). Multi-jet impulse runner.\n"
-                "• **Kaplan Turbine:** Low Head (< 50m), high flow rate. Adjustable blades.\n"
-                "• **Cross-Flow Turbine:** Mini/Micro hydro projects (< 5 MW)."
-            )
-
-    # ─── 4. Location & Basin Queries ──────────────────────────────────────────
-    if any(k in q for k in ["location", "state", "where", "basin", "river", "place", "region", "site"]):
-        if inputs:
-            state = inputs.get("state", "Uttarakhand")
-            basin = inputs.get("river_basin", "Ganga Basin")
-            terrain = inputs.get("terrain_type", "Mountainous")
-            return (
-                f"📍 Location & Geographic Regime for Active Project:\n\n"
-                f"• **State / Region:** {state}\n"
-                f"• **River / Basin:** {basin}\n"
-                f"• **Terrain Type:** {terrain}\n"
-                f"• **Project Type:** {inputs.get('project_type', 'run-of-river')}"
-            )
-        elif monitoring_context:
-            pid = monitoring_context.get("project_id")
-            name = monitoring_context.get("project_name", "Monitored Plant")
-            return (
-                f"📍 Site Location for Monitored Project {pid} ({name}):\n\n"
-                f"• **State:** {monitoring_context.get('state', 'India')}\n"
-                f"• **Plant Type:** {monitoring_context.get('project_type', 'Hydro')}"
-            )
-        else:
-            return (
-                "🌊 Hydroelectric River Basin Regimes (Indian Context):\n\n"
-                "• Primary Active Basins in ConstructIQ Dataset:\n"
-                "  1. Ganga River Basin (Uttarakhand / UP): High head run-of-river & storage projects.\n"
-                "  2. Sutlej / Indus Basin (Himachal / J&K): Glacial high-discharge rivers.\n"
-                "  3. Brahmaputra / Siang Basin (Arunachal / Assam): Ultra-large capacity projects.\n"
-                "  4. Periyar & Peninsular Basins (Kerala, AP, Karnataka): Medium head reservoir powerhouses."
-            )
-
-    # ─── 5. Cost & CapEx Queries ──────────────────────────────────────────────
-    if any(k in q for k in ["cost", "budget", "price", "cr", "crore", "capex", "estimation", "financial", "money", "expense"]):
-        if cost or inputs:
-            cap = inputs.get("capacity_mw", 45)
-            tot_cost = cost.get("total_project_cost_cr") or round(cap * 8.6, 1)
-            civ_cost = cost.get("civil_cost_cr") or round(tot_cost * 0.62, 1)
-            eq_cost = cost.get("equipment_cost_cr") or round(tot_cost * 0.38, 1)
-            cost_mw = cost.get("cost_per_mw_cr") or round(tot_cost / cap, 2)
-            return (
-                f"💰 Estimated Capital Cost for Active Project ({cap} MW):\n\n"
-                f"• **Total Estimated CapEx:** ₹ {tot_cost:,} Cr\n"
-                f"• **Civil Cost (Dam, Tunnel, Powerhouse):** ₹ {civ_cost:,} Cr (~62%)\n"
-                f"• **Equipment Cost (Turbines, GIS Switchyard):** ₹ {eq_cost:,} Cr (~38%)\n"
-                f"• **Cost Intensity per MW:** ₹ {cost_mw} Cr / MW\n\n"
-                f"Predicted by GradientBoosting model trained on historical CEA DPR & CAG audit benchmarks."
-            )
-        elif monitoring_context:
+            status = monitoring_context.get("status", {}) or {}
             pid = monitoring_context.get("project_id")
             name = monitoring_context.get("project_name", "Monitored Plant")
             return (
                 f"📊 Capital Cost & Budget Monitoring for Project {pid} ({name}):\n\n"
                 f"• **Project Name:** {name}\n"
-                f"• **Overall Cost Status:** View the EVM S-Curve & CapEx Breakdown on the dashboard.\n"
+                f"• **Overall Cost Status:** The cost details and normalized curves are available in the CapEx Breakdown panel.\n"
                 f"• **Procurement Risk Status:** {monitoring_context.get('procurement', {}).get('overall_risk', 'LOW')} risk level."
             )
         else:
@@ -379,110 +248,38 @@ def _domain_fallback_answer(
                 "  - Electro-Mechanical Equipment (Turbines, Generators, Transformers): ~35% – 40%."
             )
 
-    # ─── 6. Material BOQ & Concrete Queries ──────────────────────────────────
-    if any(k in q for k in ["concrete", "cement", "steel", "boq", "rebar", "intensity", "material", "quantity", "aggregate", "sand"]):
-        if mats or inputs:
-            cap = inputs.get("capacity_mw", 45)
-            c_m3 = mats.get("concrete_m3") or round(cap * 3200)
-            cem_mt = mats.get("cement_mt") or round(cap * 880)
-            reb_mt = mats.get("reinforcement_steel_mt") or mats.get("rebar_steel_mt") or round(cap * 210)
-            pen_mt = mats.get("penstock_steel_mt") or round(cap * 42)
+    # ─── 2. Material BOQ & Concrete Queries ──────────────────────────────────
+    if any(k in query for k in ["concrete", "cement", "steel", "boq", "rebar", "intensity", "material", "quantity"]):
+        if estimation_result:
+            mats = estimation_result.get("model_1_materials", {}) or {}
             return (
                 f"🧱 Predicted Material Bill of Quantities (BOQ):\n\n"
-                f"• **Concrete Volume:** {c_m3:,} m³\n"
-                f"• **Cement Quantity:** {cem_mt:,} MT (OPC 43/53 grade)\n"
-                f"• **Reinforcement Steel (Rebar):** {reb_mt:,} MT (Fe 500D TMT)\n"
-                f"• **Penstock Steel (E350 Grade):** {pen_mt:,} MT\n\n"
-                f"Predicted by XGBoost MultiOutput models using historical PARIVESH clearances & NHPC commercial tenders."
+                f"• **Concrete Volume:** {mats.get('concrete_m3', '—'):,} m³ (dam, powerhouse, tunnels)\n"
+                f"• **Cement Quantity:** {mats.get('cement_mt', '—'):,} MT (standard OPC 43/53 grade)\n"
+                f"• **Reinforcement Steel (Rebar):** {mats.get('rebar_steel_mt', '—'):,} MT (Fe 500D TMT)\n"
+                f"• **Penstock Steel (High Strength):** {mats.get('penstock_steel_mt', '—'):,} MT\n\n"
+                f"Predicted by XGBoost MultiOutput models using historical PARIVESH environment clearances and NHPC commercial tenders."
             )
         elif monitoring_context:
-            mats_ctx = monitoring_context.get("materials", {}) or {}
-            shortages = mats_ctx.get("shortage_count") or 0
+            mats = monitoring_context.get("materials", {}) or {}
+            shortages = mats.get("shortage_count") or 0
             return (
                 f"🧱 Material Stock & Availability Status:\n\n"
                 f"• **Critical Stock Alerts:** {shortages} safety stock threshold breaches detected.\n"
-                f"• **Detailed Materials List:** Available on the Material Availability dashboard tab."
+                f"• **Detailed Materials list:** Available on the Material Availability dashboard metrics.\n"
+                f"• **Procurement Status:** Procurement orders are listed in the logs panel below."
             )
         else:
             return (
                 "🧱 Construction Material BOQ Benchmarks (per MW Installed Capacity):\n\n"
-                "• Concrete Volume: 2,500 – 4,200 m³ / MW.\n"
-                "• Cement Quantity: 700 – 1,200 MT / MW.\n"
+                "• Concrete Volume: 2,500 – 4,200 m³ / MW (M25–M40 grade for dam & powerhouse structures).\n"
+                "• Cement Quantity: 700 – 1,200 MT / MW (OPC 43/53 grade).\n"
                 "• Reinforcement Steel (Rebar Fe500D): 180 – 320 MT / MW.\n"
-                "• Penstock Steel (High Tensile Grade E350): 25 – 60 MT / MW."
+                "• Penstock Steel (High Tensile Grade E350): 25 – 60 MT / MW depending on static head pressure."
             )
 
-    # ─── 7. Generation & Capacity Factor Queries ──────────────────────────────
-    if any(k in q for k in ["generation", "power", "gwh", "energy", "efficiency", "hydrology", "plf", "capacity factor", "annual"]):
-        if gen or inputs:
-            cap = inputs.get("capacity_mw", 45)
-            gwh = gen.get("annual_generation_gwh") or round(cap * 8760 * 0.435 / 1000, 2)
-            plf = gen.get("capacity_factor_pct") or 43.5
-            flow = inputs.get("design_flow_m3s", 42.5)
-            net_head = inputs.get("net_head_m", 120)
-            ttype = inputs.get("turbine_type", "Francis")
-            units = inputs.get("number_of_units", 3)
-            return (
-                f"⚡ Predicted Power Generation details for {cap} MW project:\n\n"
-                f"• **Annual Energy Generation:** {gwh:,} GWh\n"
-                f"• **Estimated Capacity Factor (PLF):** {plf}%\n"
-                f"• **Design Discharge:** {flow} m³/s at {net_head} m net head\n"
-                f"• **Turbine Choice:** {ttype} Turbine ({units} units)\n\n"
-                f"Based on a 90% dependable hydrology year profile with typical efficiency metrics."
-            )
-        else:
-            return (
-                "⚡ Hydro Energy Generation Mechanics:\n\n"
-                "• Annual Generation (GWh) = Installed Capacity (MW) × 8,760 hours × Plant Load Factor (PLF) ÷ 1,000.\n"
-                "• Typical PLF in India: 35% – 55% for run-of-river plants depending on seasonal monsoon inflow."
-            )
-
-    # ─── 8. Dam, Tunnel & Civil Structures Queries ────────────────────────────
-    if any(k in q for k in ["dam", "tunnel", "penstock", "powerhouse", "excavation", "civil", "structure"]):
-        if inputs:
-            return (
-                f"🏗️ Civil Structures & Layout for Active Project:\n\n"
-                f"• **Dam Type:** {inputs.get('dam_type', 'Concrete Gravity')} (Height: {inputs.get('dam_height_m', 45)} m, Length: {inputs.get('dam_length_m', 180)} m)\n"
-                f"• **Headrace Tunnel:** {inputs.get('tunnel_length_km', 3.5)} km length, {inputs.get('tunnel_diameter_m', 4.8)} m diameter\n"
-                f"• **Penstock:** {inputs.get('penstock_length_m', 250)} m length, {inputs.get('penstock_diameter_m', 2.5)} m diameter\n"
-                f"• **Powerhouse Type:** {inputs.get('powerhouse_type', 'Underground')}"
-            )
-        else:
-            return (
-                "🏗️ Hydroelectric Civil Infrastructure Components:\n\n"
-                "• **Dam / Barrage:** Concrete Gravity, Rockfill, or Arch structure for water head creation.\n"
-                "• **Headrace Tunnel (HRT):** Transports water under pressure from reservoir to surge shaft.\n"
-                "• **Penstock Steel Pipes:** High-pressure steel conduits feeding water into power turbines.\n"
-                "• **Powerhouse:** Houses hydro generators, Francis/Pelton runners, and GIS switchyard."
-            )
-
-    # ─── 9. Duration & Schedule Queries ───────────────────────────────────────
-    if any(k in q for k in ["duration", "timeline", "time", "month", "months", "year", "years"]):
-        if dur or inputs:
-            m = dur.get("construction_duration_months") or 48
-            y = dur.get("estimated_years") or round(m / 12.0, 1)
-            return (
-                f"⏱️ Predicted Construction Duration:\n\n"
-                f"• **Estimated Duration:** {m} Months ({y} Years)\n\n"
-                f"Model incorporates terrain complexity, dam height, and tunneling parameters."
-            )
-        elif monitoring_context:
-            status = monitoring_context.get("status", {}) or {}
-            return (
-                f"⏱️ Monitored Schedule Status:\n\n"
-                f"• **Progress:** {status.get('actual_pct')}% complete vs {status.get('planned_pct')}% planned.\n"
-                f"• **Status:** {status.get('status')}"
-            )
-        else:
-            return (
-                "⏱️ Typical Construction Timelines:\n\n"
-                "• Large Hydro (>100 MW): 60 – 90 months.\n"
-                "• Medium Hydro (25–100 MW): 42 – 60 months.\n"
-                "• Small Hydro (<25 MW): 24 – 36 months."
-            )
-
-    # ─── 10. Delay & Monitoring Status Queries ────────────────────────────────
-    if any(k in q for k in ["delay", "status", "progress", "schedule", "actual", "overrun", "monitoring"]):
+    # ─── 3. Project Delay & Monitoring Status ────────────────────────────────
+    if any(k in query for k in ["delay", "status", "progress", "schedule", "actual", "overrun", "monitoring"]):
         if monitoring_context:
             status = monitoring_context.get("status", {}) or {}
             delays = monitoring_context.get("delays", {}) or {}
@@ -498,15 +295,56 @@ def _domain_fallback_answer(
                 f"• **Delayed Activities:** {', '.join(delayed_list) if delayed_list else 'None'}\n"
                 f"• **Root Cause Analysis:** {rc.get('root_cause_summary')}"
             )
+        elif estimation_result:
+            dur = estimation_result.get("model_4_duration", {}) or {}
+            return (
+                f"⏱️ Predicted Construction Duration:\n\n"
+                f"• **Construction Duration:** {dur.get('construction_duration_months', '—')} Months ({dur.get('estimated_years', '—')} years)\n\n"
+                f"Estimated by Gradient Boosting models based on geographic elevation, terrain complexity, and structural sizing parameters."
+            )
         else:
             return (
-                "⏱️ Hydroelectric Delay Detection & Risk Management:\n\n"
-                "Main root causes for delay include geological surprises (tunneling), land acquisition, "
-                "and seasonal monsoons."
+                "⏱️ Hydroelectric Schedule Monitoring & Delay Management:\n\n"
+                "Typically, large projects average 60–90 months construction time in India. "
+                "Main root causes for delay include geological surprises (tunneling), land acquisition issues, "
+                "and seasonal monsoons/flood risks."
             )
 
-    # ─── 11. CEA / DPR Submission Norms ───────────────────────────────────────
-    if "cea" in q or "dpr" in q or "statutory" in q:
+    # ─── 4. Generation & Capacity Factor ─────────────────────────────────────
+    if any(k in query for k in ["generation", "power", "gwh", "energy", "efficiency", "hydrology"]):
+        if estimation_result:
+            inputs = estimation_result.get("project_inputs", {}) or {}
+            gen = estimation_result.get("model_2_generation", {}) or {}
+            return (
+                f"⚡ Predicted Power Generation details for {inputs.get('capacity_mw')} MW project:\n\n"
+                f"• **Annual Energy Generation:** {gen.get('annual_generation_gwh', '—')} GWh\n"
+                f"• **Estimated Capacity Factor (PLF):** {gen.get('capacity_factor_pct', '—')}%\n"
+                f"• **Design Discharge:** {inputs.get('design_flow_m3s', '—')} m³/s at {inputs.get('net_head_m', '—')} m net head\n"
+                f"• **Turbine Choice:** {inputs.get('turbine_type')} Turbine ({inputs.get('number_of_units')} units)\n\n"
+                f"Generation estimates are based on a 90% dependable hydrology year profile with typical efficiency metrics."
+            )
+        else:
+            return (
+                "⚙️ Turbine Design & Flow Mechanics:\n\n"
+                "• **Francis Turbine:** Ideal for Medium Head (40m - 350m).\n"
+                "• **Pelton Turbine:** Ideal for High Head (>200m), lower discharge flow.\n"
+                "• **Kaplan Turbine:** Ideal for Low Head (<50m), high discharge flow.\n"
+                "• Power Equation: Power (kW) = 9.81 * Flow (m³/s) * Head (m) * Efficiency (η)."
+            )
+
+    # ─── 5. Basin & River Geography ──────────────────────────────────────────
+    if any(k in query for k in ["basin", "river", "ganga", "sutlej", "indus", "siang", "periyar", "krishna", "godavari", "location"]):
+        return (
+            "🌊 Hydroelectric River Basin Regimes (Indian Context):\n\n"
+            "• Primary Active Basins in ConstructIQ Dataset:\n"
+            "  1. Ganga River Basin (Uttarakhand / UP): High head run-of-river & storage projects (Tehri, Alaknanda, Bhagirathi).\n"
+            "  2. Sutlej / Indus Basin (Himachal / J&K): High discharge glacial rivers (Nathpa Jhakri, Chenab, Beas).\n"
+            "  3. Brahmaputra / Siang Basin (Arunachal / Assam): Ultra-large capacity projects (Subansiri, Siang Upper).\n"
+            "  4. Periyar & Peninsular Basins (Kerala, AP, Karnataka): Medium head reservoir powerhouses (Idukki, Srisailam)."
+        )
+
+    # ─── 6. CEA / DPR Submission Norms ───────────────────────────────────────
+    if "cea" in query or "dpr" in query or "statutory" in query:
         return (
             "🏛️ CEA DPR Submission & Technical Appraisal Guidelines:\n\n"
             "• Statutory Norm: Required for Hydro Projects with CapEx > ₹ 1,000 Cr under Section 8 of Electricity Act 2003.\n"
@@ -518,8 +356,8 @@ def _domain_fallback_answer(
             "  5. Levelized Tariff: Per-unit generation cost analysis."
         )
 
-    # ─── 12. PARIVESH / Environmental Clearances ──────────────────────────────
-    if "parivesh" in q or "environmental" in q or "clearance" in q or "moefcc" in q:
+    # ─── 7. PARIVESH / Environmental Clearances ──────────────────────────────
+    if "parivesh" in query or "environmental" in query or "clearance" in query or "moefcc" in query:
         return (
             "🍃 PARIVESH (MoEFCC) Environmental & Forest Clearance Norms:\n\n"
             "• Category A (>50 MW): Requires Central MoEFCC Expert Appraisal Committee (EAC) approval.\n"
@@ -529,38 +367,7 @@ def _domain_fallback_answer(
             "  3. E-Flow Release: Minimum 15–20% lean season river flow maintenance."
         )
 
-    # ─── 13. General Project Overview / Summary Queries ──────────────────────
-    if any(k in q for k in ["project", "about", "overview", "summary", "details", "info", "tell me"]):
-        if inputs:
-            cap = inputs.get("capacity_mw", 45)
-            net_head = inputs.get("net_head_m", 120)
-            state = inputs.get("state", "Uttarakhand")
-            ttype = inputs.get("turbine_type", "Francis")
-            tot_cost = cost.get("total_project_cost_cr") or round(cap * 8.6, 1)
-            gwh = gen.get("annual_generation_gwh") or round(cap * 8760 * 0.435 / 1000, 2)
-            m = dur.get("construction_duration_months") or 48
-            return (
-                f"📋 Project Summary Overview:\n\n"
-                f"• **Capacity & Type:** {cap} MW {inputs.get('project_type', 'run-of-river')} ({ttype} Turbine)\n"
-                f"• **Location:** {state} ({inputs.get('river_basin', 'Ganga Basin')})\n"
-                f"• **Net Head:** {net_head} m | **Flow:** {inputs.get('design_flow_m3s', 42.5)} m³/s\n"
-                f"• **CapEx Estimate:** ₹ {tot_cost:,} Cr (₹ {cost.get('cost_per_mw_cr') or round(tot_cost/cap, 2)} Cr/MW)\n"
-                f"• **Annual Energy:** {gwh:,} GWh (PLF: {gen.get('capacity_factor_pct', 43.5)}%)\n"
-                f"• **Timeline:** {m} Months ({round(m/12.0, 1)} Years)"
-            )
-
-    # ─── 14. Default Answer ──────────────────────────────────────────────────
-    if inputs:
-        cap = inputs.get("capacity_mw", 45)
-        net_head = inputs.get("net_head_m", 120)
-        state = inputs.get("state", "Uttarakhand")
-        ttype = inputs.get("turbine_type", "Francis")
-        return (
-            f"🌊 Active Project ({cap} MW Hydro, {state}):\n\n"
-            f"• Net Head: {net_head} m | Turbine: {ttype}\n"
-            f"• Ask me specific questions about CapEx cost, material BOQ, energy generation, turbine selection, or CEA/PARIVESH norms!"
-        )
-
+    # ─── 8. Welcome / Default Answer ─────────────────────────────────────────
     return (
         "🌊 ConstructIQ Hydro Specialist AI Assistant:\n\n"
         "I can help you with hydroelectric power calculations, turbine selection (Francis, Pelton, Kaplan), "
