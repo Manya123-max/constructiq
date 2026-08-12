@@ -33,10 +33,13 @@ export function EstimationPanel() {
   }
 
   if (estimationError) {
+    const errorStr = typeof estimationError === 'string' 
+      ? estimationError 
+      : JSON.stringify(estimationError)
     return (
       <div className="workspace-panel">
         <div style={{ background: '#FFEBEE', border: '1px solid #FF1744', color: '#D50000', padding: '1.25rem', borderRadius: '8px', fontWeight: 600 }}>
-          ⚠️ Estimation Error: {estimationError}
+          ⚠️ Estimation Error: {errorStr}
         </div>
       </div>
     )

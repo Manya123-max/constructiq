@@ -192,7 +192,18 @@ export function ProjectForm() {
       const result = await api.estimate(payload)
       setEstimationResult(result)
     } catch (err) {
-      setEstimationError(err.response?.data?.detail || 'Estimation failed. Please check backend server.')
+      let msg = 'Estimation failed. Please check backend server.'
+      const detail = err.response?.data?.detail
+      if (typeof detail === 'string') {
+        msg = detail
+      } else if (Array.isArray(detail)) {
+        msg = detail.map((d) => (typeof d === 'string' ? d : `${d.loc ? d.loc.join('.') : 'field'}: ${d.msg || JSON.stringify(d)}`)).join('; ')
+      } else if (detail && typeof detail === 'object') {
+        msg = detail.message || detail.msg || JSON.stringify(detail)
+      } else if (err.message) {
+        msg = err.message
+      }
+      setEstimationError(String(msg))
     } finally {
       setIsEstimating(false)
     }
