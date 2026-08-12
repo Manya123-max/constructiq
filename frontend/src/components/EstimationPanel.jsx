@@ -8,7 +8,7 @@ function fmt(n, decimals = 0) {
 }
 
 export function EstimationPanel() {
-  const { estimationResult, isEstimating, estimationError } = useStore()
+  const { estimationResult, isEstimating, estimationError, currentForm } = useStore()
 
   if (isEstimating) {
     return (
@@ -72,8 +72,6 @@ export function EstimationPanel() {
     model_4_duration,
     rag_confidence
   } = estimationResult
-
-  const currentForm = useStore((s) => s.currentForm)
 
   const capMw = currentForm?.capacity_mw || project_inputs?.capacity_mw || 45
   const stateName = currentForm?.state || project_inputs?.state || 'Uttarakhand'

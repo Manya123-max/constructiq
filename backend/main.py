@@ -122,20 +122,30 @@ def estimate_project(req: HydroEstimationRequest, db: Session = Depends(get_db))
             # Persist newly estimated project into database
             db.execute(text("""
                 INSERT OR REPLACE INTO project_master 
-                (project_id, project_name, project_category, project_type, state, capacity_mw, number_of_units, unit_capacity_mw, commissioning_year, net_head_m, annual_generation_gwh, project_cost_cr, primary_source)
-                VALUES (:pid, :pname, :cat, :ptype, :state, :cap, :units, :ucap, 2026, :head, :gen, :cost, 'ConstructIQ AI Pipeline')
+                (project_id, project_name, project_type, state, capacity_mw, number_of_units, commissioning_year, annual_generation_gwh, project_cost_cr, primary_source)
+                VALUES (:pid, :pname, :ptype, :state, :cap, :units, 2026, :gen, :cost, 'ConstructIQ AI Pipeline')
             """), {
                 "pid": proj_id,
                 "pname": pname,
-                "cat": req.project_category or "Large Hydro",
                 "ptype": req.project_type,
                 "state": req.state,
                 "cap": req.capacity_mw,
                 "units": req.number_of_units,
-                "ucap": round(req.capacity_mw / max(req.number_of_units, 1), 2),
-                "head": req.net_head_m or 100.0,
                 "gen": res.get("model_2_generation", {}).get("annual_generation_gwh", 100.0),
                 "cost": res.get("model_3_cost", {}).get("total_project_cost_cr", 1000.0),
+            })
+            db.execute(text("""
+                INSERT OR REPLACE INTO hydro_project_features
+                (project_id, head_m, design_flow_m3s, plant_type, turbine_type, unit_capacity_mw, dam_height_category)
+                VALUES (:pid, :head, :flow, :ptype, :ttype, :ucap, :cat)
+            """), {
+                "pid": proj_id,
+                "head": req.net_head_m or 100.0,
+                "flow": req.design_flow_m3s or 45.0,
+                "ptype": req.project_type,
+                "ttype": req.turbine_type,
+                "ucap": round(req.capacity_mw / max(req.number_of_units, 1), 2),
+                "cat": req.project_category or "Medium Hydro"
             })
             db.commit()
         except Exception as dberr:
