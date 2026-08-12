@@ -118,30 +118,34 @@ def estimate_project(req: HydroEstimationRequest, db: Session = Depends(get_db))
 
         pname = req.project_name.strip() if (req.project_name and req.project_name.strip()) else f"Custom {req.capacity_mw} MW {req.project_category or 'Hydro'} Project"
 
-        # Persist newly estimated project into database
-        db.execute(text("""
-            INSERT OR REPLACE INTO project_master 
-            (project_id, project_name, project_category, project_type, state, capacity_mw, number_of_units, unit_capacity_mw, commissioning_year, net_head_m, annual_generation_gwh, project_cost_cr, primary_source)
-            VALUES (:pid, :pname, :cat, :ptype, :state, :cap, :units, :ucap, 2026, :head, :gen, :cost, 'ConstructIQ AI Pipeline')
-        """), {
-            "pid": proj_id,
-            "pname": pname,
-            "cat": req.project_category or "Large Hydro",
-            "ptype": req.project_type,
-            "state": req.state,
-            "cap": req.capacity_mw,
-            "units": req.number_of_units,
-            "ucap": round(req.capacity_mw / max(req.number_of_units, 1), 2),
-            "head": req.net_head_m or 100.0,
-            "gen": res.get("model_2_generation", {}).get("annual_generation_gwh", 100.0),
-            "cost": res.get("model_3_cost", {}).get("total_project_cost_cr", 1000.0),
-        })
-        db.commit()
-        return res
+        try:
+            # Persist newly estimated project into database
+            db.execute(text("""
+                INSERT OR REPLACE INTO project_master 
+                (project_id, project_name, project_category, project_type, state, capacity_mw, number_of_units, unit_capacity_mw, commissioning_year, net_head_m, annual_generation_gwh, project_cost_cr, primary_source)
+                VALUES (:pid, :pname, :cat, :ptype, :state, :cap, :units, :ucap, 2026, :head, :gen, :cost, 'ConstructIQ AI Pipeline')
+            """), {
+                "pid": proj_id,
+                "pname": pname,
+                "cat": req.project_category or "Large Hydro",
+                "ptype": req.project_type,
+                "state": req.state,
+                "cap": req.capacity_mw,
+                "units": req.number_of_units,
+                "ucap": round(req.capacity_mw / max(req.number_of_units, 1), 2),
+                "head": req.net_head_m or 100.0,
+                "gen": res.get("model_2_generation", {}).get("annual_generation_gwh", 100.0),
+                "cost": res.get("model_3_cost", {}).get("total_project_cost_cr", 1000.0),
+            })
+            db.commit()
+        except Exception as dberr:
+            print(f"[WARN] Database project registration failed: {dberr}")
+            db.rollback()
 
+        return res
     except Exception as e:
-        print(f"[WARN] Estimation database registration: {e}")
-        return run_estimation_pipeline(req.model_dump())
+        print(f"[ERROR] Estimation endpoint failure: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 
