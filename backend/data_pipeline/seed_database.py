@@ -44,15 +44,10 @@ def seed_database():
 
     try:
         from sqlalchemy import text
-        print("Clearing existing tables...")
-        for tbl in ["activity_actual", "activity_plan", "material_stock", "material_requirement",
-                    "procurement_orders", "site_logs", "hydro_project_features",
-                    "project_materials", "project_equipment", "project_cost", "project_generation",
-                    "project_source", "project_master"]:
-            try:
-                db.execute(text(f"DELETE FROM {tbl}"))
-            except Exception:
-                pass
+        print("Re-creating database tables with updated schema...")
+        from db.database import Base, engine
+        Base.metadata.drop_all(bind=engine)
+        Base.metadata.create_all(bind=engine)
         db.commit()
 
         print(f"Seeding {len(df_projects)} Hydro Projects into ProjectMaster & HydroFeatures...")
@@ -63,6 +58,8 @@ def seed_database():
                 project_name=str(p['project_name']),
                 project_type=str(p['project_type']),
                 state=str(p['state']),
+                river=str(p['river']) if 'river' in p and pd.notnull(p['river']) else None,
+                river_basin=str(p['river_basin']) if 'river_basin' in p and pd.notnull(p['river_basin']) else None,
                 capacity_mw=float(p['capacity_mw']),
                 number_of_units=int(p['number_of_units']),
                 commissioning_year=int(p['commissioning_year']),
