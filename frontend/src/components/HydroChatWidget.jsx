@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { api } from '../api/client'
+import { useStore } from '../store/useStore'
 
 const QUICK_PROMPTS = [
   '⚡ How is Francis turbine flow calculated?',
@@ -20,6 +21,7 @@ function renderFormattedMessage(content) {
 }
 
 export function HydroChatWidget() {
+  const { estimationResult, monitorProjectId } = useStore()
   const [isOpen, setIsOpen] = useState(false)
   const [unread, setUnread] = useState(true)
   const [messages, setMessages] = useState([
@@ -53,7 +55,7 @@ export function HydroChatWidget() {
     setIsLoading(true)
 
     try {
-      const res = await api.sendChat(newMessages)
+      const res = await api.sendChat(newMessages, estimationResult, monitorProjectId)
       if (res && res.reply) {
         setMessages([...newMessages, { role: 'assistant', content: res.reply }])
       } else {

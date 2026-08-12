@@ -10,6 +10,8 @@ import sys
 import uuid
 from contextlib import asynccontextmanager
 from typing import Optional, List
+from dotenv import load_dotenv
+load_dotenv()
 
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
@@ -240,22 +242,72 @@ class ChatMessage(BaseModel):
 
 class ChatRequest(BaseModel):
     messages: List[ChatMessage]
+    estimationResult: Optional[dict] = None
+    monitorProjectId: Optional[str] = None
 
 
 @app.post("/api/chat")
-def chat_endpoint(req: ChatRequest):
+def chat_endpoint(req: ChatRequest, db: Session = Depends(get_db)):
     """Conversational Hydro Specialist AI Chatbot endpoint."""
     try:
         from agents.chatbot import generate_chat_response
         msgs = [m.model_dump() for m in req.messages]
-        reply = generate_chat_response(msgs)
+        
+        monitoring_ctx = None
+        if req.monitorProjectId:
+            try:
+                project_record = db.execute(
+                    text("SELECT project_name, project_type, capacity_mw, state FROM project_master WHERE project_id=:pid"),
+                    {"pid": req.monitorProjectId}
+                ).fetchone()
+                
+                monitoring_ctx = {
+                    "project_id": req.monitorProjectId,
+                    "project_name": project_record.project_name if project_record else "Monitored Plant",
+                    "project_type": project_record.project_type if project_record else "",
+                    "capacity_mw": project_record.capacity_mw if project_record else 0.0,
+                    "state": project_record.state if project_record else "",
+                    "status": status_agent(db, req.monitorProjectId),
+                    "delays": delay_agent(db, req.monitorProjectId),
+                    "rootcause": rootcause_agent(db, req.monitorProjectId),
+                    "materials": material_availability_agent(db, req.monitorProjectId),
+                    "procurement": procurement_risk_agent(db, req.monitorProjectId)
+                }
+            except Exception as db_err:
+                print(f"[WARN] Error fetching monitoring context: {db_err}")
+
+        reply = generate_chat_response(msgs, estimation_result=req.estimationResult, monitoring_context=monitoring_ctx)
         return {"success": True, "reply": reply}
     except Exception as e:
         print(f"[ERROR] chat_endpoint exception: {e}")
         try:
             from agents.chatbot import _domain_fallback_answer
             last_query = req.messages[-1].content if req.messages else ""
-            fallback = _domain_fallback_answer(last_query.lower())
+            
+            monitoring_ctx = None
+            if req.monitorProjectId:
+                try:
+                    project_record = db.execute(
+                        text("SELECT project_name, project_type, capacity_mw, state FROM project_master WHERE project_id=:pid"),
+                        {"pid": req.monitorProjectId}
+                    ).fetchone()
+                    
+                    monitoring_ctx = {
+                        "project_id": req.monitorProjectId,
+                        "project_name": project_record.project_name if project_record else "Monitored Plant",
+                        "project_type": project_record.project_type if project_record else "",
+                        "capacity_mw": project_record.capacity_mw if project_record else 0.0,
+                        "state": project_record.state if project_record else "",
+                        "status": status_agent(db, req.monitorProjectId),
+                        "delays": delay_agent(db, req.monitorProjectId),
+                        "rootcause": rootcause_agent(db, req.monitorProjectId),
+                        "materials": material_availability_agent(db, req.monitorProjectId),
+                        "procurement": procurement_risk_agent(db, req.monitorProjectId)
+                    }
+                except Exception:
+                    pass
+
+            fallback = _domain_fallback_answer(last_query.lower(), estimation_result=req.estimationResult, monitoring_context=monitoring_ctx)
             return {"success": True, "reply": fallback}
         except Exception:
             return {

@@ -1,8 +1,9 @@
 import axios from 'axios'
 
-const API_BASE = (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.includes('constructiq'))
-  ? import.meta.env.VITE_API_URL
-  : 'https://constructiq-t6qw.onrender.com'
+const API_BASE = import.meta.env.VITE_API_URL || 
+  (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://localhost:8000'
+    : 'https://constructiq-t6qw.onrender.com')
 
 const client = axios.create({
   baseURL: API_BASE,
@@ -19,5 +20,6 @@ export const api = {
   monitorRootcause: (id) => client.get(`/api/monitor/${id}/rootcause`).then(r => r.data),
   monitorMaterials: (id) => client.get(`/api/monitor/${id}/materials`).then(r => r.data),
   monitorProcurement: (id) => client.get(`/api/monitor/${id}/procurement`).then(r => r.data),
-  sendChat: (messages) => client.post('/api/chat', { messages }).then(r => r.data),
+  sendChat: (messages, estimationResult = null, monitorProjectId = null) =>
+    client.post('/api/chat', { messages, estimationResult, monitorProjectId }).then(r => r.data),
 }
