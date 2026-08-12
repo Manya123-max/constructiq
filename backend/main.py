@@ -122,15 +122,13 @@ def estimate_project(req: HydroEstimationRequest, db: Session = Depends(get_db))
             # Persist newly estimated project into database
             db.execute(text("""
                 INSERT OR REPLACE INTO project_master 
-                (project_id, project_name, project_type, state, river, river_basin, capacity_mw, number_of_units, commissioning_year, annual_generation_gwh, project_cost_cr, primary_source)
-                VALUES (:pid, :pname, :ptype, :state, :river, :basin, :cap, :units, 2026, :gen, :cost, 'ConstructIQ AI Pipeline')
+                (project_id, project_name, project_type, state, capacity_mw, number_of_units, commissioning_year, annual_generation_gwh, project_cost_cr, primary_source)
+                VALUES (:pid, :pname, :ptype, :state, :cap, :units, 2026, :gen, :cost, 'ConstructIQ AI Pipeline')
             """), {
                 "pid": proj_id,
                 "pname": pname,
                 "ptype": req.project_type,
                 "state": req.state,
-                "river": req.river_basin or "Ganga Basin",
-                "basin": req.river_basin or "Ganga Basin",
                 "cap": req.capacity_mw,
                 "units": req.number_of_units,
                 "gen": res.get("model_2_generation", {}).get("annual_generation_gwh", 100.0),

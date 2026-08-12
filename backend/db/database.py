@@ -43,8 +43,6 @@ class ProjectMaster(Base):
     project_name          = Column(Text, nullable=False)
     project_type          = Column(Text, nullable=False)
     state                 = Column(Text)
-    river                 = Column(Text)
-    river_basin           = Column(Text)
     capacity_mw           = Column(Float)
     number_of_units       = Column(Integer)
     commissioning_year    = Column(Integer)
